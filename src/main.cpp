@@ -1,48 +1,37 @@
-#include "raylib.h"
-#include "DB_global_variables.h"
-#include "DB_UI_resources.h"
-#include "DB_UI_loops.h"
-#include "DB_UI_initilizers.h"
-#include "DB_game_objects.h"
 #include <ctime>
+#include "raylib.h"
+#include "Singleton.hpp"
+#include "global_resources.hpp"
 
-////////////////// FUNCTIONS DECLARATIONS //////////////////////////
-void window_initilize ();
-/////////////////////////////////////////////////////////////////
+bool choose_screen_mode()
+{
+	InitWindow (1012, 569, "Dodgy Blocks");
+	
+	while (true){
+		
+		// update:
+		if (IsKeyPressed (KEY_ONE)) {CloseWindow (); return 0;}
+		if (IsKeyPressed (KEY_TWO)) {CloseWindow (); return 1;}
+		
+		// draw:
+		BeginDrawing ();
+		ClearBackground (WHITE);
+		DrawText (	"Press '1' to play in windowed mode\nPress '2' to play in full screen mode",
+					253, 284, 20, RED);
+		EndDrawing ();
+	}
+}
 
 int main ()
 {
-    // new seed for random_number generator
-    srand (time (NULL));
-    
-    // setup environment
-    window_initilize ();
-    SetTargetFPS (FPS);
-    
-    // setup player
-    p1.initilize ({KEY_UP, KEY_LEFT, KEY_DOWN, KEY_RIGHT});
-    p2.initilize ({KEY_W, KEY_A, KEY_S, KEY_D});
-    
-    // setup menus buttons
-    initilize_menu_buttons ();
-    initilize_settings_buttons ();
-    initilize_about_pause_lostGame_buttons ();
-    
-    timer.construct ();
-    
-    menu_loop ();
-    
-    return 0;
+	srand (time (NULL));
+	
+	// bool screenMode = choose_screen_mode ();
+	create_globals (0);
+	
+	MAIN_MENU.loop ();
+	
+	destroy_globals ();
+	
+	return 0;
 }
-
-////////////////////////////// FUNCTIONS DEFINITIONS ///////////////////////////////
-void window_initilize ()
-{
-    InitWindow (0, 0, title);
-    int monitor = GetCurrentMonitor ();
-    screenWidth = GetMonitorWidth (monitor);
-    screenHeight = GetMonitorHeight (monitor);
-    SetWindowSize (screenWidth, screenHeight);
-    ToggleFullscreen ();
-}
-/////////////////////////////////////////////////////////////////
