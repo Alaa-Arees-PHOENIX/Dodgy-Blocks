@@ -658,8 +658,8 @@ int main()
     SetTargetFPS (FPS);
     
     // setup player
-    p1.initilize ({KEY_UP, KEY_LEFT, KEY_DOWN, KEY_RIGHT});
-    p2.initilize ({KEY_W, KEY_A, KEY_S, KEY_D});
+    p1.initilize ({KEY_W, KEY_A, KEY_S, KEY_D});
+    p2.initilize ({KEY_UP, KEY_LEFT, KEY_DOWN, KEY_RIGHT});
     
     // setup menus buttons
     initilize_menu_buttons ();
@@ -810,8 +810,8 @@ void standard_game_loop ()
     endGame = 0;
     lostGame = 0;
     p1Died = 0; p2Died = 0;
-    p1.initilize ({KEY_UP, KEY_LEFT, KEY_DOWN, KEY_RIGHT});
-    p2.initilize ({KEY_W, KEY_A, KEY_S, KEY_D});
+    p1.initilize ({KEY_W, KEY_A, KEY_S, KEY_D});
+    p2.initilize ({KEY_UP, KEY_LEFT, KEY_DOWN, KEY_RIGHT});
 }
 
 //////////////////////////// UPDATE METHODS ////////////////////////////
