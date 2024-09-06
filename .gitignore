@@ -1,3 +1,5 @@
 *.o
 *.exe
 DB_classes_diagram.violet
+inst1
+inst2
