@@ -4,7 +4,7 @@
 #include <cstdint>
 #include "raylib.h"
 #include "Singleton.hpp"
-#include "World.hpp"
+#include "GameWorld.hpp"
 #include "ScreenManager.hpp"
 #include "MainMenu.hpp"
 #include "SettingsMenu.hpp"
@@ -34,7 +34,7 @@
 
 #define TIMER Singleton<Timer>::get_instance()
 
-#define WORLD Singleton<World>::get_instance()
+#define GAME_WORLD Singleton<GameWorld>::get_instance()
 
 #define ENEMIES_MANAGER Singleton<EnemiesManager>::get_instance()
 

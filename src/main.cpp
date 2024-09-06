@@ -1,6 +1,5 @@
 #include <ctime>
 #include "raylib.h"
-#include "Singleton.hpp"
 #include "global_resources.hpp"
 
 bool choose_screen_mode()

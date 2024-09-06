@@ -28,7 +28,7 @@ MainMenu::MainMenu ()
 	
     add_button	(bBuilder.build ("Play",
 								(Rectangle){-W/2.0f, -75, W, H},
-								[] {Singleton<World>::get_instance().game_loop();},
+								[] {GAME_WORLD.loop();},
 								KEY_ENTER));
 								
 	add_button	(bBuilder.build ("Settings",

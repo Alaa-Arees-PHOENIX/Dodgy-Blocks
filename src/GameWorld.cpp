@@ -1,22 +1,21 @@
 #include "raylib.h"
-#include "World.hpp"
+#include "GameWorld.hpp"
 #include "global_resources.hpp"
 #include "MotiveCreature.hpp"
 #include "Player.hpp"
 #include "Button.hpp"
 #include "Menu.hpp"
 
-World::World ()
-	: p1 (*new Player ({1200, 1200}, {3600, 3600}, 1, RED)), p2 (*new Player ({2000, 2000}, {200, 200}, 1, BLUE))
+GameWorld::GameWorld ()
+	:	p1 (Player ({1200, 1200}, {3600, 3600}, 1, RED)),
+		p2 (Player ({2000, 2000}, {200, 200}, 1, BLUE))
 {
 	// setup players:
-	// p1 = Player ({1200, 1200}, {3600, 3600}, 1, RED);
-	// p2 = Player ({2000, 2000}, {200, 200}, 1, BLUE);
 	p1.set_controls ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
 	p2.set_controls ({KEY_W, KEY_S, KEY_A, KEY_D});
 }
 
-void World::game_loop ()
+void GameWorld::loop ()
 {
 	p1.initilize();
 	p2.initilize();
@@ -24,8 +23,8 @@ void World::game_loop ()
 	ENEMIES_MANAGER.reset();
 	ClearBackground (WHITE);
 	while (!p1.is_dead()){ //TODO: while(!endGame && !lostGame)
-		game_update (GetFrameTime ());
-		game_draw ();
+		update (GetFrameTime ());
+		draw ();
 		if (IsKeyReleased (KEY_ESCAPE)) {return;}
 		if (IsKeyPressed (KEY_ENTER)){
 			int breakPoint = 0;
@@ -35,18 +34,17 @@ void World::game_loop ()
 	}
 }
 
-void World::game_update (float dt)
+void GameWorld::update (float dt)
 {
 	p1.update (dt);
 	if (check_setting (MULTIPLAYER)) {p2.update (dt);}
-	if (!check_setting (SANDBOX)) {TIMER.update (dt); ENEMIES_MANAGER.update (dt);}
-	// if (!sandbox) {enemiesSpawner.update (dt);}
-	
-	//debug:
-	// update_debug ();
+	if (!check_setting (SANDBOX)){
+		TIMER.update (dt);
+		ENEMIES_MANAGER.update (dt);
+	}
 }
 
-void World::game_draw ()
+void GameWorld::draw ()
 {
 	BeginDrawing ();
 	ClearBackground (WHITE);
@@ -56,7 +54,10 @@ void World::game_draw ()
 	if (IsKeyDown (KEY_TWO)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (1);}
 	p1.draw ();
 	if (check_setting (MULTIPLAYER)) {p2.draw ();}
-	if (!check_setting (SANDBOX)) {TIMER.draw (); ENEMIES_MANAGER.draw ();}
+	if (!check_setting (SANDBOX)){
+		TIMER.draw ();
+		ENEMIES_MANAGER.draw ();
+	}
 	if (check_setting (SHOW_FPS)) {DrawText (TextFormat("%d", GetFPS()), -0.45f*SCREEN_WIDTH, -0.45f*SCREEN_HEIGHT, 17, GREEN);}
 	
 	EndMode2D ();
@@ -68,7 +69,7 @@ void World::game_draw ()
 
 
 
-void World::draw_debug ()
+void GameWorld::draw_debug ()
 {
 	Vector2 v1 = {100, 200}, v2 = {500, 200}, v3 = {100, 250}, v4 = {500, 250};
 	Vector2 v5 = {100, 300}, v6 = {500, 300};

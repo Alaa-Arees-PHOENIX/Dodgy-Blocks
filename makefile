@@ -28,7 +28,7 @@ objects =	main.o \
 			Player.o \
 			MotiveCreature.o \
 			global_resources.o \
-			World.o \
+			GameWorld.o \
 			ScreenManager.o \
 			Button.o \
 			ButtonBuilder.o \
@@ -57,7 +57,7 @@ MotiveCreature.o: src/MotiveCreature.cpp src/MotiveCreature.hpp src/ScreenManage
 
 global_resources.o: src/global_resources.cpp src/global_resources.hpp \
 					src/Singleton.hpp \
-					src/World.hpp \
+					src/GameWorld.hpp \
 					src/ScreenManager.hpp \
 					src/MainMenu.hpp \
 					src/SettingsMenu.hpp \
@@ -68,8 +68,8 @@ global_resources.o: src/global_resources.cpp src/global_resources.hpp \
 					src/EnemiesManager.hpp
 	$(CXX) src/global_resources.cpp $(CFLAGS)
 
-World.o: src/World.cpp src/World.hpp src/Player.hpp src/MotiveCreature.hpp src/global_resources.hpp src/Menu.hpp src/Singleton.hpp
-	$(CXX) src/World.cpp $(CFLAGS)
+GameWorld.o: src/GameWorld.cpp src/GameWorld.hpp src/Player.hpp src/MotiveCreature.hpp src/global_resources.hpp src/Menu.hpp src/Singleton.hpp
+	$(CXX) src/GameWorld.cpp $(CFLAGS)
 
 ScreenManager.o: src/ScreenManager.cpp src/ScreenManager.hpp
 	$(CXX) src/ScreenManager.cpp $(CFLAGS)

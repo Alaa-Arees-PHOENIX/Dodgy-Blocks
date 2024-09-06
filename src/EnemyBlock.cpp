@@ -29,16 +29,16 @@ EnemyBlock::~EnemyBlock ()
 
 Player& EnemyBlock::pick_target ()
 {
-	if (!check_setting (MULTIPLAYER)) {return WORLD.P1();}
+	if (!check_setting (MULTIPLAYER)) {return GAME_WORLD.P1();}
 	
 	float disFromP1, disFromP2;
-	disFromP1 = (get_posX() - WORLD.P1().get_posX()) * (get_posX() - WORLD.P1().get_posX()) +
-				(get_posY() - WORLD.P1().get_posY()) * (get_posY() - WORLD.P1().get_posY());
-	disFromP2 = (get_posX() - WORLD.P2().get_posX()) * (get_posX() - WORLD.P2().get_posX()) +
-				(get_posY() - WORLD.P2().get_posY()) * (get_posY() - WORLD.P2().get_posY());
+	disFromP1 = (get_posX() - GAME_WORLD.P1().get_posX()) * (get_posX() - GAME_WORLD.P1().get_posX()) +
+				(get_posY() - GAME_WORLD.P1().get_posY()) * (get_posY() - GAME_WORLD.P1().get_posY());
+	disFromP2 = (get_posX() - GAME_WORLD.P2().get_posX()) * (get_posX() - GAME_WORLD.P2().get_posX()) +
+				(get_posY() - GAME_WORLD.P2().get_posY()) * (get_posY() - GAME_WORLD.P2().get_posY());
 	
-	if ((disFromP1 < disFromP2 && !WORLD.P1().is_dead()) || WORLD.P2().is_dead()) {return WORLD.P1();}
-	else {return WORLD.P2();}
+	if ((disFromP1 < disFromP2 && !GAME_WORLD.P1().is_dead()) || GAME_WORLD.P2().is_dead()) {return GAME_WORLD.P1();}
+	else {return GAME_WORLD.P2();}
 }
 
 void EnemyBlock::update (float dt)
@@ -57,17 +57,17 @@ void EnemyBlock::update (float dt)
 	position.y += velocity.y * dt;
 
 	// check if the enemy hits a player
-	if (CheckCollisionCircleRec (WORLD.P1().get_pos(), WORLD.P1().get_radius(), body) &&
-		!WORLD.P1().is_dead())
+	if (CheckCollisionCircleRec (GAME_WORLD.P1().get_pos(), GAME_WORLD.P1().get_radius(), body) &&
+		!GAME_WORLD.P1().is_dead())
 	{
-		WORLD.P1().kill();
+		GAME_WORLD.P1().kill();
 	}
 
 	else if (	check_setting (MULTIPLAYER) &&
-				CheckCollisionCircleRec (WORLD.P2().get_pos (), WORLD.P2().get_radius(), body) &&
-				!WORLD.P2().is_dead())
+				CheckCollisionCircleRec (GAME_WORLD.P2().get_pos (), GAME_WORLD.P2().get_radius(), body) &&
+				!GAME_WORLD.P2().is_dead())
 	{
-		WORLD.P2().kill();
+		GAME_WORLD.P2().kill();
 	}
 	
 	// update warning signs:
