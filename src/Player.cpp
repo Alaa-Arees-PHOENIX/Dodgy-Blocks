@@ -8,7 +8,7 @@
 Player::Player (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Color color)
 	: MotiveCreature (MAX_VELOCITY, ACC_FORCE, MASS), color (color)
 {
-	radius = 19;
+	
 }
 
 void Player::set_controls (std::tuple <KeyboardKey, KeyboardKey, KeyboardKey, KeyboardKey> controls)
@@ -43,13 +43,13 @@ void Player::update (float dt)
     
 void Player::draw ()
 {
-    DrawCircle (position.x, position.y, radius, color);
+    DrawCircle (position.x, position.y, RADIUS, color);
 }
 
 void Player::initilize ()
 {
-	position = {(float)random_number (-CURRENT_SCREEN_WIDTH/2 + radius, CURRENT_SCREEN_WIDTH/2 - radius),
-				(float)random_number (-CURRENT_SCREEN_HEIGHT/2 + radius, CURRENT_SCREEN_HEIGHT/2 - radius)};
+	position = {(float)random_number (-SCREEN_WIDTH/2 + RADIUS, SCREEN_WIDTH/2 - RADIUS),
+				(float)random_number (-SCREEN_HEIGHT/2 + RADIUS, SCREEN_HEIGHT/2 - RADIUS)};
 	velocity = {0, 0};
 	dead = 0;
 	survivedFor = 0;
@@ -66,8 +66,8 @@ void Player::bounce_on_edges (float dt)
 	Vector2 pos = GetWorldToScreen2D (position, CAMERA);
 	
 	// player will gain energy (velocity) when bouncing, so '-1' is passed to the 'bounce' method.
-    if (pos.y - radius <= 0)							{bounce_down (-1, dt);}
-    else if (pos.y + radius >= CURRENT_SCREEN_HEIGHT)	{bounce_up (-1, dt);}
-    if (pos.x - radius <= 0)							{bounce_right (-1, dt);}
-    else if (pos.x + radius >= CURRENT_SCREEN_WIDTH)	{bounce_left (-1, dt);}
+    if (pos.y - RADIUS <= 0)							{bounce_down (-1, dt);}
+    else if (pos.y + RADIUS >= CURRENT_SCREEN_HEIGHT)	{bounce_up (-1, dt);}
+    if (pos.x - RADIUS <= 0)							{bounce_right (-1, dt);}
+    else if (pos.x + RADIUS >= CURRENT_SCREEN_WIDTH)	{bounce_left (-1, dt);}
 }

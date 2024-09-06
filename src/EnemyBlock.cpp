@@ -29,7 +29,7 @@ EnemyBlock::~EnemyBlock ()
 
 Player& EnemyBlock::pick_target ()
 {
-	if (!check_setting (MULTIPLAYER)) {return GAME_WORLD.P1();}
+	if (!GAME_WORLD.P2().is_active()) {return GAME_WORLD.P1();} // playing singleplayer
 	
 	float disFromP1, disFromP2;
 	disFromP1 = (get_posX() - GAME_WORLD.P1().get_posX()) * (get_posX() - GAME_WORLD.P1().get_posX()) +
@@ -37,7 +37,9 @@ Player& EnemyBlock::pick_target ()
 	disFromP2 = (get_posX() - GAME_WORLD.P2().get_posX()) * (get_posX() - GAME_WORLD.P2().get_posX()) +
 				(get_posY() - GAME_WORLD.P2().get_posY()) * (get_posY() - GAME_WORLD.P2().get_posY());
 	
-	if ((disFromP1 < disFromP2 && !GAME_WORLD.P1().is_dead()) || GAME_WORLD.P2().is_dead()) {return GAME_WORLD.P1();}
+	if ((disFromP1 < disFromP2 && !GAME_WORLD.P1().is_dead()) || GAME_WORLD.P2().is_dead()){
+		return GAME_WORLD.P1();
+	}
 	else {return GAME_WORLD.P2();}
 }
 
@@ -63,7 +65,7 @@ void EnemyBlock::update (float dt)
 		GAME_WORLD.P1().kill();
 	}
 
-	else if (	check_setting (MULTIPLAYER) &&
+	else if (	GAME_WORLD.P2().is_active() &&
 				CheckCollisionCircleRec (GAME_WORLD.P2().get_pos (), GAME_WORLD.P2().get_radius(), body) &&
 				!GAME_WORLD.P2().is_dead())
 	{

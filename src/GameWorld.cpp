@@ -8,7 +8,7 @@
 
 GameWorld::GameWorld ()
 	:	p1 (Player ({1200, 1200}, {3600, 3600}, 1, RED)),
-		p2 (Player ({2000, 2000}, {200, 200}, 1, BLUE))
+		p2 (Player ({1200, 1200}, {3600, 3600}, 1, BLUE))
 {
 	// setup players:
 	p1.set_controls ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
@@ -22,7 +22,7 @@ void GameWorld::loop ()
 	TIMER.reset();
 	ENEMIES_MANAGER.reset();
 	ClearBackground (WHITE);
-	while (!p1.is_dead()){ //TODO: while(!endGame && !lostGame)
+	while (!p1.is_dead() || !p2.is_dead()){ //TODO: while(!endGame && !lostGame)
 		update (GetFrameTime ());
 		draw ();
 		if (IsKeyReleased (KEY_ESCAPE)) {return;}
@@ -30,14 +30,13 @@ void GameWorld::loop ()
 			int breakPoint = 0;
 		}
 		// if (WindowShouldClose ()) {PAUSE_MENU.loop ();}
-		// if (WindowShouldClose ()) {Singleton<MenusManager>::get_instance().pauseMenu_loop ();}
 	}
 }
 
 void GameWorld::update (float dt)
 {
-	p1.update (dt);
-	if (check_setting (MULTIPLAYER)) {p2.update (dt);}
+	if (!p1.is_dead())						{p1.update (dt);}
+	if (!p2.is_dead() && p2.is_active())	{p2.update (dt);}
 	if (!check_setting (SANDBOX)){
 		TIMER.update (dt);
 		ENEMIES_MANAGER.update (dt);
@@ -52,13 +51,16 @@ void GameWorld::draw ()
 	
 	if (IsKeyDown (KEY_ONE)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (0);}
 	if (IsKeyDown (KEY_TWO)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (1);}
-	p1.draw ();
-	if (check_setting (MULTIPLAYER)) {p2.draw ();}
+	
+	if (!p1.is_dead())						{p1.draw();}
+	if (!p2.is_dead() && p2.is_active())	{p2.draw();}
 	if (!check_setting (SANDBOX)){
 		TIMER.draw ();
 		ENEMIES_MANAGER.draw ();
 	}
-	if (check_setting (SHOW_FPS)) {DrawText (TextFormat("%d", GetFPS()), -0.45f*SCREEN_WIDTH, -0.45f*SCREEN_HEIGHT, 17, GREEN);}
+	if (check_setting (SHOW_FPS)){
+		DrawText (TextFormat("%d", GetFPS()), -0.45f*SCREEN_WIDTH, -0.45f*SCREEN_HEIGHT, 17, GREEN);
+	}
 	
 	EndMode2D ();
 	#if defined (DEBUG)

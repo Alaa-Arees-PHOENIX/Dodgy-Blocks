@@ -42,9 +42,8 @@
 enum Directions {UP_DIR, DOWN_DIR, LEFT_DIR, RIGHT_DIR};
 enum Settings
 {
-	MULTIPLAYER		=	1 << 0,
-	SANDBOX			=	1 << 1,
-	SHOW_FPS		=	1 << 2
+	SANDBOX			=	1 << 0,
+	SHOW_FPS		=	1 << 1
 };
 
 // // // // // // // // // GLOBAL VARIABLES:
