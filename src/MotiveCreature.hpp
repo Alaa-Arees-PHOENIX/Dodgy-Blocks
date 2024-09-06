@@ -9,7 +9,8 @@ class MotiveCreature
 {
 protected:
 	Vector2 position, velocity;
-	const Vector2 ACC_FORCE, MAX_VELOCITY; // ACC_FORCE <=> acceleration_force
+	const Vector2 MAX_VELOCITY;
+	const Vector2 ACC_FORCE; // ACC_FORCE <=> acceleration_force
 	const float MASS; // ACC_FORCE/MASS = acceleration
 	
 protected:

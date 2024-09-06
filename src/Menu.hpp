@@ -16,10 +16,11 @@ public:
 	void update (const Camera2D& camera);
 	virtual void draw ();
 	void add_button (Button b);
-	Button& operator[] (int i);
+	Button& operator[] (size_t i);
 	
 protected:
 	Menu () {}
+	virtual ~Menu() {};
 	void draw_message_aligned (Button& button, const char msg[], Color color);
 };
 

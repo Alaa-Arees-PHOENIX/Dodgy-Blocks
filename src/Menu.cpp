@@ -5,12 +5,12 @@
 
 void Menu::update (const Camera2D& camera)
 {
-	for (int i=0; i<buttons.size (); i++){buttons[i].update (camera);}
+	for (size_t i=0; i<buttons.size (); i++){buttons[i].update (camera);}
 }
 
 void Menu::draw ()
 {
-	for (int i=0; i<buttons.size (); i++){buttons[i].draw ();}
+	for (size_t i=0; i<buttons.size (); i++){buttons[i].draw ();}
 }
 
 void Menu::add_button (Button b)
@@ -18,7 +18,7 @@ void Menu::add_button (Button b)
 	buttons.push_back (b);
 }
 
-Button& Menu::operator[] (int i) {return buttons[i];}
+Button& Menu::operator[] (size_t i) {return buttons[i];}
 
 void Menu::draw_message_aligned (Button& button, const char msg[], Color color)
 {
