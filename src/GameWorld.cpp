@@ -22,7 +22,7 @@ void GameWorld::loop ()
 	TIMER.reset();
 	ENEMIES_MANAGER.reset();
 	ClearBackground (WHITE);
-	while (!p1.is_dead() || !p2.is_dead()){ //TODO: while(!endGame && !lostGame)
+	while (!p1.is_dead() || (!p2.is_dead() && p2.is_active())){ //TODO: while(!endGame && !lostGame)
 		update (GetFrameTime ());
 		draw ();
 		if (IsKeyReleased (KEY_ESCAPE)) {return;}

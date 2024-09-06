@@ -3,9 +3,9 @@
 
 uint8_t settings = 0;
 
-void create_globals (bool screenMode)
+void create_globals ()
 {
-	Singleton<ScreenManager>::set_instance (new ScreenManager (screenMode));
+	Singleton<ScreenManager>::create_instance ();
 	Singleton<GameWorld>::create_instance ();
 	Singleton<MainMenu>::create_instance ();
 	Singleton<SettingsMenu>::create_instance ();

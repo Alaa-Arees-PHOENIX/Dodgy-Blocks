@@ -58,7 +58,7 @@ inline bool check_setting (Settings s)		{return ((settings & s) == s);} // check
 inline void activate_setting (Settings s)	{settings = (settings | s);} // turns an option on
 inline void deactivate_setting (Settings s)	{settings = (settings & (~s));} // turns an option off
 
-void create_globals (bool screenMode); // istantiate global objects with `Singleton<T>`.
+void create_globals (); // Istantiate global objects with `Singleton<T>`.
 void destroy_globals (); // destroy all globals istantiated above.
 int random_number (int Min, int Max);
 
