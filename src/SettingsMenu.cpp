@@ -35,11 +35,11 @@ SettingsMenu::SettingsMenu ()
 	
 	add_button	(bBuilder.build ("Single player", // #4
 								(Rectangle){-W/2.0f, y_of(3) + h_of(3) + VS, W, H},
-								[] {GAME_WORLD.P2().activate(0);}));
+								[] {PLAYER_2.activate(0);}));
 	
 	add_button	(bBuilder.build ("Multiplayer", // #5
 								(Rectangle){x_of(4) + w_of(4) + HS, y_of(4), W, H},
-								[] {GAME_WORLD.P2().activate(1);}));
+								[] {PLAYER_2.activate(1);}));
 	
 	add_button	(bBuilder.build ("Arcade", // #6
 								(Rectangle){-W/2.0f, y_of(5) + h_of(5) + VS, W, H},
@@ -83,7 +83,7 @@ void SettingsMenu::update ()
 	else 								{buttons[1].activate(1); buttons[1].change_colors();}
 	if (check_setting (SHOW_FPS))		{buttons[2].activate(1); buttons[2].change_colors();}
 	else 								{buttons[3].activate(1); buttons[3].change_colors();}
-	if (!GAME_WORLD.P2().is_active())	{buttons[4].activate(1); buttons[4].change_colors();}
+	if (!PLAYER_2.is_active())			{buttons[4].activate(1); buttons[4].change_colors();}
 	else 								{buttons[5].activate(1); buttons[5].change_colors();}
 	if (!check_setting (SANDBOX))		{buttons[6].activate(1); buttons[6].change_colors();}
 	else 								{buttons[7].activate(1); buttons[7].change_colors();}

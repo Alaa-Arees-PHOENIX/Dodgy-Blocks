@@ -8,19 +8,25 @@
 
 class Player : public MotiveCreature
 {
-	
 public:
 	Player (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Color color);
+	Player ();
 
     void update (float dt) override;
     void draw () override;
-    void set_controls (std::tuple <KeyboardKey, KeyboardKey, KeyboardKey, KeyboardKey> controls);
+    void set_keyboard_control (std::tuple <KeyboardKey, KeyboardKey, KeyboardKey, KeyboardKey> controls);
+	void set_mouse_control ();
 	void initilize ();
 	void kill ();
+	bool should_accelerate_up ();
+	bool should_accelerate_down ();
+	bool should_accelerate_left ();
+	bool should_accelerate_right ();
 	
 	bool is_dead () {return dead;}
 	bool is_active () {return active;}
 	void activate (bool b) {active = b;}
+	bool is_available () {return active && !dead;}
 	int survival_time () {return survivedFor;}
 	float get_radius () {return RADIUS;}
     
@@ -36,6 +42,7 @@ private:
 	
     // controls:
     KeyboardKey UP, DOWN, LEFT, RIGHT;
+	bool useMouse;
 };
 
 #endif

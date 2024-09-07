@@ -14,6 +14,7 @@ void create_globals ()
 	Singleton<LostGameMenu>::create_instance ();
 	Singleton<Timer>::create_instance ();
 	Singleton<EnemiesManager>::create_instance ();
+	Singleton<PlayersManager>::create_instance ();
 }
 
 void destroy_globals ()
@@ -27,6 +28,7 @@ void destroy_globals ()
 	Singleton<ScreenManager>::destroy_instance ();
 	Singleton<Timer>::destroy_instance ();
 	Singleton<EnemiesManager>::destroy_instance ();
+	Singleton<PlayersManager>::destroy_instance ();
 }
 
 int random_number (int Min, int Max)

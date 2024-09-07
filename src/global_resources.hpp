@@ -13,30 +13,36 @@
 #include "LostGameMenu.hpp"
 #include "Timer.hpp"
 #include "EnemiesManager.hpp"
+#include "PlayersManager.hpp"
 
 ////////////// USEFUL MACROS /////////////////////
-#define SCREEN_WIDTH Singleton<ScreenManager>::get_instance().get_default_screen_width()
-#define SCREEN_HEIGHT Singleton<ScreenManager>::get_instance().get_default_screen_height()
+#define SCREEN_WIDTH	Singleton<ScreenManager>::get_instance().get_default_screen_width()
+#define SCREEN_HEIGHT	Singleton<ScreenManager>::get_instance().get_default_screen_height()
 
-#define MONITOR_WIDTH Singleton<ScreenManager>::get_instance().get_monitor_width()
-#define MONITOR_HEIGHT Singleton<ScreenManager>::get_instance().get_monitor_height()
+#define MONITOR_WIDTH	Singleton<ScreenManager>::get_instance().get_monitor_width()
+#define MONITOR_HEIGHT	Singleton<ScreenManager>::get_instance().get_monitor_height()
 
-#define CURRENT_SCREEN_WIDTH Singleton<ScreenManager>::get_instance().get_current_screen_width()
-#define CURRENT_SCREEN_HEIGHT Singleton<ScreenManager>::get_instance().get_current_screen_height()
+#define CURRENT_SCREEN_WIDTH	Singleton<ScreenManager>::get_instance().get_current_screen_width()
+#define CURRENT_SCREEN_HEIGHT	Singleton<ScreenManager>::get_instance().get_current_screen_height()
 
 #define CAMERA Singleton<ScreenManager>::get_instance().get_camera()
 
-#define MAIN_MENU Singleton<MainMenu>::get_instance()
-#define SETTINGS_MENU Singleton<SettingsMenu>::get_instance()
-#define ABOUT_MENU Singleton<AboutMenu>::get_instance()
-#define PAUSE_MENU Singleton<PauseMenu>::get_instance()
-#define LOST_GAME_MENU Singleton<LostGameMenu>::get_instance()
+#define MAIN_MENU		Singleton<MainMenu>::get_instance()
+#define SETTINGS_MENU	Singleton<SettingsMenu>::get_instance()
+#define ABOUT_MENU		Singleton<AboutMenu>::get_instance()
+#define PAUSE_MENU		Singleton<PauseMenu>::get_instance()
+#define LOST_GAME_MENU	Singleton<LostGameMenu>::get_instance()
 
 #define TIMER Singleton<Timer>::get_instance()
 
 #define GAME_WORLD Singleton<GameWorld>::get_instance()
 
 #define ENEMIES_MANAGER Singleton<EnemiesManager>::get_instance()
+
+#define PLAYERS_MANAGER	Singleton<PlayersManager>::get_instance()
+#define PLAYER_1		Singleton<PlayersManager>::get_instance().P(0)
+#define PLAYER_2		Singleton<PlayersManager>::get_instance().P(1)
+#define PLAYER_3		Singleton<PlayersManager>::get_instance().P(2)
 
 // // // // // // // // // GLOBAL TYPES:
 enum Directions {UP_DIR, DOWN_DIR, LEFT_DIR, RIGHT_DIR};

@@ -41,7 +41,8 @@ objects =	main.o \
 			Timer.o \
 			Enemy.o \
 			EnemyBlock.o \
-			EnemiesManager.o
+			EnemiesManager.o \
+			PlayersManager.o
 
 Dodgy_Blocks: $(objects)
 	$(CXX) $(objects) -o Dodgy_Blocks $(LDFLAGS)
@@ -65,7 +66,8 @@ global_resources.o: src/global_resources.cpp src/global_resources.hpp \
 					src/PauseMenu.hpp \
 					src/LostGameMenu.hpp \
 					src/Timer.hpp \
-					src/EnemiesManager.hpp
+					src/EnemiesManager.hpp \
+					src/PlayersManager.hpp
 	$(CXX) src/global_resources.cpp $(CFLAGS)
 
 GameWorld.o: src/GameWorld.cpp src/GameWorld.hpp src/Player.hpp src/MotiveCreature.hpp src/global_resources.hpp src/Menu.hpp src/Singleton.hpp
@@ -124,11 +126,22 @@ Timer.o: src/Timer.cpp src/Timer.hpp src/global_resources.hpp
 Enemy.o: src/Enemy.cpp src/Enemy.hpp src/global_resources.hpp
 	$(CXX) src/Enemy.cpp $(CFLAGS)
 
-EnemyBlock.o: src/EnemyBlock.cpp src/EnemyBlock.hpp src/Enemy.hpp src/MotiveCreature.hpp src/global_resources.hpp
+EnemyBlock.o: src/EnemyBlock.cpp src/EnemyBlock.hpp \
+				src/global_resources.hpp \
+				src/Enemy.hpp \
+				src/MotiveCreature.hpp \
+				src/Player.hpp
 	$(CXX) src/EnemyBlock.cpp $(CFLAGS)
 
 EnemiesManager.o: src/EnemiesManager.cpp src/EnemiesManager.hpp src/EnemyBlock.hpp src/Enemy.hpp src/global_resources.hpp
 	$(CXX) src/EnemiesManager.cpp $(CFLAGS)
+
+PlayersManager.o: 	src/PlayersManager.cpp src/PlayersManager.hpp \
+					src/global_resources.hpp \
+					src/Player.hpp
+	$(CXX) src/PlayersManager.cpp $(CFLAGS)
+
+
 
 ############## ASSISTANT TOOLS ##############
 

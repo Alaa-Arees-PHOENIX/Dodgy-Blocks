@@ -11,23 +11,32 @@ Player::Player (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Color color
 	
 }
 
-void Player::set_controls (std::tuple <KeyboardKey, KeyboardKey, KeyboardKey, KeyboardKey> controls)
+Player::Player ()
+	:	Player ({0, 0}, {0, 0}, 0, BLACK)
+{
+	
+}
+
+void Player::set_keyboard_control (std::tuple <KeyboardKey, KeyboardKey, KeyboardKey, KeyboardKey> controls)
 {
     std::tie (UP, DOWN, LEFT, RIGHT) = controls;
+	useMouse = 0;
+}
+
+void Player::set_mouse_control ()
+{
+	std::tie (UP, DOWN, LEFT, RIGHT) = (std::tuple<KeyboardKey, KeyboardKey, KeyboardKey, KeyboardKey>){KEY_NULL, KEY_NULL, KEY_NULL, KEY_NULL};
+	useMouse = 1;
 }
     
 void Player::update (float dt)
 {	
 	// acceleration:
-	if (IsKeyDown (UP))              			{accelerate_up (dt);}
-    else if (IsKeyDown (DOWN))  				{accelerate_down (dt);}
-    else if (IsKeyUp (UP) && velocity.y < 0)    {accelerate_down (dt);}
-    else if (IsKeyUp (DOWN) && velocity.y > 0)  {accelerate_up (dt);}
+	if		(should_accelerate_up ())		{accelerate_up (dt);}
+    else if	(should_accelerate_down ())		{accelerate_down (dt);}
     
-    if (IsKeyDown (LEFT))          				{accelerate_left (dt);}
-    else if (IsKeyDown (RIGHT))   				{accelerate_right (dt);}
-    else if (IsKeyUp (LEFT) && velocity.x < 0)  {accelerate_right (dt);}
-    else if (IsKeyUp (RIGHT) && velocity.x > 0) {accelerate_left (dt);}
+    if		(should_accelerate_left ())		{accelerate_left (dt);}
+    else if	(should_accelerate_right ())	{accelerate_right (dt);}
     
 	// fix precision and never-ending movement errors:
 	if (abs (velocity.x) * dt < 0.3f) {velocity.x = 0;}
@@ -59,6 +68,34 @@ void Player::kill ()
 {
 	dead = 1;
 	survivedFor = TIMER.get_time ();
+}
+
+bool Player::should_accelerate_up ()
+{
+	return ((!useMouse && IsKeyDown (UP)) ||
+			(!useMouse && IsKeyUp (DOWN) && velocity.y > 0) ||
+			(useMouse && (GetScreenToWorld2D (GetMousePosition(), CAMERA).y < position.y)));
+}
+
+bool Player::should_accelerate_down ()
+{
+	return ((!useMouse && IsKeyDown (DOWN)) ||
+			(!useMouse && IsKeyUp (UP) && velocity.y < 0) ||
+			(useMouse && (GetScreenToWorld2D (GetMousePosition(), CAMERA).y > position.y)));
+}
+
+bool Player::should_accelerate_left ()
+{
+	return ((!useMouse && IsKeyDown (LEFT)) ||
+			(!useMouse && IsKeyUp (RIGHT) && velocity.x > 0) ||
+			(useMouse && (GetScreenToWorld2D (GetMousePosition(), CAMERA).x < position.x)));
+}
+
+bool Player::should_accelerate_right ()
+{
+	return ((!useMouse && IsKeyDown (RIGHT)) ||
+			(!useMouse && IsKeyUp (LEFT) && velocity.x < 0) ||
+			(useMouse && (GetScreenToWorld2D (GetMousePosition(), CAMERA).x > position.x)));
 }
 
 void Player::bounce_on_edges (float dt)

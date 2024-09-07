@@ -7,22 +7,20 @@
 #include "Menu.hpp"
 
 GameWorld::GameWorld ()
-	:	p1 (Player ({1200, 1200}, {3600, 3600}, 1, RED)),
-		p2 (Player ({1200, 1200}, {3600, 3600}, 1, BLUE))
 {
-	// setup players:
-	p1.set_controls ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
-	p2.set_controls ({KEY_W, KEY_S, KEY_A, KEY_D});
+	
 }
 
 void GameWorld::loop ()
 {
-	p1.initilize();
-	p2.initilize();
+	PLAYER_1.initilize();
+	PLAYER_2.initilize();
+	PLAYER_3.initilize();
+	PLAYER_3.activate (1); // TODO: this should be moved to SettingsMenu
 	TIMER.reset();
 	ENEMIES_MANAGER.reset();
-	ClearBackground (WHITE);
-	while (!p1.is_dead() || (!p2.is_dead() && p2.is_active())){ //TODO: while(!endGame && !lostGame)
+	gameIsRunning = 1;
+	while (gameIsRunning){
 		update (GetFrameTime ());
 		draw ();
 		if (IsKeyReleased (KEY_ESCAPE)) {return;}
@@ -35,8 +33,7 @@ void GameWorld::loop ()
 
 void GameWorld::update (float dt)
 {
-	if (!p1.is_dead())						{p1.update (dt);}
-	if (!p2.is_dead() && p2.is_active())	{p2.update (dt);}
+	PLAYERS_MANAGER.update (dt);
 	if (!check_setting (SANDBOX)){
 		TIMER.update (dt);
 		ENEMIES_MANAGER.update (dt);
@@ -52,8 +49,7 @@ void GameWorld::draw ()
 	if (IsKeyDown (KEY_ONE)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (0);}
 	if (IsKeyDown (KEY_TWO)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (1);}
 	
-	if (!p1.is_dead())						{p1.draw();}
-	if (!p2.is_dead() && p2.is_active())	{p2.draw();}
+	PLAYERS_MANAGER.draw ();
 	if (!check_setting (SANDBOX)){
 		TIMER.draw ();
 		ENEMIES_MANAGER.draw ();
@@ -67,6 +63,11 @@ void GameWorld::draw ()
 		draw_debug ();
 	#endif
 	EndDrawing ();
+}
+
+void GameWorld::terminate ()
+{
+	gameIsRunning = 0;
 }
 
 
@@ -86,13 +87,13 @@ void GameWorld::draw_debug ()
 	// v3 = GetScreenToWorld2D ({100, 250}, CAMERA);
 	// v4 = GetScreenToWorld2D ({500, 250}, CAMERA);
 	
-	DrawText (TextFormat ("%f", GetScreenToWorld2D (p1.get_pos(), CAMERA).x), v1.x, v1.y, 20, RED);
-	DrawText (TextFormat ("%f", GetScreenToWorld2D (p1.get_pos(), CAMERA).y), v2.x, v2.y, 20, RED);
-	DrawText (TextFormat ("%f", GetWorldToScreen2D (p1.get_pos(), CAMERA).x), v3.x, v3.y, 20, RED);
-	DrawText (TextFormat ("%f", GetWorldToScreen2D (p1.get_pos(), CAMERA).y), v4.x, v4.y, 20, RED);
+	DrawText (TextFormat ("%f", GetScreenToWorld2D (PLAYER_1.get_pos(), CAMERA).x), v1.x, v1.y, 20, RED);
+	DrawText (TextFormat ("%f", GetScreenToWorld2D (PLAYER_1.get_pos(), CAMERA).y), v2.x, v2.y, 20, RED);
+	DrawText (TextFormat ("%f", GetWorldToScreen2D (PLAYER_1.get_pos(), CAMERA).x), v3.x, v3.y, 20, RED);
+	DrawText (TextFormat ("%f", GetWorldToScreen2D (PLAYER_1.get_pos(), CAMERA).y), v4.x, v4.y, 20, RED);
 	
-	DrawText (TextFormat ("%f", p1.get_pos().x), v5.x, v5.y, 20, RED);
-	DrawText (TextFormat ("%f", p1.get_posY()), v6.x, v6.y, 20, RED);
+	DrawText (TextFormat ("%f", PLAYER_1.get_pos().x), v5.x, v5.y, 20, RED);
+	DrawText (TextFormat ("%f", PLAYER_1.get_posY()), v6.x, v6.y, 20, RED);
 	// why 5472 screen width to world??
 	DrawText (TextFormat ("%f", GetMousePosition().x), 100, 350, 20, GREEN);
 	DrawText (TextFormat ("%f", GetMousePosition().y), 500, 350, 20, GREEN);
