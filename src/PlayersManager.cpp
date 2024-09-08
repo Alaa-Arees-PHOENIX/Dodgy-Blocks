@@ -16,6 +16,13 @@ PlayersManager::PlayersManager ()
 	p[2]->set_mouse_control ();
 }
 
+PlayersManager::~PlayersManager ()
+{
+	delete p[0];
+	delete p[1];
+	delete p[2];
+}
+
 void PlayersManager::collide_EnemyBlock_with_players (EnemyBlock& block)
 {
 	Rectangle body = {block.get_posX(), block.get_posY(), (float)block.get_width(), (float)block.get_height()};
@@ -28,13 +35,14 @@ void PlayersManager::collide_EnemyBlock_with_players (EnemyBlock& block)
 
 Player& PlayersManager::pick_target_for_enemy (Vector2 enemyPosition)
 {
-	Player* target = nullptr; // if all players are unavailable GameWorld will terminate, don't worry!
+	Player* target = p[0]; // default is p[0] to avoid undefined behaviour, but should take a meaningfull value at the end.
 	float shortestDistance = 999999999;
 	for (size_t i = 0; i < 3; i++){
-		if (p[i]->is_available() &&
-			Vector2DistanceSqr (enemyPosition, p[i]->get_pos()) < shortestDistance)
+		float dis = Vector2DistanceSqr (enemyPosition, p[i]->get_pos());
+		if (p[i]->is_available() && (dis < shortestDistance))
 		{
 				target = p[i];
+				shortestDistance = dis;
 		}
 	}
 	return *target;

@@ -10,6 +10,7 @@ class PlayersManager
 {
 public:
 	PlayersManager ();
+	~PlayersManager ();
 	void collide_EnemyBlock_with_players (EnemyBlock& block);
 	Player& pick_target_for_enemy (Vector2 enemyPosition);
 	void update (float dt);
