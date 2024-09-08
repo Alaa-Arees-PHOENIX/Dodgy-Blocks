@@ -29,7 +29,6 @@ EnemyBlock::~EnemyBlock ()
 void EnemyBlock::update (float dt)
 {
 	Player& target = PLAYERS_MANAGER.pick_target_for_enemy (position);
-	Rectangle body = {position.x, position.y, (float)width, (float)height};
 	
 	if (position.y > target.get_posY()) 		{accelerate_up (dt);}
 	else if (position.y < target.get_posY()) 	{accelerate_down (dt);}

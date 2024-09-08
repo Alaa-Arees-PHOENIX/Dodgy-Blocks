@@ -72,30 +72,50 @@ void Player::kill ()
 
 bool Player::should_accelerate_up ()
 {
-	return ((!useMouse && IsKeyDown (UP)) ||
-			(!useMouse && IsKeyUp (DOWN) && velocity.y > 0) ||
-			(useMouse && (GetScreenToWorld2D (GetMousePosition(), CAMERA).y < position.y)));
+	if (!useMouse){
+		return (IsKeyDown (UP) || (IsKeyUp (DOWN) && velocity.y > 0));
+	}
+	else{
+		return ((IsMouseButtonDown (MOUSE_BUTTON_LEFT) && (GetScreenToWorld2D (GetMousePosition(), CAMERA).y < position.y))
+				||
+				(IsMouseButtonUp (MOUSE_BUTTON_LEFT) && velocity.y > 0));
+	}
 }
 
 bool Player::should_accelerate_down ()
 {
-	return ((!useMouse && IsKeyDown (DOWN)) ||
-			(!useMouse && IsKeyUp (UP) && velocity.y < 0) ||
-			(useMouse && (GetScreenToWorld2D (GetMousePosition(), CAMERA).y > position.y)));
+	if (!useMouse){
+		return (IsKeyDown (DOWN) || (IsKeyUp (UP) && velocity.y < 0));
+	}
+	else{
+		return ((IsMouseButtonDown (MOUSE_BUTTON_LEFT) && (GetScreenToWorld2D (GetMousePosition(), CAMERA).y > position.y))
+				||
+				(IsMouseButtonUp (MOUSE_BUTTON_LEFT) && velocity.y < 0));
+	}
 }
 
 bool Player::should_accelerate_left ()
 {
-	return ((!useMouse && IsKeyDown (LEFT)) ||
-			(!useMouse && IsKeyUp (RIGHT) && velocity.x > 0) ||
-			(useMouse && (GetScreenToWorld2D (GetMousePosition(), CAMERA).x < position.x)));
+	if (!useMouse){
+		return (IsKeyDown (LEFT) || (IsKeyUp (RIGHT) && velocity.x > 0));
+	}
+	else{
+		return ((IsMouseButtonDown (MOUSE_BUTTON_LEFT) && (GetScreenToWorld2D (GetMousePosition(), CAMERA).x < position.x))
+				||
+				(IsMouseButtonUp (MOUSE_BUTTON_LEFT) && velocity.x > 0));
+	}
 }
 
 bool Player::should_accelerate_right ()
 {
-	return ((!useMouse && IsKeyDown (RIGHT)) ||
-			(!useMouse && IsKeyUp (LEFT) && velocity.x < 0) ||
-			(useMouse && (GetScreenToWorld2D (GetMousePosition(), CAMERA).x > position.x)));
+	if (!useMouse){
+		return (IsKeyDown (RIGHT) || (IsKeyUp (LEFT) && velocity.x < 0));
+	}
+	else{
+		return ((IsMouseButtonDown (MOUSE_BUTTON_LEFT) && (GetScreenToWorld2D (GetMousePosition(), CAMERA).x > position.x))
+				||
+				(IsMouseButtonUp (MOUSE_BUTTON_LEFT) && velocity.x < 0));
+	}
 }
 
 void Player::bounce_on_edges (float dt)
