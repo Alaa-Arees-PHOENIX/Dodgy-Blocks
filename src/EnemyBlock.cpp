@@ -40,6 +40,8 @@ void EnemyBlock::update (float dt)
 	position.x += velocity.x * dt;
 	position.y += velocity.y * dt;
 	
+	PLAYERS_MANAGER.collide_EnemyBlock_with_players (*this);
+	
 /*	update warning signs:	*/
 	warningLeft.y	= position.y;
 	warningRight.y	= position.y;

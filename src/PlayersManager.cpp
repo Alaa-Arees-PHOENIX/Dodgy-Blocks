@@ -16,6 +16,8 @@ PlayersManager::PlayersManager ()
 	p[2]->set_mouse_control ();
 	
 	p[0]->activate(1);
+	p[1]->activate(0);
+	p[2]->activate(0);
 }
 
 PlayersManager::~PlayersManager ()
@@ -29,7 +31,7 @@ void PlayersManager::collide_EnemyBlock_with_players (EnemyBlock& block)
 {
 	Rectangle body = {block.get_posX(), block.get_posY(), (float)block.get_width(), (float)block.get_height()};
 	for (size_t i = 0; i < 3; i++){
-		if (CheckCollisionCircleRec (p[i]->get_pos(), p[i]->get_radius(), body) && !p[i]->is_dead()){
+		if (p[i]->is_available() && CheckCollisionCircleRec (p[i]->get_pos(), p[i]->get_radius(), body)){
 			p[i]->kill();
 		}
 	}
