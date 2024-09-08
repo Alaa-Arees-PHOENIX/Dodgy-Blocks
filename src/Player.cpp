@@ -118,6 +118,25 @@ bool Player::should_accelerate_right ()
 	}
 }
 
+void Player::draw_statistics (short playerID)
+{
+	int fontSize = 37;
+	
+	std::string playerColor;
+	switch (playerID)
+	{
+		case 0: playerColor = "Red"; break;
+		case 1: playerColor = "Blue"; break;
+		case 2: playerColor = "Green"; break;
+	}
+	
+	std::string stats = playerColor + " player has survived for " + std::to_string (survivedFor) + " seconds.";
+	int x = -MeasureText (stats.c_str(), fontSize)/2; // centered in the middle of screen
+	int y = -SCREEN_HEIGHT/4 + 75*(playerID); // initial y-position + vertical spacing
+	
+	DrawText (stats.c_str(), x, y, fontSize, color);
+}
+
 void Player::bounce_on_edges (float dt)
 {
 	Vector2 pos = GetWorldToScreen2D (position, CAMERA);

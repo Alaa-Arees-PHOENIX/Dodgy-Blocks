@@ -81,7 +81,7 @@ SettingsMenu::SettingsMenu ()
 	
 	add_button	(bBuilder.build ("Main menu", // #11
 								(Rectangle){(SCREEN_WIDTH/2.0f) - 200, (SCREEN_HEIGHT/2.0f) - 75, W, H},
-								[] {},
+								[] {/* loop terminator button, no action */},
 								KEY_ESCAPE));
 	
 	#undef x_of

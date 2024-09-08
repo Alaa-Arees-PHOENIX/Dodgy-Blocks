@@ -22,12 +22,12 @@ void GameWorld::loop ()
 	while (gameIsRunning){
 		update (GetFrameTime ());
 		draw ();
-		if (IsKeyReleased (KEY_ESCAPE)) {return;}
+		if (IsKeyReleased (KEY_ESCAPE)) {gameIsRunning = 0;}
 		if (IsKeyPressed (KEY_ENTER)){
 			int breakPoint = 0;
 		}
-		// if (WindowShouldClose ()) {PAUSE_MENU.loop ();}
 	}
+	GAME_OVER_MENU.loop ();
 }
 
 void GameWorld::update (float dt)

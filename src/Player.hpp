@@ -22,6 +22,7 @@ public:
 	bool should_accelerate_down ();
 	bool should_accelerate_left ();
 	bool should_accelerate_right ();
+	void draw_statistics (short playerID);
 	
 	bool is_dead () {return dead;}
 	bool is_active () {return active;}

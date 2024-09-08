@@ -37,7 +37,7 @@ objects =	main.o \
 			SettingsMenu.o \
 			AboutMenu.o \
 			PauseMenu.o \
-			LostGameMenu.o \
+			GameOverMenu.o \
 			Timer.o \
 			Enemy.o \
 			EnemyBlock.o \
@@ -64,7 +64,7 @@ global_resources.o: src/global_resources.cpp src/global_resources.hpp \
 					src/SettingsMenu.hpp \
 					src/AboutMenu.hpp \
 					src/PauseMenu.hpp \
-					src/LostGameMenu.hpp \
+					src/GameOverMenu.hpp \
 					src/Timer.hpp \
 					src/EnemiesManager.hpp \
 					src/PlayersManager.hpp
@@ -113,12 +113,12 @@ PauseMenu.o: src/PauseMenu.cpp src/PauseMenu.hpp \
 			src/global_resources.hpp
 	$(CXX) src/PauseMenu.cpp $(CFLAGS)
 
-LostGameMenu.o: src/LostGameMenu.cpp src/LostGameMenu.hpp \
+GameOverMenu.o: src/GameOverMenu.cpp src/GameOverMenu.hpp \
 				src/ButtonBuilder.hpp \
 				src/Menu.hpp \
 				src/Button.hpp \
 				src/global_resources.hpp
-	$(CXX) src/LostGameMenu.cpp $(CFLAGS)
+	$(CXX) src/GameOverMenu.cpp $(CFLAGS)
 
 Timer.o: src/Timer.cpp src/Timer.hpp src/global_resources.hpp
 	$(CXX) src/Timer.cpp $(CFLAGS)

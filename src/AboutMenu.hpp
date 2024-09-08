@@ -14,7 +14,6 @@ private:
 public:
 	AboutMenu ();
 	void loop ()  override;
-	// void update () override; // no need to override update for main menu.
 	void draw () override;
 };
 

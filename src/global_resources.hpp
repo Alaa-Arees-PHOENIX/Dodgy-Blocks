@@ -10,7 +10,7 @@
 #include "SettingsMenu.hpp"
 #include "AboutMenu.hpp"
 #include "PauseMenu.hpp"
-#include "LostGameMenu.hpp"
+#include "GameOverMenu.hpp"
 #include "Timer.hpp"
 #include "EnemiesManager.hpp"
 #include "PlayersManager.hpp"
@@ -31,7 +31,7 @@
 #define SETTINGS_MENU	Singleton<SettingsMenu>::get_instance()
 #define ABOUT_MENU		Singleton<AboutMenu>::get_instance()
 #define PAUSE_MENU		Singleton<PauseMenu>::get_instance()
-#define LOST_GAME_MENU	Singleton<LostGameMenu>::get_instance()
+#define GAME_OVER_MENU	Singleton<GameOverMenu>::get_instance()
 
 #define TIMER Singleton<Timer>::get_instance()
 

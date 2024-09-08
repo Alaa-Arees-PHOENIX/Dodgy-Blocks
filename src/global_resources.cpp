@@ -11,7 +11,7 @@ void create_globals ()
 	Singleton<SettingsMenu>::create_instance ();
 	Singleton<AboutMenu>::create_instance ();
 	Singleton<PauseMenu>::create_instance ();
-	Singleton<LostGameMenu>::create_instance ();
+	Singleton<GameOverMenu>::create_instance ();
 	Singleton<Timer>::create_instance ();
 	Singleton<EnemiesManager>::create_instance ();
 	Singleton<PlayersManager>::create_instance ();
@@ -23,7 +23,7 @@ void destroy_globals ()
 	Singleton<SettingsMenu>::destroy_instance ();
 	Singleton<AboutMenu>::destroy_instance ();
 	Singleton<PauseMenu>::destroy_instance ();
-	Singleton<LostGameMenu>::destroy_instance ();
+	Singleton<GameOverMenu>::destroy_instance ();
 	Singleton<GameWorld>::destroy_instance ();
 	Singleton<ScreenManager>::destroy_instance ();
 	Singleton<Timer>::destroy_instance ();
