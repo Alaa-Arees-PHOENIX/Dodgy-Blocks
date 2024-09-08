@@ -16,7 +16,6 @@ void GameWorld::loop ()
 	PLAYER_1.initilize();
 	PLAYER_2.initilize();
 	PLAYER_3.initilize();
-	PLAYER_3.activate (1); // TODO: this should be moved to SettingsMenu
 	TIMER.reset();
 	ENEMIES_MANAGER.reset();
 	gameIsRunning = 1;

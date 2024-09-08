@@ -33,23 +33,39 @@ SettingsMenu::SettingsMenu ()
 								(Rectangle){x_of(2) + w_of(2) + HS, y_of(2), W/2.0f, H},
 								[] {deactivate_setting (SHOW_FPS);}));
 	
-	add_button	(bBuilder.build ("Single player", // #4
+	add_button	(bBuilder.build ("one player", // #4
 								(Rectangle){-W/2.0f, y_of(3) + h_of(3) + VS, W, H},
-								[] {PLAYER_2.activate(0);}));
+								[]{
+									PLAYER_1.activate(1);
+									PLAYER_2.activate(0);
+									PLAYER_3.activate(0);
+								}));
 	
-	add_button	(bBuilder.build ("Multiplayer", // #5
+	add_button	(bBuilder.build ("two players", // #5
 								(Rectangle){x_of(4) + w_of(4) + HS, y_of(4), W, H},
-								[] {PLAYER_2.activate(1);}));
+								[]{
+									PLAYER_1.activate(1);
+									PLAYER_2.activate(1);
+									PLAYER_3.activate(0);
+								}));
 	
-	add_button	(bBuilder.build ("Arcade", // #6
-								(Rectangle){-W/2.0f, y_of(5) + h_of(5) + VS, W, H},
+	add_button	(bBuilder.build ("three players", // #6
+								(Rectangle){x_of(5) + w_of(5) + HS, y_of(4), W, H},
+								[]{
+									PLAYER_1.activate(1);
+									PLAYER_2.activate(1);
+									PLAYER_3.activate(1);
+								}));
+	
+	add_button	(bBuilder.build ("Arcade", // #7
+								(Rectangle){-W/2.0f, y_of(6) + h_of(6) + VS, W, H},
 								[] {deactivate_setting (SANDBOX);}));
 	
-	add_button	(bBuilder.build ("Sand box", // #7
-								(Rectangle){x_of(6) + w_of(6) + HS, y_of(6), W, H},
+	add_button	(bBuilder.build ("Sand box", // #8
+								(Rectangle){x_of(7) + w_of(7) + HS, y_of(7), W, H},
 								[] {activate_setting (SANDBOX);}));
 	
-	add_button	(bBuilder.build ("Main menu", // #8
+	add_button	(bBuilder.build ("Main menu", // #9
 								(Rectangle){(SCREEN_WIDTH/2.0f) - 200, (SCREEN_HEIGHT/2.0f) - 75, W, H},
 								[] {},
 								KEY_ESCAPE));
@@ -83,10 +99,11 @@ void SettingsMenu::update ()
 	else 								{buttons[1].activate(1); buttons[1].change_colors();}
 	if (check_setting (SHOW_FPS))		{buttons[2].activate(1); buttons[2].change_colors();}
 	else 								{buttons[3].activate(1); buttons[3].change_colors();}
-	if (!PLAYER_2.is_active())			{buttons[4].activate(1); buttons[4].change_colors();}
-	else 								{buttons[5].activate(1); buttons[5].change_colors();}
-	if (!check_setting (SANDBOX))		{buttons[6].activate(1); buttons[6].change_colors();}
-	else 								{buttons[7].activate(1); buttons[7].change_colors();}
+	if (PLAYER_3.is_active())			{buttons[6].activate(1); buttons[6].change_colors();}
+	else if (PLAYER_2.is_active())		{buttons[5].activate(1); buttons[5].change_colors();}
+	else								{buttons[4].activate(1); buttons[4].change_colors();}
+	if (!check_setting (SANDBOX))		{buttons[7].activate(1); buttons[7].change_colors();}
+	else 								{buttons[8].activate(1); buttons[8].change_colors();}
 }
 
 void SettingsMenu::draw ()
@@ -95,5 +112,5 @@ void SettingsMenu::draw ()
 	draw_message_aligned (buttons[0], msg1, ORANGE);
 	draw_message_aligned (buttons[2], msg2, ORANGE);
 	draw_message_aligned (buttons[4], msg3, ORANGE);
-	draw_message_aligned (buttons[6], msg4, ORANGE);
+	draw_message_aligned (buttons[7], msg4, ORANGE);
 }

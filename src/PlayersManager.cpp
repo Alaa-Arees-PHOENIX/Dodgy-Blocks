@@ -14,6 +14,8 @@ PlayersManager::PlayersManager ()
 	p[0]->set_keyboard_control ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
 	p[1]->set_keyboard_control ({KEY_W, KEY_S, KEY_A, KEY_D});
 	p[2]->set_mouse_control ();
+	
+	p[0]->activate(1);
 }
 
 PlayersManager::~PlayersManager ()
