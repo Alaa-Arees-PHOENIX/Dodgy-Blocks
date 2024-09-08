@@ -29,6 +29,7 @@ public:
 	bool is_available () {return active && !dead;}
 	int survival_time () {return survivedFor;}
 	float get_radius () {return RADIUS;}
+	bool uses_mouse () {return useMouse;}
     
 private:
     void bounce_on_edges (float dt);
