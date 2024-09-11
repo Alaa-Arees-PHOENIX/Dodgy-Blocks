@@ -14,6 +14,7 @@
 #include "Timer.hpp"
 #include "EnemiesManager.hpp"
 #include "PlayersManager.hpp"
+#include "types.hpp"
 
 ////////////// USEFUL MACROS /////////////////////
 #define SCREEN_WIDTH	Singleton<ScreenManager>::get_instance().get_default_screen_width()
@@ -44,14 +45,6 @@
 #define PLAYER_2		Singleton<PlayersManager>::get_instance().P(1)
 #define PLAYER_3		Singleton<PlayersManager>::get_instance().P(2)
 
-// // // // // // // // // GLOBAL TYPES:
-enum Directions {UP_DIR, DOWN_DIR, LEFT_DIR, RIGHT_DIR};
-enum Settings
-{
-	SANDBOX			=	1 << 0,
-	SHOW_FPS		=	1 << 1
-};
-
 // // // // // // // // // GLOBAL VARIABLES:
 extern uint8_t settings; // using bitmask to toggle game settings
 constexpr char TITLE[] = "Dodgy Blocks";
@@ -67,5 +60,6 @@ inline void deactivate_setting (Settings s)	{settings = (settings & (~s));} // t
 void create_globals (); // Istantiate global objects with `Singleton<T>`.
 void destroy_globals (); // destroy all globals istantiated above.
 int random_number (int Min, int Max);
+int random_number (Range range);
 
 #endif // GLOBAL_RESOURCES_DB
