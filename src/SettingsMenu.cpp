@@ -18,7 +18,7 @@ SettingsMenu::SettingsMenu ()
 	#define h_of(n) buttons[n].get_height()
 	
 	add_button	(bBuilder.build ("On", // #0
-								(Rectangle){-W/2.0f, -200, W/2.0f, H},
+								(Rectangle){-W/2.0f, -245, W/2.0f, H},
 								[] {Singleton<ScreenManager>::get_instance().toggle_full_screen(1);},
 								KEY_NULL,
 								[] () -> bool {return IsWindowFullscreen();}));
@@ -110,8 +110,32 @@ SettingsMenu::SettingsMenu ()
 								KEY_NULL,
 								[] () -> bool {return check_setting (SANDBOX);}));
 	
-	add_button	(bBuilder.build ("Main menu", // #11
-								(Rectangle){(SCREEN_WIDTH/2.0f) - 200, (SCREEN_HEIGHT/2.0f) - 75, W, H},
+	add_button	(bBuilder.build ("Easy", // #11
+								(Rectangle){x_of(9), y_of(9) + h_of(9) + VS, 3*W/4, H},
+								[] {ENEMIES_MANAGER.set_difficulty (EASY);},
+								KEY_NULL,
+								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == EASY;}));
+	
+	add_button	(bBuilder.build ("Medium", // #12
+								(Rectangle){x_of(11) + w_of(11) + HS, y_of(11), 3*W/4, H},
+								[] {ENEMIES_MANAGER.set_difficulty (MEDIUM);},
+								KEY_NULL,
+								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == MEDIUM;}));
+	
+	add_button	(bBuilder.build ("Hard", // #13
+								(Rectangle){x_of(12) + w_of(12) + HS, y_of(12), 3*W/4, H},
+								[] {ENEMIES_MANAGER.set_difficulty (HARD);},
+								KEY_NULL,
+								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == HARD;}));
+	
+	add_button	(bBuilder.build ("INSANE", // #14
+								(Rectangle){x_of(13) + w_of(13) + HS, y_of(13), 3*W/4, H},
+								[] {ENEMIES_MANAGER.set_difficulty (INSANE);},
+								KEY_NULL,
+								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == INSANE;}));
+	
+	add_button	(bBuilder.build ("Main menu", // #15
+								(Rectangle){(SCREEN_WIDTH/2.0f) - 150, (SCREEN_HEIGHT/2.0f) - 55, W, H},
 								[] {/* loop terminator button, no action */},
 								KEY_ESCAPE));
 	

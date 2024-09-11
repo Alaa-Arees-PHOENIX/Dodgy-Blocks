@@ -16,6 +16,8 @@ public:
 	void set_difficulty (Difficulty newDifficulty);
 	void update_EnemyBlock_settings ();
 	
+	Difficulty get_difficulty () {return currentDifficulty;};
+	
 private:
 	struct EnemyComparator
 	{

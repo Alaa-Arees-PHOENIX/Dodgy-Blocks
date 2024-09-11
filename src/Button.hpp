@@ -8,7 +8,6 @@
 
 class Button
 {
-	
 public: // setters and getters are defined here to be inlined    
 	float get_x () 			{return bounds.x;}
 	float get_y () 			{return bounds.y;}
