@@ -16,7 +16,9 @@ ButtonBuilder::ButtonBuilder ( std::tuple <Color, Color, Color> defaultNormalCol
 Button ButtonBuilder::build	(	std::string text,
 								Rectangle bounds,
 								std::function <void ()> action,
-								KeyboardKey alternativeKey)
+								KeyboardKey alternativeKey,
+								std::function <bool ()> button_toggled_on)
 {
-	return Button (bounds, text, textSize, defaultNormalColors, defaultActiveColors, action, alternativeKey);
+	return Button (bounds, text, textSize, defaultNormalColors, defaultActiveColors,
+					action, alternativeKey, button_toggled_on);
 }

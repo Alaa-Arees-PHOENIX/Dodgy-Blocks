@@ -8,7 +8,6 @@ class SettingsMenu : public Menu
 public:
 	SettingsMenu ();
 	void loop () override;
-	void update (); // this is an overload for Menu::update (const Camera2D&), and not an override...
 	void draw () override;
 	
 private:

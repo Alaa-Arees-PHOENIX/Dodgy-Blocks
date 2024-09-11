@@ -5,6 +5,7 @@
 *	to make a bunch of buttons that looks similar
 *	*NOTE: verticalSpacing is not a const value but it is calculated
 *	each time with a fixed formula
+*	*NOTE 2: verticalSpacing, and also horizontalSpacing are a TODO for now, I might add it later somehow...
 ***********************************/
 
 #ifndef BUTTONBUILDER_DB
@@ -31,7 +32,8 @@ class ButtonBuilder
 	Button build (	std::string text,
 					Rectangle bounds,
 					std::function <void ()> action,
-					KeyboardKey alternativeKey = KEY_NULL);
+					KeyboardKey alternativeKey = KEY_NULL,
+					std::function <bool ()> button_toggled_on = [] () -> bool {return false;});
 };
 
 #endif // BUTTONBUILDER_DB

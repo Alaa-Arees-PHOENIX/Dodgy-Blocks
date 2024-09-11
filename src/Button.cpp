@@ -11,7 +11,8 @@ Button::Button (Rectangle bounds, std::string text, int textSize,
 				std::tuple <Color, Color, Color> normalColors, 
 				std::tuple <Color, Color, Color> activeColors,
 				std::function <void ()> action,
-				KeyboardKey alternativeKey = KEY_NULL)
+				KeyboardKey alternativeKey,
+				std::function <bool ()> button_toggled_on)
 {
 	this->bounds = bounds;
 	this->text = text;
@@ -20,6 +21,7 @@ Button::Button (Rectangle bounds, std::string text, int textSize,
     std::tie (activeBackground, activeOutlines, activeTextColor) = activeColors;
 	this->action = action;
 	this->alternativeKey = alternativeKey;
+	this->button_toggled_on = button_toggled_on;
     
     // text center alignment:
     textWidth = MeasureText (text.c_str(), textSize);
@@ -60,6 +62,10 @@ void Button::update (const Camera2D &camera)
     } else {pressed = 0;}
 	
 	if (pressed) {action ();}
+	if (button_toggled_on()){
+		active = 1;
+		change_colors ();
+	}
 }
     
 void Button::draw ()
