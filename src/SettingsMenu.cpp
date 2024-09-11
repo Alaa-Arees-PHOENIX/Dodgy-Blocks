@@ -18,7 +18,7 @@ SettingsMenu::SettingsMenu ()
 	#define h_of(n) buttons[n].get_height()
 	
 	add_button	(bBuilder.build ("On", // #0
-								(Rectangle){-W/2.0f, -200, W/2.0f, H},
+								(Rectangle){-W/2.0f, -225, W/2.0f, H},
 								[] {Singleton<ScreenManager>::get_instance().toggle_full_screen(1);}));
 								
 	add_button	(bBuilder.build ("Off", // #1

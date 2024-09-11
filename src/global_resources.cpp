@@ -35,3 +35,8 @@ int random_number (int Min, int Max)
 {
     return rand () % (Max - Min + 1) + Min;
 }
+
+int random_number (Range range)
+{
+    return rand () % (range.rMax - range.rMin + 1) + range.rMin;
+}

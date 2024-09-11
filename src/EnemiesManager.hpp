@@ -6,6 +6,15 @@
 
 class EnemiesManager
 {
+public:
+	EnemiesManager ();
+	void reset ();
+	void update (float dt);
+	void draw ();
+	void spawn_EnemyBlock ();
+	void set_difficulty (Difficulty newDifficulty);
+	void update_EnemyBlock_settings ();
+	
 private:
 	struct EnemyComparator
 	{
@@ -13,18 +22,23 @@ private:
 		{
 			return e1->get_death_time() < e2->get_death_time();
 		}
-	};
+	}; /////// I WAS HERE AT 11/9/2024 8:02 AM BEFORE GOING TO BREAKFAST
+	namespace EnemyBlock_settings
+	{
+		/*	maximum possible number of EnemyBlock objects at the same time. */
+		int maxCount = 4;
+		/*	nextSpawnTime specifies at which point in time the manager will attempt to spawn a new EnemyBlock. */
+		int nextSpawnTime;
+		/*	nextSpawnTime takes the old value and increment it by a random number within the
+			range of timeBounds */
+		Range spawnTimeRange;
+		Range widthRange, heightRange;
+		Range maxVelocityRange;
+		Range maxForceRange;
+		Range lifespanRange;
+	}
 	std::set<Enemy*, EnemyComparator> enemies;
-	static constexpr int MAX_BLOCKS_COUNT = 4; // maximum possible number of EnemyBlock objects at the same time.
-	int nextSpawnTimeForBlocks; // at which point in time the manager will attempt to spawn a new EnemyBlock.
-	
-	
-public:
-	EnemiesManager ();
-	void reset ();
-	void update (float dt);
-	void draw ();
-	void spawn_EnemyBlock ();
+	Difficulty currentDifficulty;
 };
 
 #endif // ENEMIESMANAGER_DB
