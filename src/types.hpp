@@ -18,4 +18,4 @@ struct Range
 	int rMax;
 };
 
-#endif TYPES_DB
+#endif // TYPES_DB

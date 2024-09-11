@@ -67,7 +67,8 @@ global_resources.o: src/global_resources.cpp src/global_resources.hpp \
 					src/GameOverMenu.hpp \
 					src/Timer.hpp \
 					src/EnemiesManager.hpp \
-					src/PlayersManager.hpp
+					src/PlayersManager.hpp \
+					src/types.hpp
 	$(CXX) src/global_resources.cpp $(CFLAGS)
 
 GameWorld.o: src/GameWorld.cpp src/GameWorld.hpp src/Player.hpp src/MotiveCreature.hpp src/global_resources.hpp src/Menu.hpp src/Singleton.hpp

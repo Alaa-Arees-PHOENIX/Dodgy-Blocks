@@ -3,6 +3,7 @@
 
 #include <set>
 #include "Enemy.hpp"
+#include "types.hpp"
 
 class EnemiesManager
 {
@@ -22,8 +23,8 @@ private:
 		{
 			return e1->get_death_time() < e2->get_death_time();
 		}
-	}; /////// I WAS HERE AT 11/9/2024 8:02 AM BEFORE GOING TO BREAKFAST
-	namespace EnemyBlock_settings
+	};
+	struct EnemyBlockSettings
 	{
 		/*	maximum possible number of EnemyBlock objects at the same time. */
 		int maxCount = 4;
@@ -36,7 +37,8 @@ private:
 		Range maxVelocityRange;
 		Range maxForceRange;
 		Range lifespanRange;
-	}
+	};
+	EnemyBlockSettings EBS;
 	std::set<Enemy*, EnemyComparator> enemies;
 	Difficulty currentDifficulty;
 };
