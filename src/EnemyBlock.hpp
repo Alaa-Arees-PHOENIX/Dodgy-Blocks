@@ -10,7 +10,7 @@ public:
 	EnemyBlock (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Vector2 initialPos,
 				int lifespan,
 				int width, int height);
-	~EnemyBlock ();
+	virtual ~EnemyBlock ();
 	void update (float dt) override;
 	void draw () override;
 	

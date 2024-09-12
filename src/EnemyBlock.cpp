@@ -2,6 +2,7 @@
 #include "EnemyBlock.hpp"
 #include "Player.hpp"
 #include "global_resources.hpp"
+#include <iostream>
 
 int EnemyBlock::objectsCount = 0;
 
@@ -19,11 +20,18 @@ EnemyBlock::EnemyBlock (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Vec
 	warningDown		= {0, SCREEN_HEIGHT/2.0f - 11, (float)width, 11};
 	
 	objectsCount++;
+	
+	#if defined(DEBUG)
+		std::cerr << "EnemyBlock created " << SPAWN_TIME << ' ' << DEATH_TIME << std::endl;
+	#endif
 }
 
 EnemyBlock::~EnemyBlock ()
 {
 	objectsCount--;
+	#if defined(DEBUG)
+		std::cerr << "EnemyBlock destroy\n";
+	#endif
 }
 
 void EnemyBlock::update (float dt)
