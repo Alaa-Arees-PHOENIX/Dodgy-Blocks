@@ -42,7 +42,8 @@ objects =	main.o \
 			Enemy.o \
 			EnemyBlock.o \
 			EnemiesManager.o \
-			PlayersManager.o
+			PlayersManager.o \
+			Logger.o
 
 Dodgy_Blocks: $(objects)
 	$(CXX) $(objects) -o Dodgy_Blocks $(LDFLAGS)
@@ -142,6 +143,8 @@ PlayersManager.o: 	src/PlayersManager.cpp src/PlayersManager.hpp \
 					src/Player.hpp
 	$(CXX) src/PlayersManager.cpp $(CFLAGS)
 
+Logger.o: src/Logger.cpp src/Logger.hpp
+	$(CXX) src/Logger.cpp $(CFLAGS)
 
 
 ############## ASSISTANT TOOLS ##############
