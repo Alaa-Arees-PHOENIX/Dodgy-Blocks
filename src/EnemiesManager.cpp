@@ -1,3 +1,4 @@
+#include <fstream>
 #include "raylib.h"
 #include "EnemyBlock.hpp"
 #include "EnemiesManager.hpp"
@@ -7,6 +8,16 @@ EnemiesManager::EnemiesManager ()
 {
 	reset();
 	set_difficulty (MEDIUM);
+	#if defined(DEBUG)
+		LOGGER.add_listener (this);
+	#endif
+}
+
+EnemiesManager::~EnemiesManager ()
+{
+	#if defined(DEBUG)
+		LOGGER.remove_listener (this);
+	#endif
 }
 
 void EnemiesManager::reset ()
@@ -123,4 +134,38 @@ void EnemiesManager::update_EnemyBlock_settings ()
 			EBS.spawnTimeRange		= {2, 3};
 			break;
 	}
+}
+
+void EnemiesManager::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+{
+	std::ofstream logFile;
+	if (useDefaultLogFile){
+		logFile.open ("log/EnemiesManager_log.txt", std::ios_base::app);
+	}
+	else {logFile.open (alternativeFile, std::ios_base::app);}
+	
+	logFile << Logger::LINE_BREAK;
+
+	logFile << "EnemiesManager instance, logged at: " << logTime << '\n';
+	logFile << "game time: " << TIMER.get_time() << '\n';
+	logFile << "address: " << this << '\n';
+	logFile << "difficulty: " << currentDifficulty << '\n';
+	logFile << "EBS max count = " << EBS.maxCount << '\n';
+	logFile << "EBS next spawn = " << EBS.nextSpawnTime << '\n';
+	logFile << "EBS width range = " << to_string (EBS.widthRange) << '\n';
+	logFile << "EBS height range = " << to_string (EBS.heightRange) << '\n';
+	logFile << "EBS spawn time range = " << to_string (EBS.spawnTimeRange) << '\n';
+	logFile << "EBS max velocity range = " << to_string (EBS.maxVelocityRange) << '\n';
+	logFile << "EBS max force range = " << to_string (EBS.maxForceRange) << '\n';
+	logFile << "EBS lifespan range = " << to_string (EBS.lifespanRange) << '\n';
+	
+	int i = 0;
+	for (Enemy* enemy : enemies){
+		logFile << '[' << i << ']' << enemy << ", ";
+		i++;
+	}
+
+	logFile << Logger::LINE_BREAK;
+	
+	logFile.close();
 }

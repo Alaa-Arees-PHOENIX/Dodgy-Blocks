@@ -1,8 +1,9 @@
+#include <iostream>
+#include <fstream>
 #include "raylib.h"
 #include "EnemyBlock.hpp"
 #include "Player.hpp"
 #include "global_resources.hpp"
-#include <iostream>
 
 int EnemyBlock::objectsCount = 0;
 
@@ -23,6 +24,7 @@ EnemyBlock::EnemyBlock (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Vec
 	
 	#if defined(DEBUG)
 		std::cerr << "EnemyBlock created " << SPAWN_TIME << ' ' << DEATH_TIME << std::endl;
+		LOGGER.add_listener (this);
 	#endif
 }
 
@@ -31,6 +33,7 @@ EnemyBlock::~EnemyBlock ()
 	objectsCount--;
 	#if defined(DEBUG)
 		std::cerr << "EnemyBlock destroy\n";
+		LOGGER.remove_listener (this);
 	#endif
 }
 
@@ -67,4 +70,34 @@ void EnemyBlock::draw ()
 	if (pos.x > CURRENT_SCREEN_WIDTH)			{DrawRectangleRec (warningRight, ColorAlpha (BLACK, 0.58f));}
 	if (pos.y < 0)								{DrawRectangleRec (warningUp, ColorAlpha (BLACK, 0.58f));}
 	if (pos.y + height > CURRENT_SCREEN_HEIGHT)	{DrawRectangleRec (warningDown, ColorAlpha (BLACK, 0.58f));}
+}
+
+void EnemyBlock::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+{
+	std::ofstream logFile;
+	std::string logFilePath = useDefaultLogFile ? "log/EnemyBlock_log.txt" : alternativeFile;
+	logFile.open(logFilePath.c_str(), std::ios_base::app);
+	
+	logFile << Logger::LINE_BREAK;
+	
+	logFile << "EnemyBlock instance, logged at " << logTime << '\n';
+	logFile << "game time: " << TIMER.get_time() << '\n';
+	logFile << "address: " << this << '\n';
+	logFile << "objects count = " << objectsCount << '\n';
+	logFile << "width = " << width << ", height = " << height << '\n';
+	logFile << "warningUp = " << to_string (warningUp) << '\n';
+	logFile << "warningDown = " << to_string (warningDown) << '\n';
+	logFile << "warningLeft = " << to_string (warningLeft) << '\n';
+	logFile << "warningRight = " << to_string (warningRight) << '\n';
+	
+	logFile << "##### Inherits from MotiveCreature and Enemy ####\n";
+	logFile.close();
+	MotiveCreature::logInfo (logTime, 0, "log/EnemyBlock_log.txt");
+	Enemy::logInfo (logTime, 0, "log/EnemyBlock_log.txt");	
+	logFile.open(logFilePath.c_str(), std::ios_base::app);
+	logFile << "##### End of inheritance ####\n";
+	
+	logFile << Logger::LINE_BREAK;
+	
+	logFile.close();
 }

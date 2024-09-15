@@ -15,6 +15,10 @@
 #include "EnemiesManager.hpp"
 #include "PlayersManager.hpp"
 #include "types.hpp"
+#include "Logger.hpp"
+
+struct Rectangle;
+struct Vector2;
 
 ////////////// USEFUL MACROS /////////////////////
 #define SCREEN_WIDTH	Singleton<ScreenManager>::get_instance().get_default_screen_width()
@@ -45,6 +49,8 @@
 #define PLAYER_2		Singleton<PlayersManager>::get_instance().P(1)
 #define PLAYER_3		Singleton<PlayersManager>::get_instance().P(2)
 
+#define LOGGER Singleton<Logger>::get_instance()
+
 // // // // // // // // // GLOBAL VARIABLES:
 extern uint8_t settings; // using bitmask to toggle game settings
 constexpr char TITLE[] = "Dodgy Blocks";
@@ -61,5 +67,8 @@ void create_globals (); // Istantiate global objects with `Singleton<T>`.
 void destroy_globals (); // destroy all globals istantiated above.
 int random_number (int Min, int Max);
 int random_number (Range range);
+std::string to_string (const Range&);
+std::string to_string (const Rectangle&);
+std::string to_string (const Vector2&);
 
 #endif // GLOBAL_RESOURCES_DB

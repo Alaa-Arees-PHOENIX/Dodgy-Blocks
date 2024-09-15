@@ -1,5 +1,6 @@
 #include <tuple>
 #include <cmath>
+#include <fstream>
 #include "raylib.h"
 #include "MotiveCreature.hpp"
 #include "Player.hpp"
@@ -8,13 +9,22 @@
 Player::Player (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Color color)
 	: MotiveCreature (MAX_VELOCITY, ACC_FORCE, MASS), color (color)
 {
-	
+	#if defined(DEBUG)
+		LOGGER.add_listener (this);
+	#endif
 }
 
 Player::Player ()
 	:	Player ({0, 0}, {0, 0}, 0, BLACK)
 {
 	
+}
+
+Player::~Player ()
+{
+	#if defined(DEBUG)
+		LOGGER.remove_listener (this);
+	#endif
 }
 
 void Player::set_keyboard_control (std::tuple <KeyboardKey, KeyboardKey, KeyboardKey, KeyboardKey> controls)
@@ -146,4 +156,28 @@ void Player::bounce_on_edges (float dt)
     else if (pos.y + RADIUS >= CURRENT_SCREEN_HEIGHT)	{bounce_up (-1, dt);}
     if (pos.x - RADIUS <= 0)							{bounce_right (-1, dt);}
     else if (pos.x + RADIUS >= CURRENT_SCREEN_WIDTH)	{bounce_left (-1, dt);}
+}
+
+void Player::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+{
+	std::ofstream logFile;
+	std::string logFilePath = useDefaultLogFile ? "log/Player_log.txt" : alternativeFile;
+	logFile.open(logFilePath.c_str(), std::ios_base::app);
+
+	logFile << Logger::LINE_BREAK;
+
+	logFile << "Player instance, logged at: " << logTime << '\n';
+	logFile << "game time: " << TIMER.get_time() << '\n';
+	logFile << "address: " << this << '\n';
+	logFile << "is active? " << active << '\n';
+	logFile << "is dead? " << dead << '\n';
+	logFile << "survival time " << survivedFor << '\n';
+	logFile << "use mouse? " << useMouse << '\n';
+	logFile << "#### Inherits from MotiveCreature ####\n";
+	logFile.close();
+	MotiveCreature::logInfo (logTime, 0, "log/Player_log.txt");
+	logFile.open(logFilePath.c_str(), std::ios_base::app);
+	logFile << "#### End of inheritance ####\n";
+
+	logFile << Logger::LINE_BREAK;
 }

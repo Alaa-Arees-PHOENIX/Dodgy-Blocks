@@ -1,3 +1,4 @@
+#include "raylib.h"
 #include "global_resources.hpp"
 #include <cstdint>
 
@@ -5,6 +6,8 @@ uint8_t settings = 0;
 
 void create_globals ()
 {
+	/* Logger MUST be created first and destroyed last. */
+	Singleton<Logger>::create_instance ();
 	Singleton<ScreenManager>::create_instance ();
 	Singleton<GameWorld>::create_instance ();
 	Singleton<MainMenu>::create_instance ();
@@ -29,6 +32,7 @@ void destroy_globals ()
 	Singleton<Timer>::destroy_instance ();
 	Singleton<EnemiesManager>::destroy_instance ();
 	Singleton<PlayersManager>::destroy_instance ();
+	Singleton<Logger>::destroy_instance ();
 }
 
 int random_number (int Min, int Max)
@@ -39,4 +43,23 @@ int random_number (int Min, int Max)
 int random_number (Range range)
 {
     return rand () % (range.rMax - range.rMin + 1) + range.rMin;
+}
+
+std::string to_string (const Range& r)
+{
+	std::string s = "{" + std::to_string(r.rMin) + ", " + std::to_string(r.rMax) + "}";
+	return s;
+}
+
+std::string to_string (const Rectangle& r)
+{
+	std::string s = "{" + std::to_string(r.x) + ", " + std::to_string(r.y) + ", " +
+					std::to_string(r.width) + ", " + std::to_string(r.height) + "}";
+	return s;
+}
+
+std::string to_string (const Vector2& v)
+{
+	std::string s = "{" + std::to_string(v.x) + ", " + std::to_string(v.y) + "}";
+	return s;
 }

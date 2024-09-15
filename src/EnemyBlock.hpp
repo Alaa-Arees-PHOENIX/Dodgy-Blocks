@@ -3,6 +3,7 @@
 
 #include "Enemy.hpp"
 #include "MotiveCreature.hpp"
+#include "Logger.hpp"
 
 class EnemyBlock : public MotiveCreature, public Enemy
 {
@@ -13,6 +14,9 @@ public:
 	virtual ~EnemyBlock ();
 	void update (float dt) override;
 	void draw () override;
+	void logInfo (	int logTime,
+					bool useDefaultLogFile = 1,
+					const char* alternativeFile = "\0") override;
 	
 	static int get_instances_count() {return objectsCount;}
 	int get_width ()	{return width;}

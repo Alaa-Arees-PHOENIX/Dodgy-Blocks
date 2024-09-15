@@ -4,17 +4,22 @@
 #include <set>
 #include "Enemy.hpp"
 #include "types.hpp"
+#include "Logger.hpp"
 
-class EnemiesManager
+class EnemiesManager : public Logger::Listener
 {
 public:
 	EnemiesManager ();
+	virtual ~EnemiesManager ();
 	void reset ();
 	void update (float dt);
 	void draw ();
 	void spawn_EnemyBlock ();
 	void set_difficulty (Difficulty newDifficulty);
 	void update_EnemyBlock_settings ();
+	void logInfo (	int logTime,
+					bool useDefaultLogFile = 1,
+					const char* alternativeFile = "\0") override;
 	
 	Difficulty get_difficulty () {return currentDifficulty;};
 	

@@ -28,6 +28,7 @@ void GameWorld::loop ()
 			if (IsKeyPressed (KEY_ENTER)){
 				int breakPoint = 0;
 			}
+			LOGGER.update(GetFrameTime());
 		#endif
 	}
 	GAME_OVER_MENU.loop ();

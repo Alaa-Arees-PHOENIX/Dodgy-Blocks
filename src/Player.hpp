@@ -5,12 +5,14 @@
 #include <cmath>
 #include "raylib.h"
 #include "MotiveCreature.hpp"
+#include "Logger.hpp"
 
 class Player : public MotiveCreature
 {
 public:
 	Player (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Color color);
 	Player ();
+	~Player ();
 
     void update (float dt) override;
     void draw () override;
@@ -23,6 +25,9 @@ public:
 	bool should_accelerate_left ();
 	bool should_accelerate_right ();
 	void draw_statistics (short playerID);
+	void logInfo (	int logTime,
+					bool useDefaultLogFile = 1,
+					const char* alternativeFile = "\0") override;
 	
 	bool is_dead () {return dead;}
 	bool is_active () {return active;}

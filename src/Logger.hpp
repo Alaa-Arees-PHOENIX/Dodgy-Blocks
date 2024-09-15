@@ -9,15 +9,22 @@ public:
 	class Listener
 	{
 	public:
-		virtual void logInfo (bool useDefaultOutputFile = 1, const char* alternativePath = "\0") = 0;
+		virtual void logInfo (	int logTime,
+								bool useDefaultLogFile = 1,
+								const char* alternativeFile = "\0") = 0;
 	};
 	
-	void addListner (Listener&);
-	void removeListner (Listener&);
+	Logger ();
+	void add_listener (Listener*);
+	void remove_listener (Listener*);
+	void update (float dt);
 	void logAll ();
 	
+	static constexpr char LINE_BREAK[] = "\n ----------------------------------- \n";
+
 private:
 	std::forward_list <Listener*> listeners;
+	double timeSinceGameLaunch;
 };
 
 #endif // LOGGER_DB
