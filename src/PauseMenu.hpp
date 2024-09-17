@@ -8,8 +8,6 @@ class PauseMenu : public Menu
 public:
 	PauseMenu ();
 	void loop () override;
-	// void update () override;
-	// void draw () override;
 };
 
 #endif // PAUSEMENU_DB

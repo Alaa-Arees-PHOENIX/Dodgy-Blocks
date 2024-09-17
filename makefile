@@ -22,11 +22,16 @@ objects =	main.o \
 			SettingsMenu.o \
 			AboutMenu.o \
 			PauseMenu.o \
-			LostGameMenu.o \
+			GameOverMenu.o \
 			Timer.o \
 			Enemy.o \
 			EnemyBlock.o \
-			EnemiesManager.o
+			EnemiesManager.o \
+			PlayersManager.o
+
+ifeq ($(BUILD_MODE), DEBUG)
+	objects += Logger.o
+endif
 
 Dodgy_Blocks: $(objects)
 	$(CXX) $(objects) -o Dodgy_Blocks $(LDFLAGS)
@@ -37,7 +42,10 @@ main.o: src/main.cpp src/global_resources.hpp src/Singleton.hpp
 Player.o: src/Player.cpp src/Player.hpp src/MotiveCreature.hpp src/ScreenManager.hpp src/global_resources.hpp
 	$(CXX) src/Player.cpp $(CFLAGS)
 
-MotiveCreature.o: src/MotiveCreature.cpp src/MotiveCreature.hpp src/ScreenManager.hpp src/global_resources.hpp
+MotiveCreature.o:	src/MotiveCreature.cpp src/MotiveCreature.hpp \
+					src/ScreenManager.hpp \
+					src/global_resources.hpp \
+					src/Logger.hpp
 	$(CXX) src/MotiveCreature.cpp $(CFLAGS)
 
 global_resources.o: src/global_resources.cpp src/global_resources.hpp \
@@ -48,12 +56,21 @@ global_resources.o: src/global_resources.cpp src/global_resources.hpp \
 					src/SettingsMenu.hpp \
 					src/AboutMenu.hpp \
 					src/PauseMenu.hpp \
-					src/LostGameMenu.hpp \
+					src/GameOverMenu.hpp \
 					src/Timer.hpp \
-					src/EnemiesManager.hpp
+					src/EnemiesManager.hpp \
+					src/PlayersManager.hpp \
+					src/types.hpp \
+					src/Logger.hpp
 	$(CXX) src/global_resources.cpp $(CFLAGS)
 
-GameWorld.o: src/GameWorld.cpp src/GameWorld.hpp src/Player.hpp src/MotiveCreature.hpp src/global_resources.hpp src/Menu.hpp src/Singleton.hpp
+GameWorld.o:	src/GameWorld.cpp src/GameWorld.hpp \
+				src/Player.hpp \
+				src/MotiveCreature.hpp \
+				src/global_resources.hpp \
+				src/Menu.hpp \
+				src/Singleton.hpp \
+				src/Logger.hpp
 	$(CXX) src/GameWorld.cpp $(CFLAGS)
 
 ScreenManager.o: src/ScreenManager.cpp src/ScreenManager.hpp
@@ -89,31 +106,51 @@ AboutMenu.o: src/AboutMenu.cpp src/AboutMenu.hpp \
 			src/global_resources.hpp
 	$(CXX) src/AboutMenu.cpp $(CFLAGS)
 
-PauseMenu.o: src/PauseMenu.cpp src/PauseMenu.hpp \
-			src/ButtonBuilder.hpp \
-			src/Menu.hpp \
-			src/Button.hpp \
-			src/global_resources.hpp
-	$(CXX) src/PauseMenu.cpp $(CFLAGS)
-
-LostGameMenu.o: src/LostGameMenu.cpp src/LostGameMenu.hpp \
+PauseMenu.o:	src/PauseMenu.cpp src/PauseMenu.hpp \
 				src/ButtonBuilder.hpp \
 				src/Menu.hpp \
 				src/Button.hpp \
 				src/global_resources.hpp
-	$(CXX) src/LostGameMenu.cpp $(CFLAGS)
+	$(CXX) src/PauseMenu.cpp $(CFLAGS)
+
+GameOverMenu.o: src/GameOverMenu.cpp src/GameOverMenu.hpp \
+				src/ButtonBuilder.hpp \
+				src/Menu.hpp \
+				src/Button.hpp \
+				src/global_resources.hpp
+	$(CXX) src/GameOverMenu.cpp $(CFLAGS)
 
 Timer.o: src/Timer.cpp src/Timer.hpp src/global_resources.hpp
 	$(CXX) src/Timer.cpp $(CFLAGS)
 
-Enemy.o: src/Enemy.cpp src/Enemy.hpp src/global_resources.hpp
+Enemy.o:	src/Enemy.cpp src/Enemy.hpp \
+			src/global_resources.hpp \
+			src/Logger.hpp
 	$(CXX) src/Enemy.cpp $(CFLAGS)
 
-EnemyBlock.o: src/EnemyBlock.cpp src/EnemyBlock.hpp src/Enemy.hpp src/MotiveCreature.hpp src/global_resources.hpp
+EnemyBlock.o: src/EnemyBlock.cpp src/EnemyBlock.hpp \
+				src/global_resources.hpp \
+				src/Enemy.hpp \
+				src/MotiveCreature.hpp \
+				src/Player.hpp \
+				src/Logger.hpp
 	$(CXX) src/EnemyBlock.cpp $(CFLAGS)
 
-EnemiesManager.o: src/EnemiesManager.cpp src/EnemiesManager.hpp src/EnemyBlock.hpp src/Enemy.hpp src/global_resources.hpp
+EnemiesManager.o:	src/EnemiesManager.cpp src/EnemiesManager.hpp \
+					src/EnemyBlock.hpp \
+					src/Enemy.hpp \
+					src/global_resources.hpp \
+					src/Logger.hpp
 	$(CXX) src/EnemiesManager.cpp $(CFLAGS)
+
+PlayersManager.o: 	src/PlayersManager.cpp src/PlayersManager.hpp \
+					src/global_resources.hpp \
+					src/Player.hpp
+	$(CXX) src/PlayersManager.cpp $(CFLAGS)
+
+Logger.o: src/Logger.cpp src/Logger.hpp
+	$(CXX) src/Logger.cpp $(CFLAGS)
+
 
 ############## ASSISTANT TOOLS ##############
 

@@ -4,13 +4,10 @@
 #include <cmath>
 #include "raylib.h"
 #include "raymath.h"
+#include "Logger.hpp"
 
-class MotiveCreature
+class MotiveCreature : virtual public Logger::Listener
 {
-protected:
-	Vector2 position, velocity;
-	const Vector2 ACC_FORCE, MAX_VELOCITY; // ACC_FORCE <=> acceleration_force
-	const float MASS; // ACC_FORCE/MASS = acceleration
 	
 protected:
 	MotiveCreature (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Vector2 initialPos = {0, 0});
@@ -19,6 +16,9 @@ protected:
 public:
 	virtual void update (float dt) = 0;
 	virtual void draw () = 0;
+	void logInfo (	int logTime,
+					bool useDefaultLogFile = 1,
+					const char* alternativeFile = "\0") override;
 	
 	// getters and setters:
 	void set_pos (Vector2 pos) {position = pos;}
@@ -40,6 +40,11 @@ protected:
 	void bounce_left (short decay, float dt)	{velocity.x = -abs (velocity.x) + (decay * (ACC_FORCE.y / MASS) * dt);}
 	void bounce_right (short decay, float dt)	{velocity.x = abs  (velocity.x) - (decay * (ACC_FORCE.y / MASS) * dt);}
 	
+protected:
+	Vector2 position, velocity;
+	const Vector2 MAX_VELOCITY;
+	const Vector2 ACC_FORCE; // ACC_FORCE <=> acceleration_force
+	const float MASS; // ACC_FORCE/MASS = acceleration
 };
 
 #endif

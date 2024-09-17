@@ -1,4 +1,5 @@
-#include <iostream> // TEMP
+#include <iostream>
+#include <fstream>
 #include "raylib.h"
 #include "EnemyBlock.hpp"
 #include "Player.hpp"
@@ -13,38 +14,32 @@ EnemyBlock::EnemyBlock (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Vec
 		Enemy (lifespan),
 		width (width), height (height)
 {
-	// same height with a small width, pos on the y-axis for left/right warnings doesn't matter it's variable
+/*	same height with a small width, pos on the y-axis for left/right warnings doesn't matter it's variable	*/
 	warningLeft		= {-SCREEN_WIDTH/2.0f, 0, 11, (float)height}; 
 	warningRight	= {SCREEN_WIDTH/2.0f - 11, 0, 11, (float)height};
 	warningUp		= {0, -SCREEN_HEIGHT/2.0f, (float)width, 11};
 	warningDown		= {0, SCREEN_HEIGHT/2.0f - 11, (float)width, 11};
 	
 	objectsCount++;
+	
+	#if defined(DEBUG)
+		std::cerr << "EnemyBlock created " << SPAWN_TIME << ' ' << DEATH_TIME << std::endl;
+		LOGGER.add_listener (this);
+	#endif
 }
 
 EnemyBlock::~EnemyBlock ()
 {
 	objectsCount--;
-}
-
-Player& EnemyBlock::pick_target ()
-{
-	if (!check_setting (MULTIPLAYER)) {return WORLD.P1();}
-	
-	float disFromP1, disFromP2;
-	disFromP1 = (get_posX() - WORLD.P1().get_posX()) * (get_posX() - WORLD.P1().get_posX()) +
-				(get_posY() - WORLD.P1().get_posY()) * (get_posY() - WORLD.P1().get_posY());
-	disFromP2 = (get_posX() - WORLD.P2().get_posX()) * (get_posX() - WORLD.P2().get_posX()) +
-				(get_posY() - WORLD.P2().get_posY()) * (get_posY() - WORLD.P2().get_posY());
-	
-	if ((disFromP1 < disFromP2 && !WORLD.P1().is_dead()) || WORLD.P2().is_dead()) {return WORLD.P1();}
-	else {return WORLD.P2();}
+	#if defined(DEBUG)
+		std::cerr << "EnemyBlock destroy\n";
+		LOGGER.remove_listener (this);
+	#endif
 }
 
 void EnemyBlock::update (float dt)
 {
-	Player& target = pick_target ();
-	Rectangle body = {position.x, position.y, (float)width, (float)height};
+	Player& target = PLAYERS_MANAGER.pick_target_for_enemy (position);
 	
 	if (position.y > target.get_posY()) 		{accelerate_up (dt);}
 	else if (position.y < target.get_posY()) 	{accelerate_down (dt);}
@@ -52,25 +47,13 @@ void EnemyBlock::update (float dt)
 	if (position.x > target.get_posX()) 		{accelerate_left (dt);}
 	else if (position.x < target.get_posX()) 	{accelerate_right (dt);}
 
-	// actual movement
+/*	actual movement:	*/
 	position.x += velocity.x * dt;
 	position.y += velocity.y * dt;
-
-	// check if the enemy hits a player
-	if (CheckCollisionCircleRec (WORLD.P1().get_pos(), WORLD.P1().get_radius(), body) &&
-		!WORLD.P1().is_dead())
-	{
-		WORLD.P1().kill();
-	}
-
-	else if (	check_setting (MULTIPLAYER) &&
-				CheckCollisionCircleRec (WORLD.P2().get_pos (), WORLD.P2().get_radius(), body) &&
-				!WORLD.P2().is_dead())
-	{
-		WORLD.P2().kill();
-	}
 	
-	// update warning signs:
+	PLAYERS_MANAGER.collide_EnemyBlock_with_players (*this);
+	
+/*	update warning signs:	*/
 	warningLeft.y	= position.y;
 	warningRight.y	= position.y;
 	warningUp.x		= position.x;
@@ -81,10 +64,40 @@ void EnemyBlock::draw ()
 {
 	DrawRectangle (position.x, position.y, width, height, BLACK);
 	
-	// check and draw a warning sign if the enemy is outside the screen:
+/*	check and draw a warning sign if the enemy is outside the screen:	*/
 	Vector2 pos = GetWorldToScreen2D (position, CAMERA);
 	if (pos.x + width < 0)						{DrawRectangleRec (warningLeft, ColorAlpha (BLACK, 0.58f));}
 	if (pos.x > CURRENT_SCREEN_WIDTH)			{DrawRectangleRec (warningRight, ColorAlpha (BLACK, 0.58f));}
 	if (pos.y < 0)								{DrawRectangleRec (warningUp, ColorAlpha (BLACK, 0.58f));}
 	if (pos.y + height > CURRENT_SCREEN_HEIGHT)	{DrawRectangleRec (warningDown, ColorAlpha (BLACK, 0.58f));}
+}
+
+void EnemyBlock::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+{
+	std::ofstream logFile;
+	std::string logFilePath = useDefaultLogFile ? "log/EnemyBlock_log.txt" : alternativeFile;
+	logFile.open(logFilePath.c_str(), std::ios_base::app);
+	
+	logFile << Logger::LINE_BREAK;
+	
+	logFile << "EnemyBlock instance, logged at " << logTime << '\n';
+	logFile << "game time: " << TIMER.get_time() << '\n';
+	logFile << "address: " << this << '\n';
+	logFile << "objects count = " << objectsCount << '\n';
+	logFile << "width = " << width << ", height = " << height << '\n';
+	logFile << "warningUp = " << to_string (warningUp) << '\n';
+	logFile << "warningDown = " << to_string (warningDown) << '\n';
+	logFile << "warningLeft = " << to_string (warningLeft) << '\n';
+	logFile << "warningRight = " << to_string (warningRight) << '\n';
+	
+	logFile << "##### Inherits from MotiveCreature and Enemy ####\n";
+	logFile.close();
+	MotiveCreature::logInfo (logTime, 0, "log/EnemyBlock_log.txt");
+	Enemy::logInfo (logTime, 0, "log/EnemyBlock_log.txt");	
+	logFile.open(logFilePath.c_str(), std::ios_base::app);
+	logFile << "##### End of inheritance ####\n";
+	
+	logFile << Logger::LINE_BREAK;
+	
+	logFile.close();
 }
