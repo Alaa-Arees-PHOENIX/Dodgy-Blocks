@@ -22,7 +22,6 @@ EnemiesManager::~EnemiesManager ()
 
 void EnemiesManager::reset ()
 {
-	for (auto it = enemies.begin(); it != enemies.end(); it++) {delete *it;}
 	enemies.clear();
 	EBS.nextSpawnTime = 3;
 }
@@ -30,22 +29,13 @@ void EnemiesManager::reset ()
 void EnemiesManager::update (float dt)
 {
 	spawn_EnemyBlock ();
-	
-	while (!enemies.empty() && (*enemies.begin())->life_has_ended()){
-		delete *(enemies.begin());
-		enemies.erase (enemies.begin());
-	}
-	
-	for (auto it = enemies.begin(); it != enemies.end(); it++){
-		(*it)->update(dt);
-	}
+	enemies.remove_if ([] (const std::unique_ptr<Enemy>& enemy) {return enemy->life_has_ended();});
+	for (const std::unique_ptr<Enemy>& enemy : enemies) {enemy->update(dt);}
 }
 
 void EnemiesManager::draw ()
 {
-	for (auto it = enemies.begin(); it != enemies.end(); it++){
-		(*it)->draw();
-	}
+	for (const std::unique_ptr<Enemy>& enemy : enemies) {enemy->draw();}
 }
 
 void EnemiesManager::spawn_EnemyBlock ()
@@ -79,7 +69,7 @@ void EnemiesManager::spawn_EnemyBlock ()
 	
 	int lifespan = random_number (EBS.lifespanRange);
 	
-	enemies.insert (new EnemyBlock (maxVelocity, accForce, mass, initialPos, lifespan, width, height));
+	enemies.push_front (std::make_unique <EnemyBlock> (maxVelocity, accForce, mass, initialPos, lifespan, width, height));
 	EBS.nextSpawnTime += random_number (EBS.spawnTimeRange);
 }
 
@@ -160,8 +150,8 @@ void EnemiesManager::logInfo (int logTime, bool useDefaultLogFile, const char* a
 	logFile << "EBS lifespan range = " << to_string (EBS.lifespanRange) << '\n';
 	
 	int i = 0;
-	for (Enemy* enemy : enemies){
-		logFile << '[' << i << ']' << enemy << ", ";
+	for (const std::unique_ptr<Enemy>& enemy : enemies){
+		logFile << '[' << i << ']' << " => " << enemy.get() << ", ";
 		i++;
 	}
 

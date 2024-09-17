@@ -1,7 +1,8 @@
 #ifndef ENEMIESMANAGER_DB
 #define ENEMIESMANAGER_DB
 
-#include <set>
+#include <forward_list>
+#include <memory>
 #include "Enemy.hpp"
 #include "types.hpp"
 #include "Logger.hpp"
@@ -24,13 +25,6 @@ public:
 	Difficulty get_difficulty () {return currentDifficulty;};
 	
 private:
-	struct EnemyComparator
-	{
-		bool operator() (Enemy* e1, Enemy* e2) const
-		{
-			return e1->get_death_time() < e2->get_death_time();
-		}
-	};
 	struct EnemyBlockSettings
 	{
 		/*	maximum possible number of EnemyBlock objects at the same time. */
@@ -46,7 +40,7 @@ private:
 		Range lifespanRange;
 	};
 	EnemyBlockSettings EBS;
-	std::set<Enemy*, EnemyComparator> enemies;
+	std::forward_list<std::unique_ptr<Enemy>> enemies;
 	Difficulty currentDifficulty;
 };
 

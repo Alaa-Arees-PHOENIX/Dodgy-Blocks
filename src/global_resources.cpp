@@ -6,8 +6,10 @@ uint8_t settings = 0;
 
 void create_globals ()
 {
-	/* Logger MUST be created first and destroyed last. */
-	Singleton<Logger>::create_instance ();
+	/* Logger MUST be created first and destroyed last (when 'DEBUG' is defined). */
+	#if defined(DEBUG)
+		Singleton<Logger>::create_instance ();
+	#endif
 	Singleton<ScreenManager>::create_instance ();
 	Singleton<GameWorld>::create_instance ();
 	Singleton<MainMenu>::create_instance ();
@@ -32,7 +34,9 @@ void destroy_globals ()
 	Singleton<Timer>::destroy_instance ();
 	Singleton<EnemiesManager>::destroy_instance ();
 	Singleton<PlayersManager>::destroy_instance ();
-	Singleton<Logger>::destroy_instance ();
+	#if defined(DEBUG)
+		Singleton<Logger>::destroy_instance ();
+	#endif
 }
 
 int random_number (int Min, int Max)
