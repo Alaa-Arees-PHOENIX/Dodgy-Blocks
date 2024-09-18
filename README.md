@@ -15,7 +15,7 @@ directory then type `make` or `mingw32-make`.
 
 
 Notes:
----------	
+-----------
 - 	NAMING CONVENTIONS: variables defined by Dodgy_Blocks' code follows this pattern "variableName"
 	functions defined by Dodgy_Blocks' code follows this pattern "function_name ()"
 	functions defined by raylib's code/headers follows this pattern "FunctionName ()"
@@ -25,10 +25,14 @@ Notes:
 	The header file contains only prototypes and class declarations and the ".cpp" provides the
 	implementation of those functions.
 
+License:
+-----------
+Dodgy Blocks is licensed under the zlib/libpng License, for more details see the LICENSE
+file accompanied with this file.
 
 contact us:
 -----------
-GitHub:		<TODO: add link here>
+GitHub:		https://github.com/Alaa-Arees-PHOENIX
 Telegram:	@phoenix_9226
 Discord:	#phoenix_9226
 Email:		alaaareesgithub@gmail.com
