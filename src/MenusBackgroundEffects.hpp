@@ -41,7 +41,7 @@ private:
 		void logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile) override;
 		
 		/*	used to calculate the mass, where mass = PI*(radius^2)*density:	*/
-		static constexpr float DENSITY_OF_BALLS = 8.81745e-4; // same as DENSITY_OF_BLOCKS
+		static constexpr float DENSITY_OF_BALLS = 8.81745e-4;
 		
 	private:
 		int radius;

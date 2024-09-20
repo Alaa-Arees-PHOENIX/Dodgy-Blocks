@@ -14,7 +14,7 @@ void MenusBackgroundEffects::initilize ()
 void MenusBackgroundEffects::launchBall ()
 {
 	int radius = random_number (5, 30);
-	flyingBalls.push_back (FlyingBall ({9999, 2100}, {1000, 3600}, PI*radius*radius*FlyingBall::DENSITY_OF_BALLS, radius));
+	flyingBalls.push_back (FlyingBall ({9999, 2100}, {0, 3600}, 1, radius));
 }
 
 void MenusBackgroundEffects::animate_recs ()
@@ -55,8 +55,8 @@ void MenusBackgroundEffects::FloatingRectangle::update (float dt)
 {
 	float lerpSpeed = random_number (1, 9) / 10.0f;
 	float exponential = pow (lerpSpeed, dt * lerpSpeed);
-	body.x = lerp (body.x, target.x, exponential); // it was: (target.x, body.x, exponential);
-	body.y = lerp (body.y, target.y, exponential); // it was: (target.y, body.y, exponential);
+	body.x = lerp (body.x, target.x, exponential);
+	body.y = lerp (body.y, target.y, exponential);
 }
 
 void MenusBackgroundEffects::FloatingRectangle::draw ()
@@ -66,10 +66,10 @@ void MenusBackgroundEffects::FloatingRectangle::draw ()
 
 
 
-MenusBackgroundEffects::FlyingBall::FlyingBall (	Vector2 MAX_VELOCITY,
-														Vector2 ACC_FORCE,
-														float MASS,
-														int radius)
+MenusBackgroundEffects::FlyingBall::FlyingBall (Vector2 MAX_VELOCITY,
+												Vector2 ACC_FORCE,
+												float MASS,
+												int radius)
 		: MotiveCreature (MAX_VELOCITY, ACC_FORCE, MASS), radius (radius)
 {
 	float x = 0, y = 0;
@@ -103,11 +103,19 @@ MenusBackgroundEffects::FlyingBall::~FlyingBall ()
 
 void MenusBackgroundEffects::FlyingBall::bounce_on_edges (float dt)
 {
-	if (position.y + radius >= CURRENT_SCREEN_HEIGHT/2)	{bounce_down (1, dt);}
-	if (position.x - radius <= -CURRENT_SCREEN_WIDTH/2)	{bounce_left (0, dt);}
-	if (position.x + radius >= CURRENT_SCREEN_WIDTH/2)	{bounce_right (0, dt);}
+	Vector2 pos = GetWorldToScreen2D (position, CAMERA);
+	
+	if (pos.y + radius >= CURRENT_SCREEN_HEIGHT){
+		bool shouldStop = (abs (velocity.y) <= (ACC_FORCE.y/MASS) * dt);
+		if (shouldStop) {velocity.y = 0;}
+		bounce_up ((!shouldStop) * (1.2), dt);
+		// bounce_up (0, dt);
+		// if (abs (velocity.y) <= (ACC_FORCE.y/MASS) * dt) {velocity.y = 0;}
+		// else {velocity.y += (ACC_FORCE.y/MASS) * dt * 1.2;} // v is negative, it will lose energy here
+	}
+	if (pos.x - radius <= 0)						{bounce_right (0, dt);}
+	else if (pos.x + radius >= CURRENT_SCREEN_WIDTH){bounce_left (0, dt);}
 		
-	if (abs (velocity.y) <= (ACC_FORCE.y/MASS) * dt) {velocity.y = 0;}
 }
 
 void MenusBackgroundEffects::FlyingBall::update (float dt)

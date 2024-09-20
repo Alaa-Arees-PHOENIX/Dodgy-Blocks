@@ -11,7 +11,10 @@ AboutMenu::AboutMenu ()
 	
 	add_button	(bBuilder.build ("Main menu",
 								(Rectangle){(SCREEN_WIDTH/2.0f) - 200, (SCREEN_HEIGHT/2.0f) - 100, W, H},
-								[] {},
+								[]{
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+									MENUS_BACKGROUND_EFFECTS.animate_recs();
+								},
 								KEY_ESCAPE));
 }
 
@@ -19,10 +22,12 @@ void AboutMenu::loop ()
 {
 	while (!buttons.back().is_pressed()){
 		Menu::update (CAMERA);
+		MENUS_BACKGROUND_EFFECTS.update (GetFrameTime());
 		
 		BeginDrawing ();
 		ClearBackground (WHITE);
 		BeginMode2D (CAMERA);
+		MENUS_BACKGROUND_EFFECTS.draw ();
 		draw ();
 		EndMode2D ();
 		EndDrawing ();

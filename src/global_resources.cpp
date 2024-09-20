@@ -72,5 +72,5 @@ std::string to_string (const Vector2& v)
 
 double lerp (float initialPos, float targetPos, float lerpSpeed)
 {
-    return initialPos*(1-lerpSpeed) + targetPos*lerpSpeed;
+    return targetPos*(1-lerpSpeed) + initialPos*lerpSpeed;
 }

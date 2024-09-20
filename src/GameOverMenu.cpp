@@ -11,7 +11,9 @@ GameOverMenu::GameOverMenu ()
 	
 	add_button	(bBuilder.build ("Continue",
 								(Rectangle){-W/2.0f, SCREEN_HEIGHT/4.0f, W, H},
-								[] {/* loop terminator button, no action */},
+								[]{
+									MENUS_BACKGROUND_EFFECTS.initilize();
+								},
 								KEY_ENTER));
 }
 

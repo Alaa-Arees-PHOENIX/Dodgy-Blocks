@@ -19,25 +19,37 @@ SettingsMenu::SettingsMenu ()
 	
 	add_button	(bBuilder.build ("On", // #0
 								(Rectangle){-W/2.0f, -245, W/2.0f, H},
-								[] {Singleton<ScreenManager>::get_instance().toggle_full_screen(1);},
+								[]{
+									Singleton<ScreenManager>::get_instance().toggle_full_screen(1);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return IsWindowFullscreen();}));
 								
 	add_button	(bBuilder.build ("Off", // #1
 								(Rectangle){x_of(0) + w_of(0) + HS, y_of(0), W/2.0f, H},
-								[] {Singleton<ScreenManager>::get_instance().toggle_full_screen(0);},
+								[]{
+									Singleton<ScreenManager>::get_instance().toggle_full_screen(0);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return !IsWindowFullscreen();}));
 	
 	add_button	(bBuilder.build ("On", // #2
 								(Rectangle){-W/2.0f, y_of(1) + h_of(1) + VS, W/2.0f, H},
-								[] {activate_setting (SHOW_FPS);},
+								[]{
+									activate_setting (SHOW_FPS);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return check_setting(SHOW_FPS);}));
 								
 	add_button	(bBuilder.build ("Off", // #3
 								(Rectangle){x_of(2) + w_of(2) + HS, y_of(2), W/2.0f, H},
-								[] {deactivate_setting (SHOW_FPS);},
+								[]{
+									deactivate_setting (SHOW_FPS);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return !check_setting(SHOW_FPS);}));
 	
@@ -47,6 +59,7 @@ SettingsMenu::SettingsMenu ()
 									PLAYER_1.activate(1);
 									PLAYER_2.activate(0);
 									PLAYER_3.activate(0);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
 								},
 								KEY_NULL,
 								[] () -> bool {
@@ -62,6 +75,7 @@ SettingsMenu::SettingsMenu ()
 									PLAYER_1.activate(1);
 									PLAYER_2.activate(1);
 									PLAYER_3.activate(0);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
 								},
 								KEY_NULL,
 								[] () -> bool {
@@ -86,6 +100,7 @@ SettingsMenu::SettingsMenu ()
 								[]{
 									PLAYER_1.set_keyboard_control ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
 									PLAYER_3.set_mouse_control();
+									MENUS_BACKGROUND_EFFECTS.launchBall();
 								},
 								KEY_NULL,
 								[] () -> bool {return !PLAYER_1.uses_mouse();}));
@@ -95,49 +110,71 @@ SettingsMenu::SettingsMenu ()
 								[]{
 									PLAYER_1.set_mouse_control();
 									PLAYER_3.set_keyboard_control ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
+									MENUS_BACKGROUND_EFFECTS.launchBall();
 								},
 								KEY_NULL,
 								[] () -> bool {return PLAYER_1.uses_mouse();}));
 	
 	add_button	(bBuilder.build ("Arcade", // #9
 								(Rectangle){-W/2.0f, y_of(8) + h_of(8) + VS, W, H},
-								[] {deactivate_setting (SANDBOX);},
+								[]{
+									deactivate_setting (SANDBOX);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return !check_setting (SANDBOX);}));
 	
 	add_button	(bBuilder.build ("Sand box", // #10
 								(Rectangle){x_of(9) + w_of(9) + HS, y_of(9), W, H},
-								[] {activate_setting (SANDBOX);},
+								[]{
+									activate_setting (SANDBOX);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return check_setting (SANDBOX);}));
 	
 	add_button	(bBuilder.build ("Easy", // #11
 								(Rectangle){x_of(9), y_of(9) + h_of(9) + VS, 3*W/4, H},
-								[] {ENEMIES_MANAGER.set_difficulty (EASY);},
+								[]{
+									ENEMIES_MANAGER.set_difficulty (EASY);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == EASY;}));
 	
 	add_button	(bBuilder.build ("Medium", // #12
 								(Rectangle){x_of(11) + w_of(11) + HS, y_of(11), 3*W/4, H},
-								[] {ENEMIES_MANAGER.set_difficulty (MEDIUM);},
+								[]{
+									ENEMIES_MANAGER.set_difficulty (MEDIUM);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == MEDIUM;}));
 	
 	add_button	(bBuilder.build ("Hard", // #13
 								(Rectangle){x_of(12) + w_of(12) + HS, y_of(12), 3*W/4, H},
-								[] {ENEMIES_MANAGER.set_difficulty (HARD);},
+								[]{
+									ENEMIES_MANAGER.set_difficulty (HARD);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == HARD;}));
 	
 	add_button	(bBuilder.build ("INSANE", // #14
 								(Rectangle){x_of(13) + w_of(13) + HS, y_of(13), 3*W/4, H},
-								[] {ENEMIES_MANAGER.set_difficulty (INSANE);},
+								[]{
+									ENEMIES_MANAGER.set_difficulty (INSANE);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+								},
 								KEY_NULL,
 								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == INSANE;}));
 	
 	add_button	(bBuilder.build ("Main menu", // #15
 								(Rectangle){(SCREEN_WIDTH/2.0f) - 150, (SCREEN_HEIGHT/2.0f) - 55, W, H},
-								[] {/* loop terminator button, no action */},
+								[]{
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+									MENUS_BACKGROUND_EFFECTS.animate_recs();
+								},
 								KEY_ESCAPE));
 	
 	#undef x_of
@@ -156,7 +193,6 @@ void SettingsMenu::loop ()
 		ClearBackground (WHITE);
 		BeginMode2D (CAMERA);
 		draw ();
-		MENUS_BACKGROUND_EFFECTS.draw();
 		EndMode2D ();
 		EndDrawing ();
 	}
@@ -165,6 +201,7 @@ void SettingsMenu::loop ()
 
 void SettingsMenu::draw ()
 {
+	MENUS_BACKGROUND_EFFECTS.draw();
 	Menu::draw ();
 	draw_message_aligned (buttons[0], msg1, ORANGE);
 	draw_message_aligned (buttons[2], msg2, ORANGE);

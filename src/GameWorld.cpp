@@ -25,7 +25,7 @@ void GameWorld::loop ()
 		if (IsKeyReleased (KEY_ESCAPE)) {PAUSE_MENU.loop();}
 		
 		#if defined (DEBUG)
-			if (IsKeyPressed (KEY_ENTER)){
+			if (IsKeyPressed (KEY_B)){
 				int breakPoint = 0;
 			}
 			LOGGER.update(GetFrameTime());

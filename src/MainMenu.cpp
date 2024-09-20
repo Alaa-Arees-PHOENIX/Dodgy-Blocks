@@ -33,11 +33,19 @@ MainMenu::MainMenu ()
 								
 	add_button	(bBuilder.build ("Settings",
 								(Rectangle){-W/2.0f, buttons[0].get_y() + H + VS, W, H},
-								[] {SETTINGS_MENU.loop();}));
+								[]{
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+									MENUS_BACKGROUND_EFFECTS.animate_recs();
+									SETTINGS_MENU.loop();
+								}));
 								
     add_button	(bBuilder.build ("About us",
 								(Rectangle){-W/2.0f, buttons[1].get_y() + H + VS, W, H},
-								[] {ABOUT_MENU.loop();}));
+								[]{
+									MENUS_BACKGROUND_EFFECTS.launchBall();
+									MENUS_BACKGROUND_EFFECTS.animate_recs();
+									ABOUT_MENU.loop();
+								}));
 								
     add_button	(bBuilder.build ("Quit game",
 								(Rectangle){-W/2.0f, buttons[2].get_y() + H + VS, W, H},
@@ -46,15 +54,24 @@ MainMenu::MainMenu ()
 
 void MainMenu::loop ()
 {
+	MENUS_BACKGROUND_EFFECTS.initilize();
+	MENUS_BACKGROUND_EFFECTS.animate_recs();
 	while (!buttons[3].is_pressed()){
 		Menu::update (CAMERA);
 		MENUS_BACKGROUND_EFFECTS.update (GetFrameTime());
 		
+		#if defined (DEBUG)
+			if (IsKeyPressed (KEY_B)){
+				int breakPoint = 0;
+			}
+			LOGGER.update(GetFrameTime());
+		#endif
+		
 		BeginDrawing ();
 		ClearBackground (WHITE);
 		BeginMode2D (CAMERA);
-		Menu::draw ();
 		MENUS_BACKGROUND_EFFECTS.draw();
+		Menu::draw ();
 		DrawText (TITLE, -MeasureText (TITLE, 60)/2.0f, -SCREEN_HEIGHT/3.0f - 50, 60, RED);
 		EndMode2D ();
 		EndDrawing ();
