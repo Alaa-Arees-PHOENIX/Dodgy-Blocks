@@ -76,6 +76,7 @@ SettingsMenu::SettingsMenu ()
 									PLAYER_1.activate(1);
 									PLAYER_2.activate(1);
 									PLAYER_3.activate(1);
+									MENUS_BACKGROUND_EFFECTS.launchBall();
 								},
 								KEY_NULL,
 								[] () -> bool {return PLAYER_3.is_active();}));
@@ -149,11 +150,13 @@ void SettingsMenu::loop ()
 {
 	while (!buttons.back().is_pressed()){
 		Menu::update (CAMERA);
+		MENUS_BACKGROUND_EFFECTS.update (GetFrameTime());
 		
 		BeginDrawing ();
 		ClearBackground (WHITE);
 		BeginMode2D (CAMERA);
 		draw ();
+		MENUS_BACKGROUND_EFFECTS.draw();
 		EndMode2D ();
 		EndDrawing ();
 	}

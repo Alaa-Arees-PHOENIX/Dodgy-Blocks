@@ -27,7 +27,8 @@ objects =	main.o \
 			Enemy.o \
 			EnemyBlock.o \
 			EnemiesManager.o \
-			PlayersManager.o
+			PlayersManager.o \
+			MenusBackgroundEffects.o
 
 ifeq ($(BUILD_MODE), DEBUG)
 	objects += Logger.o
@@ -61,7 +62,8 @@ global_resources.o: src/global_resources.cpp src/global_resources.hpp \
 					src/EnemiesManager.hpp \
 					src/PlayersManager.hpp \
 					src/types.hpp \
-					src/Logger.hpp
+					src/Logger.hpp \
+					src/MenusBackgroundEffects.hpp
 	$(CXX) src/global_resources.cpp $(CFLAGS)
 
 GameWorld.o:	src/GameWorld.cpp src/GameWorld.hpp \
@@ -151,6 +153,10 @@ PlayersManager.o: 	src/PlayersManager.cpp src/PlayersManager.hpp \
 Logger.o: src/Logger.cpp src/Logger.hpp
 	$(CXX) src/Logger.cpp $(CFLAGS)
 
+MenusBackgroundEffects.o:	src/MenusBackgroundEffects.cpp src/MenusBackgroundEffects.hpp \
+							src/global_resources.hpp \
+							src/Logger.hpp
+	$(CXX) src/MenusBackgroundEffects.cpp $(CFLAGS)
 
 ############## ASSISTANT TOOLS ##############
 

@@ -18,6 +18,8 @@ Logger::Logger ()
 	f.close();
 	f.open ("log/EnemiesManager_log.txt", std::ios_base::out);
 	f.close();
+	f.open ("log/FlyingBall_log.txt", std::ios_base::out);
+	f.close();
 }
 
 void Logger::add_listener (Listener* listener)

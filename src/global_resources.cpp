@@ -20,6 +20,7 @@ void create_globals ()
 	Singleton<Timer>::create_instance ();
 	Singleton<EnemiesManager>::create_instance ();
 	Singleton<PlayersManager>::create_instance ();
+	Singleton<MenusBackgroundEffects>::create_instance();
 }
 
 void destroy_globals ()
@@ -34,6 +35,7 @@ void destroy_globals ()
 	Singleton<Timer>::destroy_instance ();
 	Singleton<EnemiesManager>::destroy_instance ();
 	Singleton<PlayersManager>::destroy_instance ();
+	Singleton<MenusBackgroundEffects>::destroy_instance();
 	#if defined(DEBUG)
 		Singleton<Logger>::destroy_instance ();
 	#endif
@@ -66,4 +68,9 @@ std::string to_string (const Vector2& v)
 {
 	std::string s = "{" + std::to_string(v.x) + ", " + std::to_string(v.y) + "}";
 	return s;
+}
+
+double lerp (float initialPos, float targetPos, float lerpSpeed)
+{
+    return initialPos*(1-lerpSpeed) + targetPos*lerpSpeed;
 }

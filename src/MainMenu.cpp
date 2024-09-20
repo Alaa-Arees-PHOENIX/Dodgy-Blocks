@@ -48,11 +48,13 @@ void MainMenu::loop ()
 {
 	while (!buttons[3].is_pressed()){
 		Menu::update (CAMERA);
+		MENUS_BACKGROUND_EFFECTS.update (GetFrameTime());
 		
 		BeginDrawing ();
 		ClearBackground (WHITE);
 		BeginMode2D (CAMERA);
 		Menu::draw ();
+		MENUS_BACKGROUND_EFFECTS.draw();
 		DrawText (TITLE, -MeasureText (TITLE, 60)/2.0f, -SCREEN_HEIGHT/3.0f - 50, 60, RED);
 		EndMode2D ();
 		EndDrawing ();

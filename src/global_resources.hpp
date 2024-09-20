@@ -16,6 +16,7 @@
 #include "PlayersManager.hpp"
 #include "types.hpp"
 #include "Logger.hpp"
+#include "MenusBackgroundEffects.hpp"
 
 struct Rectangle;
 struct Vector2;
@@ -51,6 +52,8 @@ struct Vector2;
 
 #define LOGGER Singleton<Logger>::get_instance()
 
+#define MENUS_BACKGROUND_EFFECTS Singleton<MenusBackgroundEffects>::get_instance()
+
 // // // // // // // // // GLOBAL VARIABLES:
 extern uint8_t settings; // using bitmask to toggle game settings
 constexpr char TITLE[] = "Dodgy Blocks";
@@ -70,5 +73,6 @@ int random_number (Range range);
 std::string to_string (const Range&);
 std::string to_string (const Rectangle&);
 std::string to_string (const Vector2&);
+double lerp (float initialPos, float targetPos, float lerpSpeed);
 
 #endif // GLOBAL_RESOURCES_DB

@@ -8,7 +8,6 @@
 
 class MotiveCreature : virtual public Logger::Listener
 {
-	
 protected:
 	MotiveCreature (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Vector2 initialPos = {0, 0});
 	virtual ~MotiveCreature ();
