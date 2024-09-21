@@ -13,8 +13,7 @@ void MenusBackgroundEffects::initilize ()
 
 void MenusBackgroundEffects::launchBall ()
 {
-	int radius = random_number (5, 30);
-	flyingBalls.push_back (FlyingBall ({9999, 2100}, {0, 3600}, 1, radius));
+	flyingBalls.push_back (FlyingBall ());
 }
 
 void MenusBackgroundEffects::animate_recs ()
@@ -66,12 +65,9 @@ void MenusBackgroundEffects::FloatingRectangle::draw ()
 
 
 
-MenusBackgroundEffects::FlyingBall::FlyingBall (Vector2 MAX_VELOCITY,
-												Vector2 ACC_FORCE,
-												float MASS,
-												int radius)
-		: MotiveCreature (MAX_VELOCITY, ACC_FORCE, MASS), radius (radius)
+MenusBackgroundEffects::FlyingBall::FlyingBall ()
 {
+	radius = random_number (5, 30);
 	float x = 0, y = 0;
 	int whichSideToSpawnFrom = random_number (1, 2);
 	switch (whichSideToSpawnFrom)
@@ -88,6 +84,8 @@ MenusBackgroundEffects::FlyingBall::FlyingBall (Vector2 MAX_VELOCITY,
 	position = {x, y}; // initial position
 	velocity.x = random_number (600, 2000); // initial velocity
 	velocity.y = random_number (-1800, 0);
+	acceleration.x = 100;
+	acceleration.y = 3600; // gravity
 	
 	#if defined(DEBUG)
 		LOGGER.add_listener (this);
@@ -104,23 +102,18 @@ MenusBackgroundEffects::FlyingBall::~FlyingBall ()
 void MenusBackgroundEffects::FlyingBall::bounce_on_edges (float dt)
 {
 	Vector2 pos = GetWorldToScreen2D (position, CAMERA);
-	
-	if (pos.y + radius >= CURRENT_SCREEN_HEIGHT){
-		bool shouldStop = (abs (velocity.y) <= (ACC_FORCE.y/MASS) * dt);
-		if (shouldStop) {velocity.y = 0;}
-		bounce_up ((!shouldStop) * (1.2), dt);
-		// bounce_up (0, dt);
-		// if (abs (velocity.y) <= (ACC_FORCE.y/MASS) * dt) {velocity.y = 0;}
-		// else {velocity.y += (ACC_FORCE.y/MASS) * dt * 1.2;} // v is negative, it will lose energy here
-	}
-	if (pos.x - radius <= 0)						{bounce_right (0, dt);}
-	else if (pos.x + radius >= CURRENT_SCREEN_WIDTH){bounce_left (0, dt);}
-		
+	if (pos.y + radius >= CURRENT_SCREEN_HEIGHT)	{bounce_up (dt);}
+	if (pos.x - radius <= 0)            			{bounce_right ();}
+	if (pos.x + radius >= CURRENT_SCREEN_WIDTH)		{bounce_left ();}
 }
 
 void MenusBackgroundEffects::FlyingBall::update (float dt)
 {
-	accelerate_down (dt);
+	// accelerate_down (dt);
+	
+	bool limitDown = ((velocity.y < 2100) && (GetWorldToScreen2D (position, CAMERA).y + radius < CURRENT_SCREEN_HEIGHT));
+	if (velocity.y < 0)                 {velocity.y += acceleration.y * dt;}
+	if (velocity.y > 0 && limitDown)    {velocity.y += acceleration.y * dt;}
 	
 	/* friction */
 	velocity.x *= 0.99;
@@ -149,11 +142,9 @@ void MenusBackgroundEffects::FlyingBall::logInfo (int logTime, bool useDefaultLo
 	logFile << "game time: " << TIMER.get_time() << '\n';
 	logFile << "address: " << this << '\n';
 	logFile << "radius = " << radius << '\n';
-	logFile << "#### Inherits from MotiveCreature ####\n";
-	logFile.close();
-	MotiveCreature::logInfo (logTime, 0, "log/FlyingBall_log.txt");
-	logFile.open(logFilePath.c_str(), std::ios_base::app);
-	logFile << "#### End of inheritance ####\n";
+	logFile << "position = " << to_string (position) << '\n';
+	logFile << "velocity = " << to_string (velocity) << '\n';
+	logFile << "acceleration = " << to_string (acceleration) << '\n';
 
 	logFile << Logger::LINE_BREAK;
 }

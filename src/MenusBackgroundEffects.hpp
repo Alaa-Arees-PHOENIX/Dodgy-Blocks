@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "raylib.h"
-#include "MotiveCreature.hpp"
+#include "Logger.hpp"
 
 class MenusBackgroundEffects
 {
@@ -30,21 +30,31 @@ private:
 		Vector2 target;
 	};
     
-	class FlyingBall : public MotiveCreature
+	class FlyingBall : public Logger::Listener
 	{
 	public:
-		FlyingBall (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, int radius);
+		FlyingBall ();
 		virtual ~FlyingBall ();
 		void bounce_on_edges (float dt);
-		void update (float dt) override;
-		void draw () override;
-		void logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile) override;
+		void update (float dt);
+		void draw ();
+		void logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile);
+		
+		void bounce_up (float dt)
+		{
+            velocity.y = -abs (velocity.y);
+            if (abs (velocity.y) <= acceleration.y * dt) {velocity.y = 0;}
+            else {velocity.y += acceleration.y * dt;} // v is negative, it will loose energy here
+        }
+        void bounce_left () {velocity.x = -abs (velocity.x);}
+        void bounce_right () {velocity.x = +abs (velocity.x);}
 		
 		/*	used to calculate the mass, where mass = PI*(radius^2)*density:	*/
 		static constexpr float DENSITY_OF_BALLS = 8.81745e-4;
 		
 	private:
 		int radius;
+        Vector2 position, velocity, acceleration;
 	};
     
     FloatingRectangle floatingRecs[10];

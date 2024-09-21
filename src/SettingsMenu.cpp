@@ -208,4 +208,5 @@ void SettingsMenu::draw ()
 	draw_message_aligned (buttons[4], msg3, ORANGE);
 	draw_message_aligned (buttons[7], msg4, ORANGE);
 	draw_message_aligned (buttons[9], msg5, ORANGE);
+	draw_message_aligned (buttons[11], msg6, ORANGE);
 }

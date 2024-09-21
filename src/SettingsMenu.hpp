@@ -16,6 +16,7 @@ private:
 	static constexpr char msg3[] = "Number of players:";
 	static constexpr char msg4[] = "Red player's controls:";
 	static constexpr char msg5[] = "Game mode:";
+	static constexpr char msg6[] = "Difficulty:";
 };
 
 #endif // SETTINGSMENU_DB
