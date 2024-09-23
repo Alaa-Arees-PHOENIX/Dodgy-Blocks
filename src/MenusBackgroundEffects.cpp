@@ -8,12 +8,12 @@ void MenusBackgroundEffects::initilize ()
 	numOfFloatingRecs = random_number (3, 8);
 	for (int i=0; i < numOfFloatingRecs; i++) {floatingRecs[i].initilize ();}
 
-	flyingBalls.clear ();
+	cannonBalls.clear ();
 }
 
-void MenusBackgroundEffects::launchBall ()
+void MenusBackgroundEffects::launchCannon ()
 {
-	flyingBalls.push_back (FlyingBall ());
+	cannonBalls.push_back (CannonBall ());
 }
 
 void MenusBackgroundEffects::animate_recs ()
@@ -24,15 +24,15 @@ void MenusBackgroundEffects::animate_recs ()
 void MenusBackgroundEffects::update (float dt)
 {
 	for (int i=0; i < numOfFloatingRecs; i++) {floatingRecs[i].update (dt);}
-	if (flyingBalls.empty ()) {return;}
-	for (auto it = flyingBalls.begin (); it != flyingBalls.end (); it++) {it -> update (dt);}
+	if (cannonBalls.empty ()) {return;}
+	for (auto it = cannonBalls.begin (); it != cannonBalls.end (); it++) {it -> update (dt);}
 }
 
 void MenusBackgroundEffects::draw ()
 {
 	for (int i=0; i < numOfFloatingRecs; i++) {floatingRecs[i].draw ();}
-	if (flyingBalls.empty ()) {return;}
-	for (auto it = flyingBalls.begin(); it != flyingBalls.end(); it++) {it -> draw ();}
+	if (cannonBalls.empty ()) {return;}
+	for (auto it = cannonBalls.begin(); it != cannonBalls.end(); it++) {it -> draw ();}
 }
 
 /*********** NESTED INACCESSIBLE METHODS *************/
@@ -65,7 +65,7 @@ void MenusBackgroundEffects::FloatingRectangle::draw ()
 
 
 
-MenusBackgroundEffects::FlyingBall::FlyingBall ()
+MenusBackgroundEffects::CannonBall::CannonBall ()
 {
 	radius = random_number (5, 30);
 	float x = 0, y = 0;
@@ -92,14 +92,14 @@ MenusBackgroundEffects::FlyingBall::FlyingBall ()
 	#endif
 }
 
-MenusBackgroundEffects::FlyingBall::~FlyingBall ()
+MenusBackgroundEffects::CannonBall::~CannonBall ()
 {
 	#if defined(DEBUG)
 		LOGGER.remove_listener (this);
 	#endif
 }
 
-void MenusBackgroundEffects::FlyingBall::bounce_on_edges (float dt)
+void MenusBackgroundEffects::CannonBall::bounce_on_edges (float dt)
 {
 	Vector2 pos = GetWorldToScreen2D (position, CAMERA);
 	if (pos.y + radius >= CURRENT_SCREEN_HEIGHT)	{bounce_up (dt);}
@@ -107,7 +107,7 @@ void MenusBackgroundEffects::FlyingBall::bounce_on_edges (float dt)
 	if (pos.x + radius >= CURRENT_SCREEN_WIDTH)		{bounce_left ();}
 }
 
-void MenusBackgroundEffects::FlyingBall::update (float dt)
+void MenusBackgroundEffects::CannonBall::update (float dt)
 {
 	// accelerate_down (dt);
 	
@@ -125,20 +125,20 @@ void MenusBackgroundEffects::FlyingBall::update (float dt)
 	position.y += velocity.y * dt;
 }
 
-void MenusBackgroundEffects::FlyingBall::draw ()
+void MenusBackgroundEffects::CannonBall::draw ()
 {
 	DrawCircle (position.x, position.y, radius, BLACK);
 }
 
-void MenusBackgroundEffects::FlyingBall::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+void MenusBackgroundEffects::CannonBall::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
 {
 	std::ofstream logFile;
-	std::string logFilePath = useDefaultLogFile ? "log/FlyingBall_log.txt" : alternativeFile;
+	std::string logFilePath = useDefaultLogFile ? "log/CannonBall_log.txt" : alternativeFile;
 	logFile.open(logFilePath.c_str(), std::ios_base::app);
 
 	logFile << Logger::LINE_BREAK;
 
-	logFile << "FlyingBall instance, logged at: " << logTime << '\n';
+	logFile << "CannonBall instance, logged at: " << logTime << '\n';
 	logFile << "game time: " << TIMER.get_time() << '\n';
 	logFile << "address: " << this << '\n';
 	logFile << "radius = " << radius << '\n';

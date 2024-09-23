@@ -12,7 +12,7 @@ AboutMenu::AboutMenu ()
 	add_button	(bBuilder.build ("Main menu",
 								(Rectangle){(SCREEN_WIDTH/2.0f) - 200, (SCREEN_HEIGHT/2.0f) - 100, W, H},
 								[]{
-									MENUS_BACKGROUND_EFFECTS.launchBall();
+									MENUS_BACKGROUND_EFFECTS.launchCannon();
 									MENUS_BACKGROUND_EFFECTS.animate_recs();
 								},
 								KEY_ESCAPE));

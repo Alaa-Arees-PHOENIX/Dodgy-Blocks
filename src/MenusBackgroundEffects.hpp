@@ -9,7 +9,7 @@ class MenusBackgroundEffects
 {
 public:
 	void initilize ();
-	void launchBall ();
+	void launchCannon ();
 	void animate_recs ();
 	void update (float dt);
 	void draw ();
@@ -30,11 +30,11 @@ private:
 		Vector2 target;
 	};
     
-	class FlyingBall : public Logger::Listener
+	class CannonBall : public Logger::Listener
 	{
 	public:
-		FlyingBall ();
-		virtual ~FlyingBall ();
+		CannonBall ();
+		virtual ~CannonBall ();
 		void bounce_on_edges (float dt);
 		void update (float dt);
 		void draw ();
@@ -59,7 +59,7 @@ private:
     
     FloatingRectangle floatingRecs[10];
     short numOfFloatingRecs = 0;
-    std::vector <FlyingBall> flyingBalls;
+    std::vector <CannonBall> cannonBalls;
 };
 
 #endif // MENUSBACKGROUNDEFFECTS_DB
