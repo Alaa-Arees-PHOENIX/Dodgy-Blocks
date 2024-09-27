@@ -15,7 +15,7 @@ protected:
 public:
 	virtual void update (float dt) = 0;
 	virtual void draw () = 0;
-	void logInfo (	int logTime,
+	void log_info (	int logTime,
 					bool useDefaultLogFile = 1,
 					const char* alternativeFile = "\0") override;
 	

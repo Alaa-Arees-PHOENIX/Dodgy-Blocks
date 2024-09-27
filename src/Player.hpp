@@ -25,7 +25,7 @@ public:
 	bool should_accelerate_left ();
 	bool should_accelerate_right ();
 	void draw_statistics (short playerID);
-	void logInfo (	int logTime,
+	void log_info (	int logTime,
 					bool useDefaultLogFile = 1,
 					const char* alternativeFile = "\0") override;
 	

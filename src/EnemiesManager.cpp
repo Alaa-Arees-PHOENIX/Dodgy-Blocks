@@ -126,7 +126,7 @@ void EnemiesManager::update_EnemyBlock_settings ()
 	}
 }
 
-void EnemiesManager::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+void EnemiesManager::log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile)
 {
 	std::ofstream logFile;
 	if (useDefaultLogFile){

@@ -34,7 +34,7 @@ MainMenu::MainMenu ()
 	add_button	(bBuilder.build ("Settings",
 								(Rectangle){-W/2.0f, buttons[0].get_y() + H + VS, W, H},
 								[]{
-									MENUS_BACKGROUND_EFFECTS.launchCannon();
+									MENUS_BACKGROUND_EFFECTS.launch_cannon();
 									MENUS_BACKGROUND_EFFECTS.animate_recs();
 									SETTINGS_MENU.loop();
 								}));
@@ -42,7 +42,7 @@ MainMenu::MainMenu ()
     add_button	(bBuilder.build ("About us",
 								(Rectangle){-W/2.0f, buttons[1].get_y() + H + VS, W, H},
 								[]{
-									MENUS_BACKGROUND_EFFECTS.launchCannon();
+									MENUS_BACKGROUND_EFFECTS.launch_cannon();
 									MENUS_BACKGROUND_EFFECTS.animate_recs();
 									ABOUT_MENU.loop();
 								}));

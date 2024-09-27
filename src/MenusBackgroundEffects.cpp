@@ -11,9 +11,13 @@ void MenusBackgroundEffects::initilize ()
 	cannonBalls.clear ();
 }
 
-void MenusBackgroundEffects::launchCannon ()
+void MenusBackgroundEffects::launch_cannon ()
 {
 	cannonBalls.push_back (CannonBall ());
+	float pitch = 15.0f/(cannonBalls.back().get_radius());
+	pitch = std::max (pitch, 0.8f); // minimum pitch
+	pitch = std::min (pitch, 1.7f); // maximum pitch
+	AUDIO_MANAGER.play_cannon_ball_sound (pitch);
 }
 
 void MenusBackgroundEffects::animate_recs ()
@@ -130,7 +134,7 @@ void MenusBackgroundEffects::CannonBall::draw ()
 	DrawCircle (position.x, position.y, radius, BLACK);
 }
 
-void MenusBackgroundEffects::CannonBall::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+void MenusBackgroundEffects::CannonBall::log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile)
 {
 	std::ofstream logFile;
 	std::string logFilePath = useDefaultLogFile ? "log/CannonBall_log.txt" : alternativeFile;

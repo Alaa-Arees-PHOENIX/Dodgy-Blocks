@@ -9,7 +9,7 @@ public:
 	class Listener
 	{
 	public:
-		virtual void logInfo (	int logTime,
+		virtual void log_info (	int logTime,
 								bool useDefaultLogFile = 1,
 								const char* alternativeFile = "\0") = 0;
 	};
@@ -18,7 +18,7 @@ public:
 	void add_listener (Listener*);
 	void remove_listener (Listener*);
 	void update (float dt);
-	void logAll ();
+	void log_all ();
 	
 	static constexpr char LINE_BREAK[] = "\n ----------------------------------- \n";
 

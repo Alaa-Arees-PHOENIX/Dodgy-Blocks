@@ -9,7 +9,7 @@ class MenusBackgroundEffects
 {
 public:
 	void initilize ();
-	void launchCannon ();
+	void launch_cannon ();
 	void animate_recs ();
 	void update (float dt);
 	void draw ();
@@ -38,8 +38,9 @@ private:
 		void bounce_on_edges (float dt);
 		void update (float dt);
 		void draw ();
-		void logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile);
+		void log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile) override;
 		
+		int get_radius () {return radius;}
 		void bounce_up (float dt)
 		{
             velocity.y = -abs (velocity.y);

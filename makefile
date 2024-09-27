@@ -28,7 +28,8 @@ objects =	main.o \
 			EnemyBlock.o \
 			EnemiesManager.o \
 			PlayersManager.o \
-			MenusBackgroundEffects.o
+			MenusBackgroundEffects.o \
+			AudioManager.o
 
 ifeq ($(BUILD_MODE), DEBUG)
 	objects += Logger.o
@@ -63,7 +64,8 @@ global_resources.o: src/global_resources.cpp src/global_resources.hpp \
 					src/PlayersManager.hpp \
 					src/types.hpp \
 					src/Logger.hpp \
-					src/MenusBackgroundEffects.hpp
+					src/MenusBackgroundEffects.hpp \
+					src/AudioManager.hpp
 	$(CXX) src/global_resources.cpp $(CFLAGS)
 
 GameWorld.o:	src/GameWorld.cpp src/GameWorld.hpp \
@@ -157,6 +159,9 @@ MenusBackgroundEffects.o:	src/MenusBackgroundEffects.cpp src/MenusBackgroundEffe
 							src/global_resources.hpp \
 							src/Logger.hpp
 	$(CXX) src/MenusBackgroundEffects.cpp $(CFLAGS)
+
+AudioManager.o:	src/AudioManager.cpp src/AudioManager.hpp
+	$(CXX) src/AudioManager.cpp $(CFLAGS)
 
 ############## ASSISTANT TOOLS ##############
 

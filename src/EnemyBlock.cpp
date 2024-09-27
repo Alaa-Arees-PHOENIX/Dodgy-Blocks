@@ -72,7 +72,7 @@ void EnemyBlock::draw ()
 	if (pos.y + height > CURRENT_SCREEN_HEIGHT)	{DrawRectangleRec (warningDown, ColorAlpha (BLACK, 0.58f));}
 }
 
-void EnemyBlock::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+void EnemyBlock::log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile)
 {
 	std::ofstream logFile;
 	std::string logFilePath = useDefaultLogFile ? "log/EnemyBlock_log.txt" : alternativeFile;
@@ -92,8 +92,8 @@ void EnemyBlock::logInfo (int logTime, bool useDefaultLogFile, const char* alter
 	
 	logFile << "##### Inherits from MotiveCreature and Enemy ####\n";
 	logFile.close();
-	MotiveCreature::logInfo (logTime, 0, "log/EnemyBlock_log.txt");
-	Enemy::logInfo (logTime, 0, "log/EnemyBlock_log.txt");	
+	MotiveCreature::log_info (logTime, 0, "log/EnemyBlock_log.txt");
+	Enemy::log_info (logTime, 0, "log/EnemyBlock_log.txt");	
 	logFile.open(logFilePath.c_str(), std::ios_base::app);
 	logFile << "##### End of inheritance ####\n";
 	

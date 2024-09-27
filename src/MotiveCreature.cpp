@@ -13,7 +13,7 @@ MotiveCreature::MotiveCreature (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float M
 
 MotiveCreature::~MotiveCreature () {}
 
-void MotiveCreature::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+void MotiveCreature::log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile)
 {
 	std::ofstream logFile;
 	if (useDefaultLogFile){

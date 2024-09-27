@@ -17,6 +17,7 @@
 #include "types.hpp"
 #include "Logger.hpp"
 #include "MenusBackgroundEffects.hpp"
+#include "AudioManager.hpp"
 
 struct Rectangle;
 struct Vector2;
@@ -53,6 +54,8 @@ struct Vector2;
 #define LOGGER Singleton<Logger>::get_instance()
 
 #define MENUS_BACKGROUND_EFFECTS Singleton<MenusBackgroundEffects>::get_instance()
+
+#define AUDIO_MANAGER Singleton<AudioManager>::get_instance()
 
 // // // // // // // // // GLOBAL VARIABLES:
 extern uint8_t settings; // using bitmask to toggle game settings

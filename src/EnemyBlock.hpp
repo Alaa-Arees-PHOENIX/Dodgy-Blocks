@@ -14,7 +14,7 @@ public:
 	virtual ~EnemyBlock ();
 	void update (float dt) override;
 	void draw () override;
-	void logInfo (	int logTime,
+	void log_info (	int logTime,
 					bool useDefaultLogFile = 1,
 					const char* alternativeFile = "\0") override;
 	

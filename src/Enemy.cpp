@@ -22,7 +22,7 @@ bool Enemy::life_has_ended ()
 	return  TIMER.get_time () >= DEATH_TIME;
 }
 
-void Enemy::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+void Enemy::log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile)
 {
 	std::ofstream logFile;
 	if (useDefaultLogFile){

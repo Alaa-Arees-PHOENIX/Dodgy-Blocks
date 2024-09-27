@@ -35,12 +35,12 @@ void Logger::remove_listener (Listener* listener)
 void Logger::update (float dt)
 {
 	timeSinceGameLaunch += dt;
-	if (IsKeyPressed (KEY_L)) {logAll();}
+	if (IsKeyPressed (KEY_L)) {log_all();}
 }
 
-void Logger::logAll ()
+void Logger::log_all ()
 {
 	for (Listener* listener : listeners){
-		listener->logInfo((int)timeSinceGameLaunch);
+		listener->log_info((int)timeSinceGameLaunch);
 	}
 }

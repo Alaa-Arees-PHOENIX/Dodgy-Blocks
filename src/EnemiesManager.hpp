@@ -18,7 +18,7 @@ public:
 	void spawn_EnemyBlock ();
 	void set_difficulty (Difficulty newDifficulty);
 	void update_EnemyBlock_settings ();
-	void logInfo (	int logTime,
+	void log_info (	int logTime,
 					bool useDefaultLogFile = 1,
 					const char* alternativeFile = "\0") override;
 	

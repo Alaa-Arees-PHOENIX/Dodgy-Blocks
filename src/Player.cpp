@@ -158,7 +158,7 @@ void Player::bounce_on_edges (float dt)
     else if (pos.x + RADIUS >= CURRENT_SCREEN_WIDTH)	{bounce_left (-1, dt);}
 }
 
-void Player::logInfo (int logTime, bool useDefaultLogFile, const char* alternativeFile)
+void Player::log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile)
 {
 	std::ofstream logFile;
 	std::string logFilePath = useDefaultLogFile ? "log/Player_log.txt" : alternativeFile;
@@ -175,7 +175,7 @@ void Player::logInfo (int logTime, bool useDefaultLogFile, const char* alternati
 	logFile << "use mouse? " << useMouse << '\n';
 	logFile << "#### Inherits from MotiveCreature ####\n";
 	logFile.close();
-	MotiveCreature::logInfo (logTime, 0, "log/Player_log.txt");
+	MotiveCreature::log_info (logTime, 0, "log/Player_log.txt");
 	logFile.open(logFilePath.c_str(), std::ios_base::app);
 	logFile << "#### End of inheritance ####\n";
 
