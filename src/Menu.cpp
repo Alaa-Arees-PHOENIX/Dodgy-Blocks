@@ -20,10 +20,14 @@ void Menu::add_button (Button b)
 
 Button& Menu::operator[] (size_t i) {return buttons[i];}
 
-void Menu::draw_message_aligned (Button& button, const char msg[], Color color)
+void Menu::draw_message_aligned (	Button& button,
+									const char msg[],
+									Color color,
+									int fontSize)
 {
     float tempSize, temp_x;
-    tempSize = button.get_size () + 15;
+	if (0 == fontSize) {tempSize = button.get_size () + 15;}
+	else {tempSize = fontSize;}
     temp_x = button.get_x() - MeasureText (msg, tempSize) - 50;
     DrawText (msg, temp_x, button.get_y (), tempSize, color);
 }

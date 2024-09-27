@@ -14,6 +14,8 @@ private:
 	static constexpr char msg1[] = "Player 1 has survived ";
 	static constexpr char msg2[] = "Player 2 has survived ";
 	static constexpr char msg3[] = "Player 3 has survived ";
+	static constexpr char msg4[] = "(Press 'space')";
+	static constexpr char msg5[] = "(Press 'enter')";
 };
 
 #endif // GAMEOVERMENU_DB

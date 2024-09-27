@@ -6,7 +6,7 @@
 class GameWorld
 {
 private:
-	bool gameIsRunning;
+	bool gameIsRunning, shouldRestartGame;
 public:
 	GameWorld ();
 	
@@ -15,6 +15,7 @@ public: // loops:
 	void update (float dt);
 	void draw ();
 	void terminate ();
+	void restart ();
 	
 	// DEBUGGING STUFF:
 private:

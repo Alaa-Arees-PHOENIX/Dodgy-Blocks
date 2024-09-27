@@ -18,7 +18,10 @@ public:
 protected:
 	Menu () {}
 	virtual ~Menu() {};
-	void draw_message_aligned (Button& button, const char msg[], Color color);
+	void draw_message_aligned (	Button& button,
+								const char msg[],
+								Color color,
+								int fontSize = 0);
 	
 protected:
 	std::vector <Button> buttons;

@@ -1,14 +1,14 @@
 RAYLIB_PATH ?= C:\raylib\raylib
 BUILD_MODE  ?= RELEASE
 CXX          = g++
-CFLAGS       = -c -std=c++17 -Wall -static -I$(RAYLIB_PATH)\src -Iexternal -DPLATFORM_DESKTOP
+CFLAGS       = -c -std=c++17 -Wall -I$(RAYLIB_PATH)\src -Iexternal -DPLATFORM_DESKTOP
 ifeq ($(BUILD_MODE), RELEASE)
     CFLAGS += -s -O2
 else
     CFLAGS += -g3 -O0 -DDEBUG
 endif
 
-LDFLAGS = -L$(RAYLIB_PATH)\src $(RAYLIB_PATH)\src\raylib.rc.data -lraylib -lopengl32 -lgdi32 -lwinmm
+LDFLAGS = -static -L$(RAYLIB_PATH)\src $(RAYLIB_PATH)\src\raylib.rc.data -lraylib -lopengl32 -lgdi32 -lwinmm
 objects =	main.o \
 			Player.o \
 			MotiveCreature.o \

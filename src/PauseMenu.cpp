@@ -9,12 +9,12 @@ PauseMenu::PauseMenu ()
 	
 	float W = 125, H = 30; // default width and height for buttons in this menu.
 	
-	add_button	(bBuilder.build ("Resume",
+	add_button	(bBuilder.build ("Resume", // #0
 								(Rectangle){-SCREEN_WIDTH/6.0f - W/2.0f, 0, W, H},
-								[] {AUDIO_MANAGER.collapse_current_music (0);},
+								[] {},
 								KEY_ENTER));
 	
-	add_button	(bBuilder.build ("Main menu",
+	add_button	(bBuilder.build ("Main menu", // #1
 								(Rectangle){SCREEN_WIDTH/6.0f - W/2.0f, 0, W, H},
 								[]{GAME_WORLD.terminate();}));
 }
@@ -22,9 +22,17 @@ PauseMenu::PauseMenu ()
 void PauseMenu::loop ()
 {
 	AUDIO_MANAGER.collapse_current_music (1);
-	while (!buttons[0].is_pressed() && !buttons[1].is_pressed()){
+	while (true){
 		Menu::update (CAMERA);
 		AUDIO_MANAGER.update (IN_GAME_MENUS_LOOP);
+		if (buttons[0].is_pressed()){
+			AUDIO_MANAGER.collapse_current_music (0);
+			break;
+		}
+		if (buttons[1].is_pressed()){
+			AUDIO_MANAGER.collapse_current_music (1);
+			break;
+		}
 		
 		BeginDrawing ();
 		ClearBackground (LIGHTGRAY);

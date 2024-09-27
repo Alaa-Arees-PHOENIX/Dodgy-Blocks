@@ -6,7 +6,6 @@
 AudioManager::AudioManager ()
 {
 	InitAudioDevice ();
-	musicTransformPhase = 0;
 	cannonBallCurrentIndex = 0;
 	
 	// dump decryption:
@@ -64,19 +63,19 @@ void AudioManager::update (Loops loop)
 {
 	switch (loop)
 	{
-		case OUT_GAME_MENUS_LOOP:
-			if (musicTransformPhase && GetMusicTimePlayed (*currentMusic) == timeToSwitchMusic){
-				collapse_current_music (0);
-				StopMusicStream (*currentMusic);
-				currentMusic = &menuMusic;
-				enter_music_transform_phase (0);
-				PlayMusicStream (*currentMusic);
-			}
+		case GAME_LOOP:
+			if (!IsMusicStreamPlaying (*currentMusic)){play_next_in_game_music ();}
 			break;
 			
-		case GAME_LOOP:
-			if (musicTransformPhase){enter_music_transform_phase (0);}
-			if (!IsMusicStreamPlaying (*currentMusic)){play_next_in_game_music ();}
+		case OUT_GAME_MENUS_LOOP:
+			// if (lastPlayedMusicIndex != IN_GAME_MUSIC_COUNT){
+				// StopMusicStream (*currentMusic);
+				// currentMusic = &menuMusic;
+				// PlayMusicStream (*currentMusic);
+			// }
+			// else if (!IsMusicStreamPlaying (*currentMusic)){
+				// PlayMusicStream (*currentMusic);
+			// }
 			break;
 			
 		case IN_GAME_MENUS_LOOP:
@@ -93,18 +92,8 @@ void AudioManager::update (Loops loop)
 
 void AudioManager::collapse_current_music (bool collapse)
 {
-	bool newVol = collapse ? COLLAPSING_MUSIC_VOLUME : 1.0f;
+	float newVol = collapse ? COLLAPSING_MUSIC_VOLUME : 1.0f;
 	SetMusicVolume (*currentMusic, newVol);
-}
-
-void AudioManager::enter_music_transform_phase (bool enter)
-{
-	musicTransformPhase = enter;
-	collapse_current_music (enter);
-	if (!enter) {timeToSwitchMusic = 0;}
-	else{
-		timeToSwitchMusic = std::min (GetMusicTimePlayed (*currentMusic)+5, GetMusicTimeLength (*currentMusic)-1);
-	}
 }
 
 void AudioManager::play_next_in_game_music ()
@@ -121,4 +110,11 @@ void AudioManager::play_next_in_game_music ()
 void AudioManager::stop_menu_music ()
 {
 	StopMusicStream (menuMusic);
+}
+
+void AudioManager::play_menu_music ()
+{
+	StopMusicStream (*currentMusic);
+	currentMusic = &menuMusic;
+	PlayMusicStream (*currentMusic);
 }

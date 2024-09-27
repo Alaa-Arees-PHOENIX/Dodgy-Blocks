@@ -13,12 +13,15 @@ GameWorld::GameWorld ()
 
 void GameWorld::loop ()
 {
+	Loop_Beggining:
 	PLAYER_1.initilize();
 	PLAYER_2.initilize();
 	PLAYER_3.initilize();
 	TIMER.reset();
 	ENEMIES_MANAGER.reset();
 	gameIsRunning = 1;
+	shouldRestartGame = 0;
+	AUDIO_MANAGER.collapse_current_music (0);
 	while (gameIsRunning){
 		update (GetFrameTime ());
 		draw ();
@@ -32,6 +35,8 @@ void GameWorld::loop ()
 		#endif
 	}
 	GAME_OVER_MENU.loop ();
+	if (shouldRestartGame) {goto Loop_Beggining;}
+	AUDIO_MANAGER.collapse_current_music (0);
 }
 
 void GameWorld::update (float dt)
@@ -72,6 +77,11 @@ void GameWorld::draw ()
 void GameWorld::terminate ()
 {
 	gameIsRunning = 0;
+}
+
+void GameWorld::restart ()
+{
+	shouldRestartGame = 1;
 }
 
 
