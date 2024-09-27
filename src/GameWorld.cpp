@@ -41,6 +41,7 @@ void GameWorld::update (float dt)
 		TIMER.update (dt);
 		ENEMIES_MANAGER.update (dt);
 	}
+	AUDIO_MANAGER.update (GAME_LOOP);
 }
 
 void GameWorld::draw ()

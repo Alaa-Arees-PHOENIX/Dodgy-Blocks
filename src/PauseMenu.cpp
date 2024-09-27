@@ -11,18 +11,20 @@ PauseMenu::PauseMenu ()
 	
 	add_button	(bBuilder.build ("Resume",
 								(Rectangle){-SCREEN_WIDTH/6.0f - W/2.0f, 0, W, H},
-								[] {/* loop terminator button, no action */},
+								[] {AUDIO_MANAGER.collapse_current_music (0);},
 								KEY_ENTER));
 	
 	add_button	(bBuilder.build ("Main menu",
 								(Rectangle){SCREEN_WIDTH/6.0f - W/2.0f, 0, W, H},
-								[] {GAME_WORLD.terminate();}));
+								[]{GAME_WORLD.terminate();}));
 }
 
 void PauseMenu::loop ()
 {
+	AUDIO_MANAGER.collapse_current_music (1);
 	while (!buttons[0].is_pressed() && !buttons[1].is_pressed()){
 		Menu::update (CAMERA);
+		AUDIO_MANAGER.update (IN_GAME_MENUS_LOOP);
 		
 		BeginDrawing ();
 		ClearBackground (LIGHTGRAY);

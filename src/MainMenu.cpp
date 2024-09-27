@@ -28,7 +28,10 @@ MainMenu::MainMenu ()
 	
     add_button	(bBuilder.build ("Play",
 								(Rectangle){-W/2.0f, -75, W, H},
-								[] {GAME_WORLD.loop();},
+								[]{
+									AUDIO_MANAGER.stop_menu_music ();
+									GAME_WORLD.loop();
+								},
 								KEY_ENTER));
 								
 	add_button	(bBuilder.build ("Settings",
@@ -59,6 +62,7 @@ void MainMenu::loop ()
 	while (!buttons[3].is_pressed()){
 		Menu::update (CAMERA);
 		MENUS_BACKGROUND_EFFECTS.update (GetFrameTime());
+		AUDIO_MANAGER.update (OUT_GAME_MENUS_LOOP);
 		
 		#if defined (DEBUG)
 			if (IsKeyPressed (KEY_B)){

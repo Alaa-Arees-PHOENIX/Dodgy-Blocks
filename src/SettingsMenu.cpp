@@ -188,6 +188,7 @@ void SettingsMenu::loop ()
 	while (!buttons.back().is_pressed()){
 		Menu::update (CAMERA);
 		MENUS_BACKGROUND_EFFECTS.update (GetFrameTime());
+		AUDIO_MANAGER.update (OUT_GAME_MENUS_LOOP);
 		
 		BeginDrawing ();
 		ClearBackground (WHITE);

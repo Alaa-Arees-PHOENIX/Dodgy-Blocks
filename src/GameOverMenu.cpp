@@ -13,14 +13,17 @@ GameOverMenu::GameOverMenu ()
 								(Rectangle){-W/2.0f, SCREEN_HEIGHT/4.0f, W, H},
 								[]{
 									MENUS_BACKGROUND_EFFECTS.initilize();
+									AUDIO_MANAGER.enter_music_transform_phase (1);
 								},
 								KEY_ENTER));
 }
 
 void GameOverMenu::loop ()
 {
+	AUDIO_MANAGER.collapse_current_music (1);
 	while (!buttons[0].is_pressed()){
 		Menu::update (CAMERA);
+		AUDIO_MANAGER.update (IN_GAME_MENUS_LOOP);
 		
 		BeginDrawing ();
 		ClearBackground (LIGHTGRAY);
