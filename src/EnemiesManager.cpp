@@ -50,22 +50,34 @@ void EnemiesManager::spawn_EnemyBlock ()
     switch (whichSideToSpawnFrom)
     {
 		case 1: // up
-		initialPos = {(float)random_number (-CURRENT_SCREEN_WIDTH/2, CURRENT_SCREEN_WIDTH/2), -CURRENT_SCREEN_HEIGHT/2.0f - 190};
+		initialPos = {(float)random_number (-CURRENT_SCREEN_WIDTH/2, CURRENT_SCREEN_WIDTH/2), -CURRENT_SCREEN_HEIGHT/2.0f - 250};
 		break;
 		case 2: // down
-		initialPos = {(float)random_number (-CURRENT_SCREEN_WIDTH/2, CURRENT_SCREEN_WIDTH/2), CURRENT_SCREEN_WIDTH/2.0f + 190};
+		initialPos = {(float)random_number (-CURRENT_SCREEN_WIDTH/2, CURRENT_SCREEN_WIDTH/2), CURRENT_SCREEN_WIDTH/2.0f + 250};
 		break;
 		case 3: // left
-		initialPos = {-CURRENT_SCREEN_WIDTH/2.0f - 190, (float)random_number (-CURRENT_SCREEN_HEIGHT/2, CURRENT_SCREEN_HEIGHT/2)};
+		initialPos = {-CURRENT_SCREEN_WIDTH/2.0f - 250, (float)random_number (-CURRENT_SCREEN_HEIGHT/2, CURRENT_SCREEN_HEIGHT/2)};
 		break;
 		case 4: // right
-		initialPos = {CURRENT_SCREEN_WIDTH/2.0f + 190, (float)random_number (-CURRENT_SCREEN_HEIGHT/2, CURRENT_SCREEN_HEIGHT/2.0f)};
+		initialPos = {CURRENT_SCREEN_WIDTH/2.0f + 250, (float)random_number (-CURRENT_SCREEN_HEIGHT/2, CURRENT_SCREEN_HEIGHT/2.0f)};
 		break;
 	}
 	
 	Vector2 maxVelocity = {(float)random_number (EBS.maxVelocityRange), (float)random_number (EBS.maxVelocityRange)};
 	Vector2 accForce = {(float)random_number (EBS.maxForceRange), (float)random_number (EBS.maxForceRange)};
 	float mass = width*height*EnemyBlock::DENSITY_OF_BLOCKS;
+	
+	/*preserve balance of the game: */
+	if (accForce.x/mass > 3650.0f){
+		accForce.x = 3650.0f*mass;
+		if (abs (initialPos.x > CURRENT_SCREEN_WIDTH/2.0f)){
+			initialPos.x *= 1.5f;
+		}
+		if (abs (initialPos.y > CURRENT_SCREEN_HEIGHT/2.0f)){
+			initialPos.y *= 1.5f;
+		}
+	}
+	if (accForce.y/mass > 3650.0f) {accForce.y = 3650.0f*mass;}
 	
 	int lifespan = random_number (EBS.lifespanRange);
 	
@@ -86,10 +98,10 @@ void EnemiesManager::update_EnemyBlock_settings ()
 	{
 		case EASY:
 			EBS.maxCount			= 4;
-			EBS.widthRange			= {37, 111};
-			EBS.heightRange			= {37, 111};
+			EBS.widthRange			= {37, 115};
+			EBS.heightRange			= {37, 115};
 			EBS.maxVelocityRange	= {800, 1200};
-			EBS.maxForceRange		= {2500, 3550};
+			EBS.maxForceRange		= {2204, 3200};
 			EBS.lifespanRange		= {5, 15};
 			EBS.spawnTimeRange		= {3, 5};
 			break;
@@ -98,29 +110,29 @@ void EnemiesManager::update_EnemyBlock_settings ()
 			EBS.maxCount			= 4;
 			EBS.widthRange			= {37, 130};
 			EBS.heightRange			= {37, 130};
-			EBS.maxVelocityRange	= {800, 1300};
-			EBS.maxForceRange		= {2500, 3650};
+			EBS.maxVelocityRange	= {800, 1250};
+			EBS.maxForceRange		= {2204, 4000};
 			EBS.lifespanRange		= {7, 17};
 			EBS.spawnTimeRange		= {3, 4};
 			break;
 		
 		case HARD:
 			EBS.maxCount			= 5;
-			EBS.widthRange			= {20, 130};
-			EBS.heightRange			= {20, 130};
-			EBS.maxVelocityRange	= {750, 1350};
-			EBS.maxForceRange		= {2650, 3650};
-			EBS.lifespanRange		= {4, 17};
+			EBS.widthRange			= {25, 120};
+			EBS.heightRange			= {25, 120};
+			EBS.maxVelocityRange	= {750, 1200};
+			EBS.maxForceRange		= {2204, 2700};
+			EBS.lifespanRange		= {4, 15};
 			EBS.spawnTimeRange		= {2, 4};
 			break;
 		
 		case INSANE:
 			EBS.maxCount			= 6;
-			EBS.widthRange			= {10, 55};
-			EBS.heightRange			= {10, 55};
-			EBS.maxVelocityRange	= {750, 1350};
-			EBS.maxForceRange		= {2650, 3650};
-			EBS.lifespanRange		= {4, 17};
+			EBS.widthRange			= {25, 55};
+			EBS.heightRange			= {25, 55};
+			EBS.maxVelocityRange	= {800, 1200};
+			EBS.maxForceRange		= {2204, 2700};
+			EBS.lifespanRange		= {4, 15};
 			EBS.spawnTimeRange		= {2, 3};
 			break;
 	}
