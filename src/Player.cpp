@@ -130,7 +130,7 @@ bool Player::should_accelerate_right ()
 
 void Player::draw_statistics (short playerID)
 {
-	int fontSize = 37;
+	static constexpr int FONT_SIZE = 37;
 	
 	std::string playerColor;
 	switch (playerID)
@@ -141,10 +141,10 @@ void Player::draw_statistics (short playerID)
 	}
 	
 	std::string stats = playerColor + " player has survived for " + std::to_string (survivedFor) + " seconds.";
-	int x = -MeasureText (stats.c_str(), fontSize)/2; // centered in the middle of screen
-	int y = -SCREEN_HEIGHT/4 + 75*(playerID); // initial y-position + vertical spacing
+	int x = -MeasureText (stats.c_str(), FONT_SIZE)/2; // centered in the middle of screen
+	int y = (int)(-SCREEN_HEIGHT/3.5f + 75*(playerID)); // initial y-position + vertical spacing
 	
-	DrawText (stats.c_str(), x, y, fontSize, color);
+	DrawText (stats.c_str(), x, y, FONT_SIZE, color);
 }
 
 void Player::bounce_on_edges (float dt)

@@ -9,20 +9,20 @@ GameOverMenu::GameOverMenu ()
 	
 	float W = 125, H = 30; // default width and height for buttons in this menu.
 	
-	add_button	(bBuilder.build ("Continue",
-								(Rectangle){-W/2.0f, SCREEN_HEIGHT/12.0f, W, H},
+	add_button	(bBuilder.build ("Restart", // #0
+								(Rectangle){-W/2.0f, SCREEN_HEIGHT/6.0f, W, H},
+								[]{
+									GAME_WORLD.restart ();
+								},
+								KEY_ENTER));
+	
+	add_button	(bBuilder.build ("Continue", // #1
+								(Rectangle){-W/2.0f, SCREEN_HEIGHT/6.0f + 3*H, W, H},
 								[]{
 									MENUS_BACKGROUND_EFFECTS.initilize();
 									AUDIO_MANAGER.play_menu_music();
 								},
 								KEY_SPACE));
-	
-	add_button	(bBuilder.build ("Restart",
-								(Rectangle){-W/2.0f, SCREEN_HEIGHT/12.0f + 3*H, W, H},
-								[]{
-									GAME_WORLD.restart ();
-								},
-								KEY_ENTER));
 }
 
 void GameOverMenu::loop ()

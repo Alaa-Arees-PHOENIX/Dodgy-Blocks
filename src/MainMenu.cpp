@@ -52,7 +52,8 @@ MainMenu::MainMenu ()
 								
     add_button	(bBuilder.build ("Quit game",
 								(Rectangle){-W/2.0f, buttons[2].get_y() + H + VS, W, H},
-								[] {/* loop terminator button, no action */}));
+								[] {/* loop terminator button, no action */},
+								KEY_ESCAPE));
 }
 
 void MainMenu::loop ()
