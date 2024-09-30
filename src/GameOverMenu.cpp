@@ -50,6 +50,6 @@ void GameOverMenu::draw ()
 	if (PLAYER_1.is_active ()) {PLAYER_1.draw_statistics (0);}
 	if (PLAYER_2.is_active ()) {PLAYER_2.draw_statistics (1);}
 	if (PLAYER_3.is_active ()) {PLAYER_3.draw_statistics (2);}
-	draw_message_aligned (buttons[0], msg4, ORANGE, 20);
-	draw_message_aligned (buttons[1], msg5, ORANGE, 20);
+	draw_message_aligned (buttons[0], msg4, YELLOW, 20);
+	draw_message_aligned (buttons[1], msg5, YELLOW, 20);
 }

@@ -49,8 +49,8 @@ void Player::update (float dt)
     else if	(should_accelerate_right ())	{accelerate_right (dt);}
     
 	// fix precision and never-ending movement errors:
-	if (abs (velocity.x) * dt < 0.3f) {velocity.x = 0;}
-    if (abs (velocity.y) * dt < 0.3f) {velocity.y = 0;}
+	if (abs (velocity.x) < 0.35f*60) {velocity.x = 0;}
+    if (abs (velocity.y) < 0.35f*60) {velocity.y = 0;}
 	
 	// just read the function's name...
     bounce_on_edges (dt);
