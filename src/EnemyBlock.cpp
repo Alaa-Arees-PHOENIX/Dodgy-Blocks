@@ -54,10 +54,17 @@ void EnemyBlock::update (float dt)
 	PLAYERS_MANAGER.collide_EnemyBlock_with_players (*this);
 	
 /*	update warning signs:	*/
-	warningLeft.y	= position.y;
-	warningRight.y	= position.y;
-	warningUp.x		= position.x;
-	warningDown.x	= position.x;
+	Vector2 pos = GetWorldToScreen2D (position, CAMERA);
+	
+	warningLeft.y	= std::max (pos.y, -height/2.0f);
+	warningLeft.y	= std::min (pos.y, CURRENT_SCREEN_HEIGHT - height/2.0f);
+	warningLeft.y	= GetScreenToWorld2D ({warningLeft.x, warningLeft.y}, CAMERA).y;
+	warningRight.y	= warningLeft.y;
+	
+	warningUp.x		= std::max (pos.x, -width/2.0f);
+	warningUp.x		= std::min (pos.x, CURRENT_SCREEN_WIDTH - width/2.0f);
+	warningUp.x		= GetScreenToWorld2D ({warningUp.x, warningUp.y}, CAMERA).x;
+	warningDown.x	= warningUp.x;
 }
 
 void EnemyBlock::draw ()
@@ -66,10 +73,18 @@ void EnemyBlock::draw ()
 	
 /*	check and draw a warning sign if the enemy is outside the screen:	*/
 	Vector2 pos = GetWorldToScreen2D (position, CAMERA);
-	if (pos.x + width < 0)						{DrawRectangleRec (warningLeft, ColorAlpha (BLACK, 0.58f));}
-	if (pos.x > CURRENT_SCREEN_WIDTH)			{DrawRectangleRec (warningRight, ColorAlpha (BLACK, 0.58f));}
-	if (pos.y < 0)								{DrawRectangleRec (warningUp, ColorAlpha (BLACK, 0.58f));}
-	if (pos.y + height > CURRENT_SCREEN_HEIGHT)	{DrawRectangleRec (warningDown, ColorAlpha (BLACK, 0.58f));}
+	
+	if (pos.x < 0)
+		{DrawRectangleRec (warningLeft, ColorAlpha (BLACK, 0.58f));}
+	
+	if (pos.x + width > CURRENT_SCREEN_WIDTH)
+		{DrawRectangleRec (warningRight, ColorAlpha (BLACK, 0.58f));}
+	
+	if (pos.y < 0)
+		{DrawRectangleRec (warningUp, ColorAlpha (BLACK, 0.58f));}
+	
+	if (pos.y + height > CURRENT_SCREEN_HEIGHT)
+		{DrawRectangleRec (warningDown, ColorAlpha (BLACK, 0.58f));}
 }
 
 void EnemyBlock::log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile)

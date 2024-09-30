@@ -101,7 +101,7 @@ void EnemiesManager::update_EnemyBlock_settings ()
 			EBS.widthRange			= {37, 115};
 			EBS.heightRange			= {37, 115};
 			EBS.maxVelocityRange	= {800, 1200};
-			EBS.maxForceRange		= {2204, 3200};
+			EBS.maxForceRange		= {2204, 3000};
 			EBS.lifespanRange		= {5, 15};
 			EBS.spawnTimeRange		= {3, 5};
 			break;
@@ -111,7 +111,7 @@ void EnemiesManager::update_EnemyBlock_settings ()
 			EBS.widthRange			= {37, 130};
 			EBS.heightRange			= {37, 130};
 			EBS.maxVelocityRange	= {800, 1250};
-			EBS.maxForceRange		= {2204, 4000};
+			EBS.maxForceRange		= {2204, 3200};
 			EBS.lifespanRange		= {7, 17};
 			EBS.spawnTimeRange		= {3, 4};
 			break;
