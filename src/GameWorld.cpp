@@ -42,7 +42,7 @@ void GameWorld::loop ()
 void GameWorld::update (float dt)
 {
 	PLAYERS_MANAGER.update (dt);
-	if (!check_setting (SANDBOX)){
+	if (!ENEMIES_MANAGER.is_game_mode_set_to (SANDBOX)){
 		TIMER.update (dt);
 		ENEMIES_MANAGER.update (dt);
 	}
@@ -59,7 +59,7 @@ void GameWorld::draw ()
 	if (IsKeyDown (KEY_TWO)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (1);}
 	
 	PLAYERS_MANAGER.draw ();
-	if (!check_setting (SANDBOX)){
+	if (!ENEMIES_MANAGER.is_game_mode_set_to (SANDBOX)){
 		TIMER.draw ();
 		ENEMIES_MANAGER.draw ();
 	}

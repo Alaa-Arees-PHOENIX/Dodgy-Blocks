@@ -3,11 +3,12 @@
 
 enum Difficulty {EASY, MEDIUM, HARD, INSANE};
 
-enum Directions {UP_DIR, DOWN_DIR, LEFT_DIR, RIGHT_DIR};
+enum GameMode {SANDBOX, ARCADE, FRENZY};
+
+enum Directions {UP_DIR, DOWN_DIR, LEFT_DIR, RIGHT_DIR}; // unused
 
 enum Settings
 {
-	SANDBOX			=	1 << 0,
 	SHOW_FPS		=	1 << 1
 };
 

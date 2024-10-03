@@ -17,12 +17,14 @@ public:
 	void draw ();
 	void spawn_EnemyBlock ();
 	void set_difficulty (Difficulty newDifficulty);
+	void set_gameMode (GameMode newGameMode);
 	void update_EnemyBlock_settings ();
 	void log_info (	int logTime,
 					bool useDefaultLogFile = 1,
 					const char* alternativeFile = "\0") override;
 	
 	Difficulty get_difficulty () {return currentDifficulty;};
+	bool is_game_mode_set_to (GameMode gm) {return currentGameMode == gm;};
 	
 private:
 	struct EnemyBlockSettings
@@ -42,6 +44,7 @@ private:
 	EnemyBlockSettings EBS;
 	std::forward_list<std::unique_ptr<Enemy>> enemies;
 	Difficulty currentDifficulty;
+	GameMode currentGameMode;
 };
 
 #endif // ENEMIESMANAGER_DB

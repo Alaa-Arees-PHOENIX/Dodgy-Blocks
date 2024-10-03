@@ -91,6 +91,12 @@ void EnemiesManager::set_difficulty (Difficulty newDifficulty)
 	update_EnemyBlock_settings ();
 }
 
+void EnemiesManager::set_gameMode (GameMode newGameMode)
+{
+	currentGameMode = newGameMode;
+	update_EnemyBlock_settings ();
+}
+
 
 void EnemiesManager::update_EnemyBlock_settings ()
 {
@@ -135,6 +141,10 @@ void EnemiesManager::update_EnemyBlock_settings ()
 			EBS.lifespanRange		= {4, 15};
 			EBS.spawnTimeRange		= {2, 3};
 			break;
+	}
+	
+	if (currentGameMode == FRENZY){
+		EBS.spawnTimeRange		= {0, 0};
 	}
 }
 
