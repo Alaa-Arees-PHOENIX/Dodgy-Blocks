@@ -116,7 +116,7 @@ void EnemiesManager::update_EnemyBlock_settings ()
 			EBS.maxCount			= 4;
 			EBS.widthRange			= {37, 130};
 			EBS.heightRange			= {37, 130};
-			EBS.maxVelocityRange	= {800, 1250};
+			EBS.maxVelocityRange	= {800, 1200};
 			EBS.maxForceRange		= {2204, 3200};
 			EBS.lifespanRange		= {7, 17};
 			EBS.spawnTimeRange		= {3, 4};
@@ -126,17 +126,17 @@ void EnemiesManager::update_EnemyBlock_settings ()
 			EBS.maxCount			= 5;
 			EBS.widthRange			= {25, 120};
 			EBS.heightRange			= {25, 120};
-			EBS.maxVelocityRange	= {750, 1200};
+			EBS.maxVelocityRange	= {750, 1150};
 			EBS.maxForceRange		= {2204, 2700};
 			EBS.lifespanRange		= {4, 15};
 			EBS.spawnTimeRange		= {2, 4};
 			break;
 		
 		case INSANE:
-			EBS.maxCount			= 6;
+			EBS.maxCount			= 5;
 			EBS.widthRange			= {25, 55};
 			EBS.heightRange			= {25, 55};
-			EBS.maxVelocityRange	= {800, 1200};
+			EBS.maxVelocityRange	= {800, 1150};
 			EBS.maxForceRange		= {2204, 2700};
 			EBS.lifespanRange		= {4, 15};
 			EBS.spawnTimeRange		= {2, 3};

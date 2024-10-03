@@ -23,8 +23,8 @@ public:
 					bool useDefaultLogFile = 1,
 					const char* alternativeFile = "\0") override;
 	
-	Difficulty get_difficulty () {return currentDifficulty;};
-	bool is_game_mode_set_to (GameMode gm) {return currentGameMode == gm;};
+	Difficulty get_difficulty () {return currentDifficulty;}
+	bool is_game_mode_set_to (GameMode gm) {return currentGameMode == gm;}
 	
 private:
 	struct EnemyBlockSettings
