@@ -69,22 +69,22 @@ void EnemyBlock::update (float dt)
 
 void EnemyBlock::draw ()
 {
-	DrawRectangle (position.x, position.y, width, height, BLACK);
+	DrawRectangle (position.x, position.y, width, height, dark_mode_processor (BLACK));
 	
 /*	check and draw a warning sign if the enemy is outside the screen:	*/
 	Vector2 pos = GetWorldToScreen2D (position, CAMERA);
 	
 	if (pos.x < 0)
-		{DrawRectangleRec (warningLeft, ColorAlpha (BLACK, 0.58f));}
+		{DrawRectangleRec (warningLeft, ColorAlpha (dark_mode_processor (BLACK), 0.58f));}
 	
 	if (pos.x + width > CURRENT_SCREEN_WIDTH)
-		{DrawRectangleRec (warningRight, ColorAlpha (BLACK, 0.58f));}
+		{DrawRectangleRec (warningRight, ColorAlpha (dark_mode_processor (BLACK), 0.58f));}
 	
 	if (pos.y < 0)
-		{DrawRectangleRec (warningUp, ColorAlpha (BLACK, 0.58f));}
+		{DrawRectangleRec (warningUp, ColorAlpha (dark_mode_processor (BLACK), 0.58f));}
 	
 	if (pos.y + height > CURRENT_SCREEN_HEIGHT)
-		{DrawRectangleRec (warningDown, ColorAlpha (BLACK, 0.58f));}
+		{DrawRectangleRec (warningDown, ColorAlpha (dark_mode_processor (BLACK), 0.58f));}
 }
 
 void EnemyBlock::log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile)

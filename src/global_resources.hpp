@@ -18,6 +18,7 @@
 #include "Logger.hpp"
 #include "MenusBackgroundEffects.hpp"
 #include "AudioManager.hpp"
+#include "ColorsManager.hpp"
 
 struct Rectangle;
 struct Vector2;
@@ -56,6 +57,9 @@ struct Vector2;
 #define MENUS_BACKGROUND_EFFECTS Singleton<MenusBackgroundEffects>::get_instance()
 
 #define AUDIO_MANAGER Singleton<AudioManager>::get_instance()
+
+#define COLORS_MANAGER Singleton<ColorsManager>::get_instance()
+#define dark_mode_processor(color) Singleton<ColorsManager>::get_instance().color_mode(color)
 
 // // // // // // // // // GLOBAL VARIABLES:
 extern uint8_t settings; // using bitmask to toggle game settings

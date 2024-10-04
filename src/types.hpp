@@ -9,7 +9,8 @@ enum Directions {UP_DIR, DOWN_DIR, LEFT_DIR, RIGHT_DIR}; // unused
 
 enum Settings
 {
-	SHOW_FPS		=	1 << 1
+	SHOW_FPS		=	1 << 0,
+	DARK_MODE		=	1 << 1
 };
 
 /* defines various loop objects like GameWorld::loop() or MainMenu::loop() in a

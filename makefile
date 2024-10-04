@@ -29,7 +29,8 @@ objects =	main.o \
 			EnemiesManager.o \
 			PlayersManager.o \
 			MenusBackgroundEffects.o \
-			AudioManager.o
+			AudioManager.o \
+			ColorsManager.o
 
 ifeq ($(BUILD_MODE), DEBUG)
 	objects += Logger.o
@@ -65,7 +66,8 @@ global_resources.o: src/global_resources.cpp src/global_resources.hpp \
 					src/types.hpp \
 					src/Logger.hpp \
 					src/MenusBackgroundEffects.hpp \
-					src/AudioManager.hpp
+					src/AudioManager.hpp \
+					src/ColorsManager.hpp
 	$(CXX) src/global_resources.cpp $(CFLAGS)
 
 GameWorld.o:	src/GameWorld.cpp src/GameWorld.hpp \
@@ -80,7 +82,7 @@ GameWorld.o:	src/GameWorld.cpp src/GameWorld.hpp \
 ScreenManager.o: src/ScreenManager.cpp src/ScreenManager.hpp
 	$(CXX) src/ScreenManager.cpp $(CFLAGS)
 
-Button.o: src/Button.cpp src/Button.hpp
+Button.o: src/Button.cpp src/Button.hpp src/global_resources.hpp
 	$(CXX) src/Button.cpp $(CFLAGS)
 
 ButtonBuilder.o: src/ButtonBuilder.cpp src/ButtonBuilder.hpp src/Button.hpp
@@ -162,6 +164,9 @@ MenusBackgroundEffects.o:	src/MenusBackgroundEffects.cpp src/MenusBackgroundEffe
 
 AudioManager.o:	src/AudioManager.cpp src/AudioManager.hpp
 	$(CXX) src/AudioManager.cpp $(CFLAGS)
+
+ColorsManager.o: src/ColorsManager.cpp src/ColorsManager.hpp
+	$(CXX) src/ColorsManager.cpp $(CFLAGS)
 
 ############## ASSISTANT TOOLS ##############
 

@@ -8,6 +8,7 @@ EnemiesManager::EnemiesManager ()
 {
 	reset();
 	set_difficulty (MEDIUM);
+	set_gameMode (ARCADE);
 	#if defined(DEBUG)
 		LOGGER.add_listener (this);
 	#endif

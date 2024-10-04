@@ -31,13 +31,7 @@ void GameOverMenu::loop ()
 	while (!buttons[0].is_pressed() && !buttons[1].is_pressed()){
 		Menu::update (CAMERA);
 		AUDIO_MANAGER.update (IN_GAME_MENUS_LOOP);
-		
-		BeginDrawing ();
-		ClearBackground (LIGHTGRAY);
-		BeginMode2D (CAMERA);
 		draw ();
-		EndMode2D ();
-		EndDrawing ();
 	}
 	buttons[0].press(0);
 	buttons[1].press(0);
@@ -46,10 +40,17 @@ void GameOverMenu::loop ()
 
 void GameOverMenu::draw ()
 {	
+	BeginDrawing ();
+	ClearBackground (dark_mode_processor (LIGHTGRAY));
+	BeginMode2D (CAMERA);
+	
 	Menu::draw ();
 	if (PLAYER_1.is_active ()) {PLAYER_1.draw_statistics (0);}
 	if (PLAYER_2.is_active ()) {PLAYER_2.draw_statistics (1);}
 	if (PLAYER_3.is_active ()) {PLAYER_3.draw_statistics (2);}
-	draw_message_aligned (buttons[0], msg4, BLACK, 20);
-	draw_message_aligned (buttons[1], msg5, BLACK, 20);
+	draw_message_aligned (buttons[0], msg4, dark_mode_processor (BLACK), 20);
+	draw_message_aligned (buttons[1], msg5, dark_mode_processor (BLACK), 20);
+	
+	EndMode2D ();
+	EndDrawing ();
 }

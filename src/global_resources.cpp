@@ -22,6 +22,7 @@ void create_globals ()
 	Singleton<PlayersManager>::create_instance ();
 	Singleton<MenusBackgroundEffects>::create_instance();
 	Singleton<AudioManager>::create_instance();
+	Singleton<ColorsManager>::create_instance();
 }
 
 void destroy_globals ()
@@ -38,6 +39,7 @@ void destroy_globals ()
 	Singleton<PlayersManager>::destroy_instance ();
 	Singleton<MenusBackgroundEffects>::destroy_instance();
 	Singleton<AudioManager>::destroy_instance();
+	Singleton<ColorsManager>::destroy_instance();
 	#if defined(DEBUG)
 		Singleton<Logger>::destroy_instance ();
 	#endif

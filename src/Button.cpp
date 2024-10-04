@@ -2,6 +2,7 @@
 #include <tuple>
 #include <functional>
 #include "raylib.h"
+#include "global_resources.hpp"
 
 #include "Button.hpp"
 
@@ -70,8 +71,8 @@ void Button::update (const Camera2D &camera)
     
 void Button::draw ()
 {
-    DrawRectangleRounded (bounds, 0.8, 0, currentBackground);
-    DrawText (text.c_str(), text_x, text_y, textSize, currentTextColor);
+    DrawRectangleRounded (bounds, 0.8, 0, dark_mode_processor ((Color)currentBackground));
+    DrawText (text.c_str(), text_x, text_y, textSize, dark_mode_processor ((Color)currentTextColor));
     DrawRectangleRoundedLines ({bounds.x+1, bounds.y+1,
-            bounds.width-2, bounds.height-2}, 0.8, 0, 8, currentOutlines);
+            bounds.width-2, bounds.height-2}, 0.8, 0, 8, dark_mode_processor ((Color)currentOutlines));
 }

@@ -35,7 +35,7 @@ void PauseMenu::loop ()
 		}
 		
 		BeginDrawing ();
-		ClearBackground (LIGHTGRAY);
+		ClearBackground (dark_mode_processor (LIGHTGRAY));
 		BeginMode2D (CAMERA);
 		Menu::draw ();
 		EndMode2D ();

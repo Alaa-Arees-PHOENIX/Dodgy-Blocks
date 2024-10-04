@@ -64,7 +64,7 @@ void MenusBackgroundEffects::FloatingRectangle::update (float dt)
 
 void MenusBackgroundEffects::FloatingRectangle::draw ()
 {
-	DrawRectangleRec (body, BLACK);
+	DrawRectangleRec (body, dark_mode_processor (BLACK));
 }
 
 
@@ -131,7 +131,7 @@ void MenusBackgroundEffects::CannonBall::update (float dt)
 
 void MenusBackgroundEffects::CannonBall::draw ()
 {
-	DrawCircle (position.x, position.y, radius, BLACK);
+	DrawCircle (position.x, position.y, radius, dark_mode_processor (BLACK));
 }
 
 void MenusBackgroundEffects::CannonBall::log_info (int logTime, bool useDefaultLogFile, const char* alternativeFile)

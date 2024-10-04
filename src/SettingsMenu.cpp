@@ -204,25 +204,26 @@ void SettingsMenu::loop ()
 		Menu::update (CAMERA);
 		MENUS_BACKGROUND_EFFECTS.update (GetFrameTime());
 		AUDIO_MANAGER.update (OUT_GAME_MENUS_LOOP);
-		
-		BeginDrawing ();
-		ClearBackground (WHITE);
-		BeginMode2D (CAMERA);
 		draw ();
-		EndMode2D ();
-		EndDrawing ();
 	}
 	buttons.back().press(0);
 }
 
 void SettingsMenu::draw ()
 {
+	BeginDrawing ();
+	ClearBackground (dark_mode_processor (WHITE));
+	BeginMode2D (CAMERA);
+	
 	MENUS_BACKGROUND_EFFECTS.draw();
 	Menu::draw ();
-	draw_message_aligned (buttons[0], msg1, ORANGE);
-	draw_message_aligned (buttons[2], msg2, ORANGE);
-	draw_message_aligned (buttons[4], msg3, ORANGE);
-	draw_message_aligned (buttons[7], msg4, ORANGE);
-	draw_message_aligned (buttons[9], msg5, ORANGE);
-	draw_message_aligned (buttons[12], msg6, ORANGE);
+	draw_message_aligned (buttons[0], msg1, dark_mode_processor (ORANGE));
+	draw_message_aligned (buttons[2], msg2, dark_mode_processor (ORANGE));
+	draw_message_aligned (buttons[4], msg3, dark_mode_processor (ORANGE));
+	draw_message_aligned (buttons[7], msg4, dark_mode_processor (ORANGE));
+	draw_message_aligned (buttons[9], msg5, dark_mode_processor (ORANGE));
+	draw_message_aligned (buttons[12], msg6, dark_mode_processor (ORANGE));
+	
+	EndMode2D ();
+	EndDrawing ();
 }

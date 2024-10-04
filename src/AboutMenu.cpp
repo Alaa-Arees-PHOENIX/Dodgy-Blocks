@@ -24,24 +24,23 @@ void AboutMenu::loop ()
 		Menu::update (CAMERA);
 		MENUS_BACKGROUND_EFFECTS.update (GetFrameTime());
 		AUDIO_MANAGER.update (OUT_GAME_MENUS_LOOP);
-		
-		BeginDrawing ();
-		ClearBackground (WHITE);
-		BeginMode2D (CAMERA);
-		MENUS_BACKGROUND_EFFECTS.draw ();
 		draw ();
-		EndMode2D ();
-		EndDrawing ();
 	}
 	buttons.back().press(0);
 }
 
 void AboutMenu::draw ()
 {
+	BeginDrawing ();
+	ClearBackground (dark_mode_processor (WHITE));
+	BeginMode2D (CAMERA);
+	MENUS_BACKGROUND_EFFECTS.draw ();
 	Menu::draw ();
 	DrawText (TITLE, -MeasureText (TITLE, 60)/2.0f, -SCREEN_HEIGHT/3.0f - 50, 60, RED);
-	DrawText (msg1, -SCREEN_WIDTH/3.0f, -100, 25, ORANGE);
-	DrawText (msg2, -SCREEN_WIDTH/3.0f, -63, 25, ORANGE);
-	DrawText (msg3, -SCREEN_WIDTH/3.0f, -26, 25, ORANGE);
-	DrawText (msg4, -SCREEN_WIDTH/3.0f, 122, 25, ORANGE);
+	DrawText (msg1, -SCREEN_WIDTH/3.0f, -100, 25, dark_mode_processor (ORANGE));
+	DrawText (msg2, -SCREEN_WIDTH/3.0f, -63, 25, dark_mode_processor (ORANGE));
+	DrawText (msg3, -SCREEN_WIDTH/3.0f, -26, 25, dark_mode_processor (ORANGE));
+	DrawText (msg4, -SCREEN_WIDTH/3.0f, 122, 25, dark_mode_processor (ORANGE));
+	EndMode2D ();
+	EndDrawing ();
 }

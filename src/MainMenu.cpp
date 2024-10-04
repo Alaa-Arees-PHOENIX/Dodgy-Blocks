@@ -54,6 +54,17 @@ MainMenu::MainMenu ()
 								(Rectangle){-W/2.0f, buttons[2].get_y() + H + VS, W, H},
 								[] {/* loop terminator button, no action */},
 								KEY_ESCAPE));
+	
+	add_button	(bBuilder.build ("Dark Mode",
+								(Rectangle){-SCREEN_WIDTH*0.45f, SCREEN_HEIGHT*0.30f, W, H},
+								[]{
+									MENUS_BACKGROUND_EFFECTS.launch_cannon();
+									COLORS_MANAGER.toggle_dark_mode ();
+								},
+								KEY_NULL,
+								[] () -> bool{
+									return COLORS_MANAGER.is_dark_mode_enabled ();
+								}));
 }
 
 void MainMenu::loop ()
@@ -73,7 +84,7 @@ void MainMenu::loop ()
 		#endif
 		
 		BeginDrawing ();
-		ClearBackground (WHITE);
+		ClearBackground (dark_mode_processor (WHITE));
 		BeginMode2D (CAMERA);
 		MENUS_BACKGROUND_EFFECTS.draw();
 		Menu::draw ();
