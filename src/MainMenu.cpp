@@ -55,6 +55,31 @@ MainMenu::MainMenu ()
 								[] {/* loop terminator button, no action */},
 								KEY_ESCAPE));
 	
+	add_button	(bBuilder.build ("Music",
+								(Rectangle){-SCREEN_WIDTH*0.45f + W/4.0f, SCREEN_HEIGHT*0.30f - 4*H, W/2.0f, H},
+								[]{
+									MENUS_BACKGROUND_EFFECTS.launch_cannon();
+									toggle_setting (ENABLE_MUSIC);
+									if (check_setting (ENABLE_MUSIC)){
+										AUDIO_MANAGER.play_menu_music();
+									}else {AUDIO_MANAGER.stop_menu_music();}
+								},
+								KEY_NULL,
+								[] () -> bool{
+									return check_setting (ENABLE_MUSIC);
+								}));
+	
+	add_button	(bBuilder.build ("SFX",
+								(Rectangle){-SCREEN_WIDTH*0.45f + W/4.0f, SCREEN_HEIGHT*0.30f - 2*H, W/2.0f, H},
+								[]{
+									MENUS_BACKGROUND_EFFECTS.launch_cannon();
+									toggle_setting (ENABLE_SFX);
+								},
+								KEY_NULL,
+								[] () -> bool{
+									return check_setting (ENABLE_SFX);
+								}));
+	
 	add_button	(bBuilder.build ("Dark Mode",
 								(Rectangle){-SCREEN_WIDTH*0.45f, SCREEN_HEIGHT*0.30f, W, H},
 								[]{

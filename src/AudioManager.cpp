@@ -54,6 +54,7 @@ AudioManager::~AudioManager ()
 
 void AudioManager::play_cannon_ball_sound (float pitch)
 {
+	if (!check_setting (ENABLE_SFX)) {return;}
 	SetSoundPitch (cannonBallSoundPool[cannonBallCurrentIndex], pitch);
 	PlaySound (cannonBallSoundPool[cannonBallCurrentIndex]);
 	cannonBallCurrentIndex = (cannonBallCurrentIndex+1) % MAX_CANNON_BALL_SOUNDS;
@@ -61,6 +62,7 @@ void AudioManager::play_cannon_ball_sound (float pitch)
 
 void AudioManager::update (Loops loop)
 {
+	if (!check_setting (ENABLE_MUSIC)) {return;}
 	switch (loop)
 	{
 		case GAME_LOOP:

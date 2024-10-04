@@ -2,7 +2,7 @@
 #include "global_resources.hpp"
 #include <cstdint>
 
-uint8_t settings = 0;
+uint8_t settings = (ENABLE_MUSIC | ENABLE_SFX);
 
 void create_globals ()
 {

@@ -72,6 +72,7 @@ constexpr char TITLE[] = "Dodgy Blocks";
 inline bool check_setting (Settings s)		{return ((settings & s) == s);} // checks whether an option is active or not
 inline void activate_setting (Settings s)	{settings = (settings | s);} // turns an option on
 inline void deactivate_setting (Settings s)	{settings = (settings & (~s));} // turns an option off
+inline void toggle_setting (Settings s)	{settings = (settings ^ s);} // invert option status
 
 void create_globals (); // Istantiate global objects with `Singleton<T>`.
 void destroy_globals (); // destroy all globals istantiated above.
