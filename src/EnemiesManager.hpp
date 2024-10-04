@@ -22,6 +22,8 @@ public:
 	void log_info (	int logTime,
 					bool useDefaultLogFile = 1,
 					const char* alternativeFile = "\0") override;
+	std::string get_difficulty_string ();
+	std::string get_game_mode_string ();
 	
 	Difficulty get_difficulty () {return currentDifficulty;}
 	bool is_game_mode_set_to (GameMode gm) {return currentGameMode == gm;}

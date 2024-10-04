@@ -45,6 +45,13 @@ void GameOverMenu::draw ()
 	BeginMode2D (CAMERA);
 	
 	Menu::draw ();
+	DrawText (	TextFormat(	"Difficulty: %s\t\t\t\t\tGame Mode: %s",
+							ENEMIES_MANAGER.get_difficulty_string().c_str(),
+							ENEMIES_MANAGER.get_game_mode_string().c_str()),
+				-SCREEN_WIDTH*0.45f,
+				-SCREEN_HEIGHT*0.45f,
+				40,
+				dark_mode_processor (BLACK));
 	if (PLAYER_1.is_active ()) {PLAYER_1.draw_statistics (0);}
 	if (PLAYER_2.is_active ()) {PLAYER_2.draw_statistics (1);}
 	if (PLAYER_3.is_active ()) {PLAYER_3.draw_statistics (2);}

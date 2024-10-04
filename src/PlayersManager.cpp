@@ -9,7 +9,7 @@ PlayersManager::PlayersManager ()
 {
 	p[0] = new Player ({1200, 1200}, {3600, 3600}, 1, RED);
 	p[1] = new Player ({1200, 1200}, {3600, 3600}, 1, BLUE);
-	p[2] = new Player ({1200, 1200}, {3600, 3600}, 1, DARKGREEN);
+	p[2] = new Player ({1200, 1200}, {3600, 3600}, 1, LIME);
 	
 	p[0]->set_keyboard_control ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
 	p[1]->set_keyboard_control ({KEY_W, KEY_S, KEY_A, KEY_D});

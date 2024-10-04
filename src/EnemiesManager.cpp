@@ -182,3 +182,26 @@ void EnemiesManager::log_info (int logTime, bool useDefaultLogFile, const char* 
 	
 	logFile.close();
 }
+
+std::string EnemiesManager::get_difficulty_string ()
+{
+	switch (currentDifficulty)
+	{
+		case EASY: return "Easy";
+		case MEDIUM: return "Medium";
+		case HARD: return "Hard";
+		case INSANE: return "Insane";
+		default: return "Medium";
+	}
+}
+
+std::string EnemiesManager::get_game_mode_string ()
+{
+	switch (currentGameMode)
+	{
+		case ARCADE: return "Arcade";
+		case SANDBOX: return "Sandbox";
+		case FRENZY: return "Frenzy";
+		default: return "Arcade";
+	}
+}
