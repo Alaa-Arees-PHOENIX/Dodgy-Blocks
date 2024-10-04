@@ -52,7 +52,7 @@ void GameWorld::update (float dt)
 void GameWorld::draw ()
 {
 	BeginDrawing ();
-	ClearBackground (dark_mode_processor (WHITE));
+	ClearBackground (dark_mode_processor (RAYWHITE));
 	BeginMode2D (CAMERA);
 	
 	if (IsKeyDown (KEY_ONE)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (0);}

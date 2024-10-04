@@ -44,6 +44,7 @@ private:
 	std::unordered_map <Color, Color> darkVersionOfColor;
 	
 	static constexpr Color NEIL = {20, 20, 75, 255};
+	static constexpr Color ALIBLACK = {33, 33, 33, 255};
 };
 
 #endif // COLORSMANAGER_DB

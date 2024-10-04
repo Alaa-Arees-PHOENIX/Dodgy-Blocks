@@ -7,6 +7,7 @@ ColorsManager::ColorsManager ()
 	darkVersionOfColor = (std::unordered_map <Color, Color>)
 	{
 		{WHITE, NEIL},
+		{RAYWHITE, ALIBLACK},
 		{GRAY, DARKGRAY},
 		{LIGHTGRAY, DARKGRAY},
 		{BLACK, LIGHTGRAY}

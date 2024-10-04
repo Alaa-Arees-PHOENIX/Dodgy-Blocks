@@ -109,7 +109,7 @@ void MainMenu::loop ()
 		#endif
 		
 		BeginDrawing ();
-		ClearBackground (dark_mode_processor (WHITE));
+		ClearBackground (dark_mode_processor (RAYWHITE));
 		BeginMode2D (CAMERA);
 		MENUS_BACKGROUND_EFFECTS.draw();
 		Menu::draw ();
