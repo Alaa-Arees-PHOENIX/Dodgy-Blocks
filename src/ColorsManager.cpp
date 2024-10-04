@@ -1,8 +1,8 @@
 #include "raylib.h"
 #include "ColorsManager.hpp"
 
-ColorsManager::ColorsManager ()
-	: darkMode (0)
+ColorsManager::ColorsManager (bool initialDarkMode)
+	: darkMode (initialDarkMode)
 {
 	darkVersionOfColor = (std::unordered_map <Color, Color>)
 	{

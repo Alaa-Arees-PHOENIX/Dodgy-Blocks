@@ -1,6 +1,8 @@
+#include <cstdint>
+#include <fstream>
+#include <map>
 #include "raylib.h"
 #include "global_resources.hpp"
-#include <cstdint>
 
 uint8_t settings = (ENABLE_MUSIC | ENABLE_SFX);
 
@@ -10,7 +12,11 @@ void create_globals ()
 	#if defined(DEBUG)
 		Singleton<Logger>::create_instance ();
 	#endif
-	Singleton<ScreenManager>::create_instance ();
+	
+	std::map <std::string, bool> initialSettings;
+	load_initial_config_settings (initialSettings);
+	
+	Singleton<ScreenManager>::set_instance (new ScreenManager (initialSettings["initial_full_screen"]));
 	Singleton<GameWorld>::create_instance ();
 	Singleton<MainMenu>::create_instance ();
 	Singleton<SettingsMenu>::create_instance ();
@@ -22,7 +28,11 @@ void create_globals ()
 	Singleton<PlayersManager>::create_instance ();
 	Singleton<MenusBackgroundEffects>::create_instance();
 	Singleton<AudioManager>::create_instance();
-	Singleton<ColorsManager>::create_instance();
+	Singleton<ColorsManager>::set_instance(new ColorsManager (initialSettings["initial_dark_mode"]));
+	
+	// load config:
+	if (!initialSettings["initial_music_enabled"]) {deactivate_setting (ENABLE_MUSIC);}
+	if (!initialSettings["initial_sfx_enabled"]) {deactivate_setting (ENABLE_SFX);}
 }
 
 void destroy_globals ()
@@ -77,4 +87,17 @@ std::string to_string (const Vector2& v)
 double lerp (float initialPos, float targetPos, float lerpSpeed)
 {
     return targetPos*(1-lerpSpeed) + initialPos*lerpSpeed;
+}
+
+void load_initial_config_settings (std::map <std::string, bool>& initialSettings)
+{
+	std::ifstream configFile;
+	configFile.open ("config.txt", std::ios_base::in);
+	std::string s;
+	bool b;
+	for (size_t i = 0; i < 4; i++){
+		configFile >> s >> b;
+		initialSettings[s] = b;
+	}
+	configFile.close();
 }

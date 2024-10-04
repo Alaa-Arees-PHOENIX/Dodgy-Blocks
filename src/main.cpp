@@ -23,8 +23,8 @@ void show_intro ()
 {
 	char msg[] = "Alaa Arees ~ PHOENIX";
 	int fontSize = 65;
-	Color textColor = RED;
-	Color backgroundColor = RAYWHITE;
+	Color textColor = dark_mode_processor (RED);
+	Color backgroundColor = dark_mode_processor (RAYWHITE);
 	float fadingFactor = 1.0f;
 	
 	while (fadingFactor > 0){

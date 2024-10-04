@@ -1,0 +1,4 @@
+initial_dark_mode	0
+initial_full_screen	1
+initial_music_enabled	1
+initial_sfx_enabled	1

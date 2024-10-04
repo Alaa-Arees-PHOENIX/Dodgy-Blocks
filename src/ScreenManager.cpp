@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include "ScreenManager.hpp"
 
-ScreenManager::ScreenManager ()
+ScreenManager::ScreenManager (bool initialFullScreen)
 {	
 	InitWindow (SCREEN_WIDTH, SCREEN_HEIGHT, "Dodgy Blocks");
 	int monitor = GetCurrentMonitor ();
@@ -18,7 +18,7 @@ ScreenManager::ScreenManager ()
 	camera.offset = {get_current_screen_width()/2.0f, get_current_screen_height()/2.0f};
 	
 	#if defined (PLATFORM_DESKTOP)
-		toggle_full_screen (0);
+		toggle_full_screen (initialFullScreen);
 	#else
 		toggle_full_screen (1);
 	#endif

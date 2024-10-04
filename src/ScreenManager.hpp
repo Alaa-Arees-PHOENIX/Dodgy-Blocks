@@ -10,7 +10,7 @@ class ScreenManager
 	Camera2D camera = {0};
 	
 public:
-	ScreenManager ();
+	ScreenManager (bool initialFullScreen);
 	void toggle_full_screen (bool); // 1 turn it on, 0 off	
 	
 public: // Funtions intended to be inlined by the compiler:

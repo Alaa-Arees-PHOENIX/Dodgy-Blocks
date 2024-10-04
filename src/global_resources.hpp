@@ -2,6 +2,7 @@
 #define GLOBAL_RESOURCES_DB
 
 #include <cstdint>
+#include <map>
 #include "raylib.h"
 #include "Singleton.hpp"
 #include "GameWorld.hpp"
@@ -82,5 +83,6 @@ std::string to_string (const Range&);
 std::string to_string (const Rectangle&);
 std::string to_string (const Vector2&);
 double lerp (float initialPos, float targetPos, float lerpSpeed);
+void load_initial_config_settings (std::map <std::string, bool>& initialSettings);
 
 #endif // GLOBAL_RESOURCES_DB

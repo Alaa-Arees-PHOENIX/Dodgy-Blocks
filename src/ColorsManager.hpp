@@ -27,7 +27,7 @@ inline bool operator== (Color c1, Color c2)
 class ColorsManager
 {
 public:
-	ColorsManager ();
+	ColorsManager (bool initialDarkMode);
 	~ColorsManager ();
 	Color color_mode (const Color& c1);
 	Color color_mode (const Color&& c1);
