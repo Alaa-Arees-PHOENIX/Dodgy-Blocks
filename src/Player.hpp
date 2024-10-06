@@ -36,6 +36,7 @@ public:
 	int survival_time () {return survivedFor;}
 	float get_radius () {return RADIUS;}
 	bool uses_mouse () {return useMouse;}
+	bool uses_arrow_keys () {return KEY_UP == UP;}
     
 private:
     void bounce_on_edges (float dt);

@@ -95,28 +95,43 @@ SettingsMenu::SettingsMenu ()
 								KEY_NULL,
 								[] () -> bool {return PLAYER_3.is_active();}));
 	
-	add_button	(bBuilder.build ("Keyboard", // #7
+	add_button	(bBuilder.build ("Arrow Keys", // #7
 								(Rectangle){-W/2.0f, y_of(6) + h_of(6) + VS, W, H},
 								[]{
 									PLAYER_1.set_keyboard_control ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
+									PLAYER_2.set_keyboard_control ({KEY_W, KEY_S, KEY_A, KEY_D});
 									PLAYER_3.set_mouse_control();
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
 								},
 								KEY_NULL,
-								[] () -> bool {return !PLAYER_1.uses_mouse();}));
+								[] () -> bool {return PLAYER_1.uses_arrow_keys();}));
 	
-	add_button	(bBuilder.build ("Mouse", // #8
+	add_button	(bBuilder.build ("W-A-S-D", // #8
 								(Rectangle){x_of(7) + w_of(7) + HS, y_of(7), W, H},
 								[]{
+									PLAYER_1.set_keyboard_control ({KEY_W, KEY_S, KEY_A, KEY_D});
+									PLAYER_2.set_keyboard_control ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
+									PLAYER_3.set_mouse_control();
+									MENUS_BACKGROUND_EFFECTS.launch_cannon();
+								},
+								KEY_NULL,
+								[] () -> bool{
+									return (!PLAYER_1.uses_mouse() && !PLAYER_1.uses_arrow_keys());
+								}));
+	
+	add_button	(bBuilder.build ("Mouse", // #9
+								(Rectangle){x_of(8) + w_of(8) + HS, y_of(8), W, H},
+								[]{
 									PLAYER_1.set_mouse_control();
+									PLAYER_2.set_keyboard_control ({KEY_W, KEY_S, KEY_A, KEY_D});
 									PLAYER_3.set_keyboard_control ({KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT});
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
 								},
 								KEY_NULL,
 								[] () -> bool {return PLAYER_1.uses_mouse();}));
 	
-	add_button	(bBuilder.build ("Arcade", // #9
-								(Rectangle){-W/2.0f, y_of(8) + h_of(8) + VS, W, H},
+	add_button	(bBuilder.build ("Arcade", // #10
+								(Rectangle){-W/2.0f, y_of(9) + h_of(9) + VS, W, H},
 								[]{
 									ENEMIES_MANAGER.set_gameMode (ARCADE);
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
@@ -126,8 +141,8 @@ SettingsMenu::SettingsMenu ()
 									return ENEMIES_MANAGER.is_game_mode_set_to (ARCADE);
 								}));
 	
-	add_button	(bBuilder.build ("Sand box", // #10
-								(Rectangle){x_of(9) + w_of(9) + HS, y_of(9), W, H},
+	add_button	(bBuilder.build ("Sand box", // #11
+								(Rectangle){x_of(10) + w_of(10) + HS, y_of(10), W, H},
 								[]{
 									ENEMIES_MANAGER.set_gameMode (SANDBOX);
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
@@ -137,8 +152,8 @@ SettingsMenu::SettingsMenu ()
 									return ENEMIES_MANAGER.is_game_mode_set_to (SANDBOX);
 								}));
 	
-	add_button	(bBuilder.build ("FRENZY", // #11
-								(Rectangle){x_of(10) + w_of(10) + HS, y_of(10), W, H},
+	add_button	(bBuilder.build ("FRENZY", // #12
+								(Rectangle){x_of(11) + w_of(11) + HS, y_of(11), W, H},
 								[]{
 									ENEMIES_MANAGER.set_gameMode (FRENZY);
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
@@ -148,8 +163,8 @@ SettingsMenu::SettingsMenu ()
 									return ENEMIES_MANAGER.is_game_mode_set_to (FRENZY);
 								}));
 	
-	add_button	(bBuilder.build ("Easy", // #12
-								(Rectangle){x_of(9), y_of(9) + h_of(9) + VS, 3*W/4, H},
+	add_button	(bBuilder.build ("Easy", // #13
+								(Rectangle){x_of(10), y_of(10) + h_of(10) + VS, 3*W/4, H},
 								[]{
 									ENEMIES_MANAGER.set_difficulty (EASY);
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
@@ -157,8 +172,8 @@ SettingsMenu::SettingsMenu ()
 								KEY_NULL,
 								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == EASY;}));
 	
-	add_button	(bBuilder.build ("Medium", // #13
-								(Rectangle){x_of(12) + w_of(12) + HS, y_of(12), 3*W/4, H},
+	add_button	(bBuilder.build ("Medium", // #14
+								(Rectangle){x_of(13) + w_of(13) + HS, y_of(13), 3*W/4, H},
 								[]{
 									ENEMIES_MANAGER.set_difficulty (MEDIUM);
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
@@ -166,8 +181,8 @@ SettingsMenu::SettingsMenu ()
 								KEY_NULL,
 								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == MEDIUM;}));
 	
-	add_button	(bBuilder.build ("Hard", // #14
-								(Rectangle){x_of(13) + w_of(13) + HS, y_of(13), 3*W/4, H},
+	add_button	(bBuilder.build ("Hard", // #15
+								(Rectangle){x_of(14) + w_of(14) + HS, y_of(14), 3*W/4, H},
 								[]{
 									ENEMIES_MANAGER.set_difficulty (HARD);
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
@@ -175,8 +190,8 @@ SettingsMenu::SettingsMenu ()
 								KEY_NULL,
 								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == HARD;}));
 	
-	add_button	(bBuilder.build ("INSANE", // #15
-								(Rectangle){x_of(14) + w_of(14) + HS, y_of(14), 3*W/4, H},
+	add_button	(bBuilder.build ("INSANE", // #16
+								(Rectangle){x_of(15) + w_of(15) + HS, y_of(15), 3*W/4, H},
 								[]{
 									ENEMIES_MANAGER.set_difficulty (INSANE);
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
@@ -184,7 +199,7 @@ SettingsMenu::SettingsMenu ()
 								KEY_NULL,
 								[] () -> bool {return ENEMIES_MANAGER.get_difficulty() == INSANE;}));
 	
-	add_button	(bBuilder.build ("Main menu", // #16
+	add_button	(bBuilder.build ("Main menu", // #17
 								(Rectangle){(SCREEN_WIDTH/2.0f) - 150, (SCREEN_HEIGHT/2.0f) - 55, W, H},
 								[]{
 									MENUS_BACKGROUND_EFFECTS.launch_cannon();
@@ -221,8 +236,8 @@ void SettingsMenu::draw ()
 	draw_message_aligned (buttons[2], msg2, dark_mode_processor (ORANGE));
 	draw_message_aligned (buttons[4], msg3, dark_mode_processor (ORANGE));
 	draw_message_aligned (buttons[7], msg4, dark_mode_processor (ORANGE));
-	draw_message_aligned (buttons[9], msg5, dark_mode_processor (ORANGE));
-	draw_message_aligned (buttons[12], msg6, dark_mode_processor (ORANGE));
+	draw_message_aligned (buttons[10], msg5, dark_mode_processor (ORANGE));
+	draw_message_aligned (buttons[13], msg6, dark_mode_processor (ORANGE));
 	
 	EndMode2D ();
 	EndDrawing ();
