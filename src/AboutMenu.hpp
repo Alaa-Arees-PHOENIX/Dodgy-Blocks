@@ -6,10 +6,19 @@
 class AboutMenu : public Menu
 {
 private:
-	static constexpr char msg1[] = "Made by Alaa Arees (PHOENIX) using Raylib library.";
-	static constexpr char msg2[] = "Current version: 3.0-beta";
-	static constexpr char msg3[] = "this game is open source and built 100% in C++, if you want \nto check the source code or if you have any feedbacks \nfeel free to contact me on: \ndiscord or telegram phoenix_9226 (same username).";
-	static constexpr char msg4[] = "Have a nice day!";
+	/* A well formatted version of the description message:
+	static constexpr char msg1[] = "Made by Alaa Arees (PHOENIX) using Raylib library.\n
+									All music and sound contents are made by Ali Ibrahim (Beyond Electric).\n
+									Please read the 'Readme.md' file accompanied in the game folder for more\n
+									details about the game, authors and everything else.
+									Current version: unknown\n
+									this game is open source and written in C++, if you want\n
+									to check the source code or if you have any feedbacks\n
+									feel free to contact us, contact info are also available\n
+									in the 'Readme.md' file.";
+	*/
+	/* A fucked up version of the same message because Mr. C++ does not support declaring the string on multiple lines: */
+	static constexpr char msg1[] = "Made by Alaa Arees (PHOENIX) using Raylib library. \nAll music and sound contents are made by Ali Ibrahim (Beyond Electric). \nPlease read the 'Readme.md' file accompanied in the game folder for \nmore details about the game, authors and everything else. \nCurrent version: unknown \nthis game is open source and written in C++, if you want \nto check the source code or if you have any feedbacks \nfeel free to contact us, contact info are also available \nin the 'Readme.md' file.";
 	
 public:
 	AboutMenu ();

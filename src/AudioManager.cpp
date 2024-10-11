@@ -8,25 +8,19 @@ AudioManager::AudioManager ()
 	InitAudioDevice ();
 	cannonBallCurrentIndex = 0;
 	
-	// dump decryption:
-	system ("ren resources\\audio\\launch_cannon_ball.DB_MEDIA launch_cannon_ball.mp3");
-	system ("ren resources\\audio\\Beyond_Electric_-_Banksy's_Castle.DB_MEDIA Beyond_Electric_-_Banksy's_Castle.mp3");
-	system ("ren resources\\audio\\Beyond_Electric_-_Beirut.DB_MEDIA Beyond_Electric_-_Beirut.mp3");
-	system ("ren resources\\audio\\Beyond_Electric_-_Freedom.DB_MEDIA Beyond_Electric_-_Freedom.mp3");
-	system ("ren resources\\audio\\Beyond_Electric_-_Verdun.DB_MEDIA Beyond_Electric_-_Verdun.mp3");
-	
 	// load resources:
 	for (size_t i = 0; i < MAX_CANNON_BALL_SOUNDS; i++){
-		cannonBallSoundPool[i] = LoadSound ("resources\\audio\\launch_cannon_ball.mp3");
+		cannonBallSoundPool[i] = LoadSound ("resources/audio/launch_cannon_ball.mp3");
 	}
-	menuMusic		= LoadMusicStream ("resources/audio/Beyond_Electric_-_Banksy's_Castle.mp3");
-	inGameMusic[0]	= LoadMusicStream ("resources/audio/Beyond_Electric_-_Beirut.mp3");
-	inGameMusic[1]	= LoadMusicStream ("resources/audio/Beyond_Electric_-_Freedom.mp3");
-	inGameMusic[2]	= LoadMusicStream ("resources/audio/Beyond_Electric_-_Verdun.mp3");
+	menuMusic		= LoadMusicStream ("resources/audio/Dodgy Blocks - Main Menu Theme - Cosmos.mp3");
+	inGameMusic[0]	= LoadMusicStream ("resources/audio/Dodgy Blocks - Game OST #1 - Solar.mp3");
+	inGameMusic[1]	= LoadMusicStream ("resources/audio/Dodgy Blocks - Game OST #2 - Array.mp3");
+	inGameMusic[2]	= LoadMusicStream ("resources/audio/Dodgy Blocks - Game OST #3 - Reactor.mp3");
 	currentMusic = &menuMusic;
 	lastPlayedMusicIndex = IN_GAME_MUSIC_COUNT;
 	
 	menuMusic.looping = 1;
+	SeekMusicStream (menuMusic, 1.0f);
 	inGameMusic[0].looping = inGameMusic[1].looping = inGameMusic[2].looping = 0;
 	
 	PlayMusicStream (*currentMusic);
@@ -41,13 +35,6 @@ AudioManager::~AudioManager ()
 	for (size_t i = 0; i < IN_GAME_MUSIC_COUNT; i++){
 		UnloadMusicStream (inGameMusic[i]);
 	}
-	
-	// dump encryption:
-	system ("ren resources\\audio\\launch_cannon_ball.mp3 launch_cannon_ball.DB_MEDIA");
-	system ("ren resources\\audio\\Beyond_Electric_-_Banksy's_Castle.mp3 Beyond_Electric_-_Banksy's_Castle.DB_MEDIA");
-	system ("ren resources\\audio\\Beyond_Electric_-_Beirut.mp3 Beyond_Electric_-_Beirut.DB_MEDIA");
-	system ("ren resources\\audio\\Beyond_Electric_-_Freedom.mp3 Beyond_Electric_-_Freedom.DB_MEDIA");
-	system ("ren resources\\audio\\Beyond_Electric_-_Verdun.mp3 Beyond_Electric_-_Verdun.DB_MEDIA");
 	
 	CloseAudioDevice ();
 }
@@ -119,4 +106,5 @@ void AudioManager::play_menu_music ()
 	StopMusicStream (*currentMusic);
 	currentMusic = &menuMusic;
 	PlayMusicStream (*currentMusic);
+	SeekMusicStream (*currentMusic, 1.0f);
 }

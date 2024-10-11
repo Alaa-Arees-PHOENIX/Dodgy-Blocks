@@ -37,10 +37,7 @@ void AboutMenu::draw ()
 	MENUS_BACKGROUND_EFFECTS.draw ();
 	Menu::draw ();
 	DrawText (TITLE, -MeasureText (TITLE, 60)/2.0f, -SCREEN_HEIGHT/3.0f - 50, 60, RED);
-	DrawText (msg1, -SCREEN_WIDTH/3.0f, -100, 25, dark_mode_processor (ORANGE));
-	DrawText (msg2, -SCREEN_WIDTH/3.0f, -63, 25, dark_mode_processor (ORANGE));
-	DrawText (msg3, -SCREEN_WIDTH/3.0f, -26, 25, dark_mode_processor (ORANGE));
-	DrawText (msg4, -SCREEN_WIDTH/3.0f, 122, 25, dark_mode_processor (ORANGE));
+	DrawText (msg1, -SCREEN_WIDTH*0.46f, -150, 27, dark_mode_processor (ORANGE));
 	EndMode2D ();
 	EndDrawing ();
 }
