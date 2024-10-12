@@ -1,1 +1,23 @@
 GLFW_ICON ICON "Dodgy_icon.ico"
+
+1 VERSIONINFO
+FILEVERSION     0,0
+PRODUCTVERSION  0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"	// English US
+    BEGIN
+      VALUE "FileDescription", "Dodgy Blocks game executable"
+      VALUE "FileVersion", "0.0"
+      VALUE "InternalName", "Dodgy Blocks"
+      VALUE "LegalCopyright", "(c) 2024 Alaa Arees (@Alaa-Arees-PHOENIX)"
+      VALUE "ProductName", "Dodgy Blocks"
+      VALUE "ProductVersion", "0.0"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x409, 1252	// English US
+  END
+END

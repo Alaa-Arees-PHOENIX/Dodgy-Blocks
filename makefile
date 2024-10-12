@@ -8,7 +8,7 @@ else
     CFLAGS += -g3 -O0 -DDEBUG
 endif
 
-LDFLAGS = -static -L$(RAYLIB_PATH)\src $(RAYLIB_PATH)\src\raylib.rc.data -lraylib -lopengl32 -lgdi32 -lwinmm
+LDFLAGS = -static -L$(RAYLIB_PATH)\src -lraylib -lopengl32 -lgdi32 -lwinmm
 objects =	main.o \
 			Player.o \
 			MotiveCreature.o \
