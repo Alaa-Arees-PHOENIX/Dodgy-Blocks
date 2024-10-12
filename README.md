@@ -13,7 +13,7 @@ developing this game long time ago.
 
 Compiling:
 -----------
-first download and install raylib library from <TODO: add link here>  
+first download and install raylib library from https://www.raylib.com/  
 then open this project's makefile (it's in the same folder as the file you are reading  
 right now) and add the appropriate path to raylib on your machine, everything  
 should be fine to compile now by opening a terminal and changing to the project's  
@@ -24,8 +24,8 @@ directory then invoke your 'make' executable (`make` or `mingw32-make`).
 Resources:
 -----------
 Project's source code: https://github.com/Alaa-Arees-PHOENIX/Dodgy-Blocks  
-Dodgy Blocks page on Itch: <TODO: add link here>  
-Dodgy Blocks Game OST Album:<TODO: add link here>  
+Dodgy Blocks page on Itch: https://alaa-arees-phoenix.itch.io/dodgy-blocks  
+Dodgy Blocks Game OST Album: https://beyondelectric.bandcamp.com/album/dodgy-blocks-gameost
 
 Notes:
 -----------
@@ -36,18 +36,19 @@ Notes:
 
 License:
 -----------
-Dodgy Blocks is licensed under the zlib/libpng License, for more details see the <a href = "TODO: add link">LICENSE</a>  
+Dodgy Blocks is licensed under the zlib/libpng License, for more details see the <a href = https://github.com/Alaa-Arees-PHOENIX/Dodgy-Blocks/blob/main/LICENSE>LICENSE</a>  
 file in the source code's working directory.
 
 Contact us:
 -----------
 **Alaa Arees:**  
-GitHub:		https://github.com/Alaa-Arees-PHOENIX  
-Telegram:	@phoenix_9226  
-Discord:	#phoenix_9226  
-Email:		alaaareesgithub@gmail.com  
+- GitHub: https://github.com/Alaa-Arees-PHOENIX  
+- Telegram: @phoenix_9226  
+- Telegram channel (Arabic): https://t.me/tech_crawler  
+- Discord: #phoenix_9226  
+- Email: alaaareesgithub@gmail.com  
 
 **Ali Ibrahim:**  
-Soundcloud: https://soundcloud.com/beyondelectric  
-Instagram: https://instagram.com/realbeyondelectric  
-E-mail: beyondelectric.music@gmail.com  
+- Soundcloud: https://soundcloud.com/beyondelectric  
+- Instagram: https://instagram.com/realbeyondelectric  
+- E-mail: beyondelectric.music@gmail.com  
