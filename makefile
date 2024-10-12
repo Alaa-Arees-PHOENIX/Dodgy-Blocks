@@ -30,7 +30,8 @@ objects =	main.o \
 			PlayersManager.o \
 			MenusBackgroundEffects.o \
 			AudioManager.o \
-			ColorsManager.o
+			ColorsManager.o \
+			resource.o
 
 ifeq ($(BUILD_MODE), DEBUG)
 	objects += Logger.o
@@ -167,6 +168,9 @@ AudioManager.o:	src/AudioManager.cpp src/AudioManager.hpp
 
 ColorsManager.o: src/ColorsManager.cpp src/ColorsManager.hpp
 	$(CXX) src/ColorsManager.cpp $(CFLAGS)
+
+resource.o: resource.rc
+	windres resource.rc -o resource.o
 
 ############## ASSISTANT TOOLS ##############
 
