@@ -19,13 +19,17 @@ right now) and add the appropriate path to raylib on your machine, everything
 should be fine to compile now by opening a terminal and changing to the project's  
 directory then invoke your 'make' executable (`make` or `mingw32-make`).  
 **If you've only downloaded the game files without the source code, you can download the*  
-*source from the link below in 'Resources' section.*
+*source from the link below in 'Resources' section.*  
+**NOTE:** There are only binaries for the game for Windows on Itch.io, but since Dodgy Blocks'
+only external dependency is raylib you should be able to download the appropriate raylib
+version on your platform and compile the game, just make sure to configure CFLAGS and
+LDFLAGS to be suitable for the C++ compiler you intend to use...
 
 Resources:
 -----------
 Project's source code: https://github.com/Alaa-Arees-PHOENIX/Dodgy-Blocks  
 Dodgy Blocks page on Itch: https://alaa-arees-phoenix.itch.io/dodgy-blocks  
-Dodgy Blocks Game OST Album: https://beyondelectric.bandcamp.com/album/dodgy-blocks-gameost
+Dodgy Blocks Game OST Album: https://beyondelectric.bandcamp.com/album/dodgy-blocks-game-ost
 
 Notes:
 -----------
@@ -44,7 +48,7 @@ Contact us:
 **Alaa Arees:**  
 - GitHub: https://github.com/Alaa-Arees-PHOENIX  
 - Telegram: @phoenix_9226  
-- Telegram channel (Arabic): https://t.me/tech_crawler  
+- Telegram group (Arabic): https://t.me/tech_crawler  
 - Discord: #phoenix_9226  
 - Email: alaaareesgithub@gmail.com  
 
