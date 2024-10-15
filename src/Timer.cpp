@@ -6,15 +6,20 @@ Timer::Timer ()
 {
 	textSize = 16;
 	currentTime = 0;
-	bounds = {0.40f*SCREEN_WIDTH, -0.45f*SCREEN_HEIGHT, BASE_WIDTH, BASE_HEIGHT};
+	Vector2 pos = GetScreenToWorld2D ({0.9f*CURRENT_SCREEN_WIDTH, 0.05f*CURRENT_SCREEN_HEIGHT}, CAMERA);
+	bounds = {pos.x, pos.y, BASE_WIDTH, BASE_HEIGHT};
 	text_y = bounds.y + bounds.height/2 - 7.4;
 }
 
 void Timer::reset ()
 {
-	currentTime = 0;
-	bounds.width = BASE_WIDTH;
-	bounds.height = BASE_HEIGHT;
+	Vector2 pos	= GetScreenToWorld2D ({0.9f*CURRENT_SCREEN_WIDTH, 0.05f*CURRENT_SCREEN_HEIGHT}, CAMERA);
+	currentTime		= 0;
+	bounds.width	= BASE_WIDTH;
+	bounds.height	= BASE_HEIGHT;
+	bounds.x		= pos.x;
+	bounds.y		= pos.y;
+	text_y			= bounds.y + bounds.height/2 - 7.4;
 }
 
 void Timer::update (float dt)
@@ -27,7 +32,6 @@ void Timer::update (float dt)
 
 void Timer::draw ()
 {
-	// DrawCircle (bounds.x, bounds.y, 30, BLACK);
     DrawRectangleRounded (bounds, 0.8, 0, BLACK);
     DrawText (TextFormat ("%i", (int)currentTime), text_x, text_y, textSize, WHITE);
     DrawRectangleRoundedLines ({bounds.x+1, bounds.y+1, bounds.width-2, bounds.height-2},

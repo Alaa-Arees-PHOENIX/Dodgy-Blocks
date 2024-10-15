@@ -26,13 +26,6 @@ void GameWorld::loop ()
 		update (GetFrameTime ());
 		draw ();
 		if (IsKeyReleased (KEY_ESCAPE)) {PAUSE_MENU.loop();}
-		
-		#if defined (DEBUG)
-			if (IsKeyPressed (KEY_B)){
-				int breakPoint = 0;
-			}
-			LOGGER.update(GetFrameTime());
-		#endif
 	}
 	GAME_OVER_MENU.loop ();
 	if (shouldRestartGame) {goto Loop_Beggining;}
@@ -47,6 +40,16 @@ void GameWorld::update (float dt)
 		ENEMIES_MANAGER.update (dt);
 	}
 	AUDIO_MANAGER.update (GAME_LOOP);
+	
+	#if defined (DEBUG)
+		if (IsKeyPressed (KEY_B)){
+			if (IsWindowFullscreen ()) {ToggleFullscreen ();}
+			int breakPoint = 0;
+		}
+		if (IsKeyDown (KEY_ONE)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (0);}
+		if (IsKeyDown (KEY_TWO)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (1);}
+		LOGGER.update(GetFrameTime());
+	#endif
 }
 
 void GameWorld::draw ()
@@ -55,8 +58,6 @@ void GameWorld::draw ()
 	ClearBackground (dark_mode_processor (RAYWHITE));
 	BeginMode2D (CAMERA);
 	
-	if (IsKeyDown (KEY_ONE)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (0);}
-	if (IsKeyDown (KEY_TWO)) {Singleton<ScreenManager>::get_instance().toggle_full_screen (1);}
 	
 	PLAYERS_MANAGER.draw ();
 	if (!ENEMIES_MANAGER.is_game_mode_set_to (SANDBOX)){
@@ -85,7 +86,7 @@ void GameWorld::restart ()
 }
 
 
-
+#if defined (DEBUG)
 void GameWorld::draw_debug ()
 {
 	Vector2 v1 = {100, 200}, v2 = {500, 200}, v3 = {100, 250}, v4 = {500, 250};
@@ -112,3 +113,4 @@ void GameWorld::draw_debug ()
 	DrawText (TextFormat ("%f", GetMousePosition().x), 100, 350, 20, GREEN);
 	DrawText (TextFormat ("%f", GetMousePosition().y), 500, 350, 20, GREEN);
 }
+#endif

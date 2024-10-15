@@ -15,10 +15,15 @@ EnemyBlock::EnemyBlock (Vector2 MAX_VELOCITY, Vector2 ACC_FORCE, float MASS, Vec
 		width (width), height (height)
 {
 /*	same height with a small width, pos on the y-axis for left/right warnings doesn't matter it's variable	*/
-	warningLeft		= {-SCREEN_WIDTH/2.0f, 0, 11, (float)height}; 
-	warningRight	= {SCREEN_WIDTH/2.0f - 11, 0, 11, (float)height};
-	warningUp		= {0, -SCREEN_HEIGHT/2.0f, (float)width, 11};
-	warningDown		= {0, SCREEN_HEIGHT/2.0f - 11, (float)width, 11};
+	float wL = GetScreenToWorld2D ({0, 0}, CAMERA).x;
+	float wR = GetScreenToWorld2D ({(float)CURRENT_SCREEN_WIDTH - 11, 0}, CAMERA).x;
+	float wU = GetScreenToWorld2D ({0, 0}, CAMERA).y;
+	float wD = GetScreenToWorld2D ({0, (float)CURRENT_SCREEN_HEIGHT - 11}, CAMERA).y;
+	
+	warningLeft		= {wL, 0, 11, (float)height}; 
+	warningRight	= {wR, 0, 11, (float)height};
+	warningUp		= {0, wU, (float)width, 11};
+	warningDown		= {0, wD, (float)width, 11};
 	
 	objectsCount++;
 	
@@ -56,12 +61,12 @@ void EnemyBlock::update (float dt)
 /*	update warning signs:	*/
 	Vector2 pos = GetWorldToScreen2D (position, CAMERA);
 	
-	warningLeft.y	= std::max (pos.y, -height/2.0f);
+	warningLeft.y	= std::max (pos.y, height/2.0f);
 	warningLeft.y	= std::min (pos.y, CURRENT_SCREEN_HEIGHT - height/2.0f);
 	warningLeft.y	= GetScreenToWorld2D ({warningLeft.x, warningLeft.y}, CAMERA).y;
 	warningRight.y	= warningLeft.y;
 	
-	warningUp.x		= std::max (pos.x, -width/2.0f);
+	warningUp.x		= std::max (pos.x, width/2.0f);
 	warningUp.x		= std::min (pos.x, CURRENT_SCREEN_WIDTH - width/2.0f);
 	warningUp.x		= GetScreenToWorld2D ({warningUp.x, warningUp.y}, CAMERA).x;
 	warningDown.x	= warningUp.x;
@@ -77,13 +82,13 @@ void EnemyBlock::draw ()
 	if (pos.x < 0)
 		{DrawRectangleRec (warningLeft, ColorAlpha (dark_mode_processor (BLACK), 0.58f));}
 	
-	if (pos.x + width > CURRENT_SCREEN_WIDTH)
+	if (pos.x > CURRENT_SCREEN_WIDTH - width)
 		{DrawRectangleRec (warningRight, ColorAlpha (dark_mode_processor (BLACK), 0.58f));}
 	
 	if (pos.y < 0)
 		{DrawRectangleRec (warningUp, ColorAlpha (dark_mode_processor (BLACK), 0.58f));}
 	
-	if (pos.y + height > CURRENT_SCREEN_HEIGHT)
+	if (pos.y > CURRENT_SCREEN_HEIGHT - height)
 		{DrawRectangleRec (warningDown, ColorAlpha (dark_mode_processor (BLACK), 0.58f));}
 }
 

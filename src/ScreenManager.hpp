@@ -4,7 +4,7 @@
 class ScreenManager
 {
 	private:
-	static constexpr int SCREEN_WIDTH = 1012, SCREEN_HEIGHT = 569; // my personal screen dimensions {1366, 768} scaled down by 1.35
+	static constexpr int SCREEN_WIDTH = 1024, SCREEN_HEIGHT = 569; // my personal screen dimensions {1366, 768} scaled down by 1.35
 														// having an aspect ratio of 16:9
 	int monitorWidth, monitorHeight;
 	Camera2D camera = {0};

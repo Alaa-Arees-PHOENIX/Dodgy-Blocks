@@ -103,6 +103,7 @@ void MainMenu::loop ()
 		
 		#if defined (DEBUG)
 			if (IsKeyPressed (KEY_B)){
+				if (IsWindowFullscreen ()) {ToggleFullscreen ();}
 				int breakPoint = 0;
 			}
 			LOGGER.update(GetFrameTime());
