@@ -40,8 +40,9 @@ Notes:
 
 License:
 -----------
-Dodgy Blocks is licensed under the zlib/libpng License, for more details see the <a href = https://github.com/Alaa-Arees-PHOENIX/Dodgy-Blocks/blob/main/LICENSE>LICENSE</a>  
-file in the source code's working directory.
+Dodgy Blocks' source code is licensed under the zlib/libpng License, for more details  
+see the <a href = https://github.com/Alaa-Arees-PHOENIX/Dodgy-Blocks/blob/main/LICENSE>LICENSE</a> file in the source code's working directory.  
+All rights reserved by Ali Ibrahim (Beyond Electric) for the game OST.
 
 Contact us:
 -----------

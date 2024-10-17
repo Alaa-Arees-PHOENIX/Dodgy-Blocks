@@ -134,7 +134,7 @@ void EnemiesManager::update_EnemyBlock_settings ()
 			break;
 		
 		case INSANE:
-			EBS.maxCount			= 5;
+			EBS.maxCount			= 4;
 			EBS.widthRange			= {25, 55};
 			EBS.heightRange			= {25, 55};
 			EBS.maxVelocityRange	= {800, 1150};
